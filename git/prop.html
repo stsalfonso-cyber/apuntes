@@ -93,6 +93,49 @@
   </section>
 <br>
 
+<!-- modo visual -->
+
+<section id="vis" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+  <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2"> El entorno visual VS CODE</h2>
+  <p>Todo se encuentra en la pestaña "<b>Source Control</b>"</p>
+  <br>
+  <p><b>La equivalencia botón vs comando</b></p>
+  <br>
+  <table>
+    <tr>
+      <th class="text-left w-35">Acción</th>
+      <th class="text-left w-40">Comando (Consola)</th>
+      <th class="text-left">Botón en VS Code (Interfaz)</th>
+    </tr>
+    <tr>
+      <td>Ver estado</td>
+      <td>git status</td>
+      <td>Aparece automáticamente la lista de archivos cambiados en la sidebar.</td>
+    </tr>
+    <tr>
+      <td>Preparar</td>
+      <td>git add .</td>
+      <td>Pulsar el botón + (Stage Changes) al lado del archivo.</td>
+    </tr>
+    <tr>
+      <td>Guardar</td>
+      <td>git commit -m "..."</td>
+      <td>Escribir tu mensaje en el cuadro superior y pulsar el icono del check (v).</td>
+    </tr>
+    <tr>
+      <td>Enviar</td>
+      <td>git push</td>
+      <td>Pulsar el icono de "Sync Changes" (o los tres puntos ... -> Push).</td>
+    </tr>
+    <tr>
+      <td>Bajar cambios</td>
+      <td>git pull</td>
+      <td>Pulsar el icono de "Sync Changes" (o los tres puntos ... -> Pull).</td>
+    </tr>
+  </table>
+</section>
+
+
 <!-- Historial de versiones -->
 
 <section id="hist" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
@@ -106,5 +149,17 @@
   </ul>
   <p><b>Esta información es totalmente inútil</b>. En seis meses, cuando vuelvas a ese código, no tendrás ni idea de por qué hiciste esos cambios. La filosofía profesional es que <b>tus commits deben ser una narrativa lógica</b>.</p>
   <p>Un mensaje de commit profesional responde a tres preguntas: ¿Qué?, ¿Por qué? y ¿Cómo afecta?.</p>
-
+  <p>Nomenclaturas estándares par el "¿Qué?"</p>
+  <ul>
+    <li class="list-disc">feat: Has añadido una funcionalidad nueva (ej: feat: página de registro).</li>
+    <li class="list-disc">fix: Has arreglado un error (ej: fix: corregido cálculo IVA en carrito)</li>
+    <li class="list-disc">refactor: Has mejorado el código sin cambiar lo que hace (limpieza).</li>
+    <li class="list-disc">docs: Has cambiado documentación.</li>
+  </ul>
+  <p>Ejemplo práctico</p>
+  <p>fix(carrito): se ajusta validación para campos vacíos antes del envío. <br>
+<br>
+Se detectó que el usuario podía enviar el formulario de compra con campos vacíos, causando errores en el servidor. Se añade validación previa para prevenir el envío si los datos son inválidos.</p>
+<br>  
+<p><i>"La regla de oro del Commit": "Escribe cada mensaje de commit como si el destinatario fuera tu 'yo' del futuro dentro de 6 meses". Si él no entiende qué hiciste y por qué, el commit no es bueno.</i></p>
 </section>
