@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Apuntes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light p-4">
+
+    <div class="container mt-4" id="content">
+        <header class="d-flex align-items-center pb-3 mb-5 border-bottom">
+            <h1 class="h2 text-dark">Apuntes HTML - Estructura Básica</h1>
+        </header>
+        <h4>HEAD</h4>
+<!-- HEAD -->
+        <section class="card shadow-sm mb-4">
+            <div class="card-body">
+                <div id="head-list" class="list-group list-group-flush"></div>
+                <h2 class="h5 text-primary">Meta Tags</h2>
+                <div id="meta-list" class="list-group list-group-flush"></div>
+            </div>
+        </section>
+        <h4>BODY</h4>   
+<!--  ESTRUCTURA HTML -->
+        <section class="card shadow-sm mb-4">
+            <img class="card-img-top mx-auto" style="width: 300px; height: auto;" src="img/semanticaHtml.png" alt="HTML Semantica">
+            <div class="card-body">
+                <h2 class="h5 text-primary">Semántica HTML5</h2>
+                <div id="semantic-list" class="list-group list-group-flush"></div>
+            </div>
+        </section>
+<!--  ELEMENTOS    -->
+        <section class="card shadow-sm mb-4">
+            <div class="card-body">
+                <h2 class="h5 text-primary">Elementos</h2>
+                <div id="element-list" class="list-group list-group-flush"></div>
+            </div>
+        </section>
+<!--  SIMBOLOS Y EMOJIS    -->
+        <section class="card shadow-sm mb-4">
+            <div class="card-body">
+                <h2 class="h5 text-primary">Elementos</h2>
+                <div class="d-flex flex-wrap gap-5">
+                    <a href="https://www.webusable.com/CharsExtendedTable.htm" target="_blank" class="text-dark"><span class="badge bg-primary text-light fs-4"> Σ </span> Caracteres</a>
+                    <a href="https://www.w3schools.com/html/html_emojis.asp" target="_blank" class="text-dark"><span class="badge bg-primary text-light fs-4"> ;-) </span> Emojis</a>
+                    <a href="https://uiball.com/ldrs/?trk=public_post-text" target="_blank" class="text-dark"><span class="badge bg-primary text-light fs-4"> ↻ </span> Spinners</a>
+                    <a href="https://hackernoon.com/the-24-best-css-free-to-use-buttons-with-codepen-examples" target="_blank" class="text-dark"><span class="badge bg-primary text-light fs-4"> 🔳 </span> Botones</a>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <script>
+// Element HEAD 
+        const head =[
+            { name: 'title', content: '&lt;title>Título de la página&lt;/title>', desc: 'Título que aparece en la pestaña del navegador.' },
+            { name: 'link', content: '&lt;link rel="stylesheet" href="estilos.css">', desc: 'Enlace a hojas de estilo externas o iconos. Tambien para librerias como Bootstrap.' },
+            { name: 'script', content: '&lt;script src="script.js">&lt;/script>', desc: 'Incluir archivos JavaScript.' }
+        ]
+        const headContainer = document.getElementById('head-list');
+        head.forEach(item => {
+            headContainer.innerHTML += `
+            <div class="list-group-item">
+                <strong class="text-primary">${item.name}</strong>
+                <p class="mb-0 small">${item.content}</p>
+                <small class="text-muted">${item.desc}</small>
+                </div>
+                `;
+            });
+// Meta tags
+        const metaTags = [
+            { name: 'charset', content: '&lt;meta charset="UTF-8">', desc: 'Codificación (Unicode/UTF-8).' },
+            { name: 'viewport', content: '&lt;meta name="viewport" content="width=device-width, initial-scale=1.0">', desc: 'Diseño responsivo.' },
+            { name: 'author', content: '&lt;meta name="author" content="autor de la web">', desc: 'Autor de la web.' },
+            { name: 'description', content: '&lt;meta name=”description” content=”descripción de la web”>', desc: 'SEO Básico.' },
+            { name: 'keywords', content: '&lt;meta name=”keywords” content=”camisas, moda, clásicas, básicos, casual”> ', desc: 'Palabras clave para posicionamiento SEO.' }
+        ];
+        const metaContainer = document.getElementById('meta-list');
+        metaTags.forEach(meta => {
+            metaContainer.innerHTML += `
+                <div class="list-group-item">
+                    <strong class="text-primary">${meta.name}</strong>
+                    <p class="mb-0 small">${meta.content}</p>
+                    <small class="text-muted">${meta.desc}</small>
+                </div>
+            `;
+        });
+
+// Semántica
+        const semanticTags = [
+            { tag: '&lt;header&gt;', desc: 'Cabecera de página o sección.' },
+            { tag: '&lt;nav&gt;', desc: 'Enlaces de navegación.' },
+            { tag: '&lt;main&gt;', desc: 'Contenido principal.' },
+            { tag: '&lt;article&gt;', desc: 'Contenido independiente (blog, noticia).' },
+            { tag: '&lt;section&gt;', desc: 'Sección temática dentro de un documento.' },
+            { tag: '&lt;aside&gt;', desc: 'Contenido relacionado pero separado (sidebar).' },
+            { tag: '&lt;footer&gt;', desc: 'Pie de página/copyright.' }
+        ];
+        const semContainer = document.getElementById('semantic-list');
+        semanticTags.forEach(item => {
+            semContainer.innerHTML += `<div class="list-group-item"><code>${item.tag}</code><span class="ms-2 text-muted small">${item.desc}</span></div>`;
+        });
+
+// Contenedores y elementos
+        const containerTags = [
+            { tag: ' 🔳 ', desc: 'CONTENEDORES GENERALES'},
+            { tag: '&lt;div&gt;', desc: 'Contenedor genérico sin significado semántico.', atributos: 'class | id | style' },
+            { tag: '&lt;span&gt;', desc: 'Contenedor en línea para texto o elementos pequeños.', atributos: 'class | id | style' },
+            { tag: ' 🔳 ', desc: 'SEPARACION'},
+            { tag: '&lt;br&gt;', desc: 'Salto de línea.', atributos: 'none' },
+            { tag: '&lt;hr&gt;', desc: 'Línea horizontal para separar contenido.', atributos: 'none' },
+            { tag: ' 🔳 ', desc: 'ELEMENTOS BÁSICOS'},
+            { tag: '&lt;h1&gt; - &lt;h6&gt;', desc: 'Encabezados de diferentes niveles.', atributos: 'class | id | style' },
+            { tag: '&lt;p&gt;', desc: 'Párrafo de texto.', atributos: 'class | id | style' },
+            { tag: '&lt;a&gt;', desc: 'Enlace a otra página o recurso.', atributos: 'href | title' },
+            { tag: '&lt;img&gt;', desc: 'Incluir imágenes.', atributos: 'src | alt | title' },
+            { tag: '&lt;ul&gt; / &lt;ol&gt;', desc: 'Listas no ordenadas y ordenadas.', atributos: 'class | id | style' },
+            { tag: '&lt;li&gt;', desc: 'Elemento de lista dentro de &lt;ul&gt; o &lt;ol&gt;.', atributos: 'class | id | style' },
+            { tag: '&lt;table&gt;', desc: 'Tabla de datos.', atributos: 'class | id | style' },
+            { tag: '&lt;tr&gt;', desc: 'Fila de tabla.', atributos: 'class | id | style' },
+            { tag: '&lt;td&gt;', desc: 'Celda de tabla.', atributos: 'class | id | style' },
+            { tag: '&lt;th&gt;', desc: 'Encabezado de tabla.', atributos: 'class | id | style' },
+            { tag: ' 🔳 ', desc: 'ELEMENTOS CON FORMATO'},
+            { tag: '&lt;b&gt;', desc: 'Texto en negrita sin énfasis semántico.', atributos: 'class | id | style' },
+            { tag: '&lt;strong&gt;', desc: 'Texto importante en negrita con énfasis semántico.', atributos: 'class | id | style' },
+            { tag: '&lt;i&gt;', desc: 'Texto en cursiva sin énfasis semántico.', atributos: 'class | id | style' },
+            { tag: '&lt;em&gt;', desc: 'Texto enfatizado en cursiva con énfasis semántico.', atributos: 'class | id | style' },
+            { tag: '&lt;mark&gt;', desc: 'Texto resaltado.', atributos: 'class | id | style' },
+            { tag: '&lt;u&gt;', desc: 'Texto subrayado.', atributos: 'class | id | style' },
+            { tag: '&lt;small&gt;', desc: 'Texto pequeño o de menor importancia.', atributos: 'class | id | style' },
+            { tag: '&lt;del&gt;', desc: 'Texto eliminado (tachado).', atributos: 'class | id | style' },
+            { tag: '&lt;ins&gt;', desc: 'Texto insertado (subrayado).', atributos: 'class | id | style' },
+            { tag: '&lt;sub&gt;', desc: 'Texto en subíndice.', atributos: 'class | id | style' },
+            { tag: '&lt;sup&gt;', desc: 'Texto en superíndice.', atributos: 'class | id | style' },
+            { tag: ' 🔳 ', desc: 'ELEMENTOS DE AGRUPACIÓN'},
+            { tag: '&lt;fieldset&gt;', desc: 'Agrupa elementos relacionados en un formulario.', atributos: 'class | id | style' },
+            { tag: '&lt;legend&gt;', desc: 'Título para el &lt;fieldset&gt;.', atributos: 'class | id | style' },
+            { tag: ' 🔳 ', desc: 'FORMULARIOS'},
+            { tag: '&lt;form&gt;', desc: 'Contenedor para elementos de formulario.', atributos: 'class | id | style | submit' },
+            { tag: '&lt;input&gt;', desc: 'Campo de entrada para datos.', atributos: 'class | id | style | onclick | type | name | value | required' },
+            { tag: '&lt;input type="button"&gt;', desc: 'Botón interactivo.', atributos: 'class | id | style | onclick | value | disabled ' },
+            { tag: '&lt;input type="text"&gt;', desc: 'Campo de texto.', atributos: 'class | id | style | onclick | value | disabled ' },
+            { tag: '&lt;input type="radio"&gt;', desc: 'Botón de opción (radio button).', atributos: 'class | id | style | onclick | checked | name | value' },
+            { tag: '&lt;input type="number"&gt;', desc: 'Campo de entrada para números.', atributos: 'class | id | style | onchange | min | max' },
+            { tag: '&lt;input type="date"&gt;', desc: 'Campo de entrada para fechas.', atributos: 'class | id | style | onchange | name | value | min | max' },
+            { tag: '&lt;input type="checkbox"&gt;', desc: 'Casilla de verificación.', atributos: 'class | id | style | onclick | checked | name | value' },
+            { tag: '&lt;input type="submit"&gt;', desc: 'Botón para enviar un formulario.', atributos: 'class | id | style | onclick' },
+            { tag: '&lt;input type="reset"&gt;', desc: 'Botón para reiniciar un formulario.', atributos: 'class | id | style | onclick' },
+            { tag: '&lt;input type="hidden"&gt;', desc: 'Campo de formulario oculto.', atributos: 'id | name | value' },
+            
+            { tag: '&lt;button&gt;', desc: 'Botón interactivo.', atributos: 'class | id | style | onclick' },
+            { tag: '&lt;label&gt;', desc: 'Etiqueta para un elemento de formulario.', atributos: 'class | id | style' },
+            { tag: '&lt;select&gt;', desc: 'Menú desplegable.', atributos: 'class | id | style | onchange | multiple' },
+            { tag: '&lt;option&gt;', desc: 'Opción dentro de &lt;select&gt;.', atributos: 'class | id | style | selected' },
+            { tag: '&lt;textarea&gt;', desc: 'Área de texto multilinea.', atributos: 'class | id | style | onchange | rows | cols' }
+        ];
+        const contContainer = document.getElementById('element-list');
+        containerTags.forEach(item => {
+            contContainer.innerHTML += `
+                <div class="list-group-item">
+                    <code>${item.tag}</code>
+//  se le da formato al titulo con la condicion de que contenga ese emoji
+                    <span class="${item.tag.includes(' 🔳 ') ? 'font-weight-bold text-primary' : 'ms-2 text-muted small'}">
+                        ${item.desc}
+                    </span>
+                    <small class="ms-2 text-success">
+                        ${item.tag.includes(' 🔳 ') ? '' : `&nbsp;&nbsp;&nbsp;Atributos: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${item.atributos}`}
+                    </small>
+                </div>`;
+        });
+
+    </script>
+</body>
+</html>

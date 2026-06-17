@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>CSS Apuntes</title>
+   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.1.7"></script>
+   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+   <link rel="stylesheet" href="estilo.css">
+</head>
+<body class="bg-gray-50 text-gray-900">
+   <div class="flex min-h-screen mx-auto p-6 md:p-10">
+
+      <!--     MENU IZQUIERDO        -->
+      <nav class="sticky top-10 h-screen flex-shrink-0 bg-white p-6 shadow-sm border border-cyan-700">
+         <div id="menu">
+            <h2 class="text-xl font-bold mb-4">CSS</h2>
+            <ul class="space-y-2 text-cyan-700">
+               <li><a href="#sintaxis" class="btnfos btnfos-5">1. Sintaxis</a></li>
+               <li><a href="#colores" class="btnfos btnfos-5">2. Colores</a></li>
+               <li><a href="#opacidad" class="btnfos btnfos-5">3. Opacidad</a></li>
+               <li><a href="#atributos" class="btnfos btnfos-5">4. Atributos</a></li>
+               <li><a href="#pseudo" class="btnfos btnfos-5">5. Pseudoclases</a></li>
+               <li><a href="#cajas" class="btnfos btnfos-5">6. Cajas</a></li>
+               <li><a href="#posicionamiento" class="btnfos btnfos-5">7. Posicionamiento</a></li>
+               <li><a href="#flexbox" class="btnfos btnfos-5">8. Flexbox</a></li>
+               <li><a href="#grid" class="btnfos btnfos-5">9. Grid</a></li>
+            </ul>
+         </div>
+         <div id="icoMenu">
+            <span onclick="mostrarMenu()">▶</span>
+         </div>
+         <div id="icoOcuMenu">
+            <span onclick="ocultarMenu()">◀</span>
+         </div>
+      </nav>
+      
+                     <!--     CONTENIDO     -->
+      <div class="ml-10">
+         <header class="mb-10 text-center">
+            <h1 class="text-4xl font-extrabold text-cyan-700 text-shadow-sm">Apuntes CSS</h1>
+         </header>
+<!-- 1. Sintaxis -->
+         <section id="sintaxis">
+            <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">1. Sintaxis</h2>
+            <p class="mt-2 text-gray-700">La estructura básica de CSS consta de un selector y bloques de
+               declaraciones con propiedades y valores.</p>
+            <img src="img/sintaxis.jpg" alt="Ejemplo de sintaxis CSS" class="mt-4 rounded-md shadow-sm">
+         </section>
+
+<!-- 2. Colores -->
+         <section id="colores">
+            <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">2. Colores</h2>
+            <p class="mt-2 text-gray-700">Propiedades fundamentales para definir tonalidades en elementos.</p>
+            <ul class="list-disc list-inside mt-2 text-gray-700">
+               <li>background-color: color de fondo</li>
+               <li>color: color del texto</li>
+               <li>border-color: color del borde</li>
+            </ul>
+         </section>
+
+<!-- 3. Opacidad -->
+         <section id="opacidad">
+            <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">3. Opacidad</h2>
+            <p class="mt-2 text-gray-700">Controla la transparencia de un elemento.</p>
+            <code class="logica">opacity: 0.5;</code>
+         </section>
+
+<!-- 4. Atributos -->
+         <section id="atributos">
+            <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">4. Atributos (ID y Class)</h2>
+            <p class="mt-2 text-gray-700">Selectors para un elemento único o grupos.</p>
+            <p>id: para cambiar un elemento en concreto</p>
+            <code class="logica">
+               &lt;div id="miElemento">Contenido&lt;/div>
+            </code>
+            <p>class: para cambiar un grupo de elementos</p>
+            <code class="logica">
+               &lt;div class="miClase">Contenido 1&lt;/div><br>
+               &lt;div class="miClase">Contenido 2&lt;/div>
+            </code>
+         </section>
+<!-- 5. Pseudo-clases y Pseudo-elementos -->
+         <section id="pseudo">
+            <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">5. Pseudo-Clases y Pseudo-elementos</h2>
+            <h4 class="text-xl font-bold mt-4">Pseudo-Clases</h4>
+            <p class="mt-2 text-gray-700">Se utilizan para aplicar estilos cuando un elemento cambia de estado o para seleccionar 
+               elementos específicos sin necesidad de agregar nuevas clases al HTML. Se escriben con dos puntos simples</p>
+            <ul class="list-disc list-inside mt-2 text-gray-700">
+               <li class="mt-2"><code class="logica">a:hover { color: red; }</code> Cambia el color del texto a rojo cuando el cursor está sobre un enlace</li>
+               <li class="mt-2"><code class="logica">input:focus { color: gray; }</code>Cambia el color del texto a gris cuando recibe el foco</li>
+               <li class="mt-2">td:nth-child(n): Selecciona elementos en base a su posición numérica
+                  <ul>
+                     <li class="ml-8 mt-2">ej. <code class="logica">:nth-child(2)</code> para el segundo hijo</li>
+                     <li class="ml-8 mt-2">ej. <code class="logica">:nth-child(odd)</code> para impares</li>
+                     <li class="ml-8 mt-2">ej. <code class="logica">:nth-child(3n)</code> para múltiplos de 3</li>
+                  </ul>
+               </li>
+               <li class="mt-2"><code class="logica">option:checked</code>: Selecciona casillas de verificación o botones de radio activos.</li>
+            </ul>
+            <h4 class="text-xl font-bold mt-4">Pseudo-Elementos</h4>
+            <p class="mt-2 text-gray-700">Permiten estilizar partes específicas de un elemento o de todos elementos a la vez o insertar contenido sin modificar el HTML. Se escriben con dos puntos dobles</p>
+            <div>
+               /* Añade un icono antes de todos los enlace */<br>
+               <p class="bg-cyan-700 text-white w-105 p-1 rounded-md mt-1">a::before {<br>
+                  &nbsp;&nbsp;color: blue;<br>
+                  &nbsp;&nbsp;content: "🔗 ";     <br>             
+               }<br></p>
+               /* Añade un mensaje después de un un elemento con la clase "nota" */<br>
+               <p class="bg-cyan-700 text-white w-105 p-1 rounded-md mt-1">.nota::after {<br>
+                  &nbsp;&nbsp;content: "(Leer con atención)";<br>
+                  &nbsp;&nbsp;font-weight: bold;<br>
+                  &nbsp;&nbsp;color: red;<br>
+               }<br></p>
+               <p class="bg-cyan-700 text-white w-105 p-1 rounded-md mt-1">p::first-letter {    /* Estiliza la primera letra de cada párrafo */<br>
+                 &nbsp;&nbsp;font-size: 3rem;<br>
+                 &nbsp;&nbsp;color: #c0392b;<br>
+                 &nbsp;&nbsp;float: left;<br>
+                 &nbsp;&nbsp;margin-right: 10px;<br>
+               }  <br></p>
+               <p class="bg-cyan-700 text-white w-105 p-1 rounded-md mt-1">p::first-line {      /* Estiliza la primera línea de cada párrafo */<br>   
+                 &nbsp;&nbsp;font-weight: bold;<br>
+                 &nbsp;&nbsp;text-transform: uppercase;<br>
+                 &nbsp;&nbsp;color: #333;<br>
+               }<br></p>
+               <p class="bg-cyan-700 text-white w-105 p-1 rounded-md mt-1">::selection {        /* Estiliza el texto seleccionado por el usuario */<br>
+                 &nbsp;&nbsp;background: yellow; /* El fondo al seleccionar */<br>
+                 &nbsp;&nbsp;color: black;       /* El color de la letra al seleccionar */<br>
+               }<br></p>
+            </div>
+         </section>
+
+<!-- 6. Cajas -->
+         <section id="cajas">
+            <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">6. Modelo de Cajas</h2>
+            <img src="img/margenes.jpg" alt="Margenes" class="mt-4 rounded-md shadow-sm">
+            <p>El tamaño de las cajas se cambia con <b>width</b> y <b>height</b>, con <b>border</b> se cambia los bordes y 
+               con <b>margin</b> y <b>padding</b> los márgenes<br>
+               <code
+                  class="logica">display: block | inline | inline-block;</code>
+               Las cajas pueden estar <b>block</b>, que ocupa toda la línea hasta el final de la pantalla,
+                el siguiente elemento se posicionará debajo, o <b>inline</b>, solo ocupa lo que ocupe su contenido, 
+                el siguiente elemento se posicionará a su derecha o si llega al final de pantalla, debajo. 
+                Con este valor no se podrá cambiar el tamaño al elemento.<br><br>
+               Las etiquetas &lt;div&gt; y &lt;span&gt; se usan para agrupar otras etiquetas<br>
+               <b>&lt;div&gt;</b> está en Block por defecto y <b>&lt;span&gt;</b> está en in-line<br><br>
+               Para cambiar una etiqueta de inline a block y viceversa se usa la propiedad <b>display</b>, 
+               que también puede contener el valor none, el cuál elimina el elemento de la pantalla. <br>
+               La propiedad <b>visibility</b>: hidden también la oculta, pero mantiene la posición.<br><br>
+               <b>Inline-block</b><br>
+               Este valor se comporta igual que un elemento inline pero se puede cambiar el tamaño
+            </p>
+         </section>
+
+<!-- 7. Posicionamiento -->
+         <section id="posicionamiento">
+            <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">7. Posicionamiento</h2>
+            <p class="mt-2 text-gray-700">Define cómo se ubican los elementos en el documento.</p>
+            <div class="mt-4">
+               <ul>
+                  <li class="p-2">
+                     - <code class="logica">position: static;</code>
+                     <p>(Por defecto) <span>Es la posición normal. Los elementos aparecen uno detrás de otro, 
+                  como si fueran camisas dobladas en una pila una encima de la otra. 
+                  Aquí no funcionan las propiedades top, bottom, left o right.</span></p>
+                  </li>
+                  <li class="p-2">
+                     - <code class="logica">position: relative;</code>
+                     <p>El elemento se posiciona respecto a su posición normal.
+                     Las propiedades top, bottom, left y right desplazan el elemento desde su posición original.</p>
+                     <p>Punto de referencia para hijos</p>
+                  </li>
+                  <li class="p-2">
+                     - <code class="logica">position: absolute;</code>
+                     <p>coordenadas respecto al padre (si tiene relative) o documento</p>                     
+                  </li>
+                  <li class="p-2">
+                     - <code class="logica">position: fixed;</code>
+                     <p>Relativo al viewport (no hace scroll)</p>
+                  </li>
+                  <li class="p-2">
+                     - <code class="logica">position: sticky;</code>
+                     <p>fixed: relativo al viewport (no hace scroll)</p>
+                  </li>
+               </ul>
+
+               <p>sticky: relativo al scroll y padre</p>
+            </div>
+            <h4 class="text-xl font-bold mt-4">inset: 0:</h4>
+            <p class="mt-2 text-gray-700">Atajo para top: 0; right: 0; bottom: 0; left: 0;</p>
+         </section>
+
+<!-- 8. Flexbox -->
+         <section id="flexbox">
+            <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">8. Flexbox (Unidimensional)</h2>
+            <p class="mt-2 text-gray-700">Sistema diseñado para organizar elementos en una sola dimensión.</p>
+            <code
+               class="block bg-cyan-700 text-white p-2 rounded-md mt-1">
+               display: flex; <br>
+               flex-direction: row; <br>
+               justify-content: center; <br>
+               align-items: center;
+            </code>
+         </section>
+
+<!-- 9. Grid -->
+         <section id="grid">
+            <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">9. Grid (Bidimensional)</h2>
+            <p class="mt-2 text-gray-700">Sistema para controlar columnas y filas simultáneamente.</p>
+            <code class="block bg-cyan-700 text-white p-2 rounded-md mt-1">
+               display: grid;<br>
+               grid-template-columns: repeat(3, 1fr);<br>
+               gap: 16px;</code>
+         </section>
+      </div>
+   </div>
+</body>
+<script>
+   function mostrarMenu(){
+      $("#menu").css({display: 'inline'})
+         $("#icoMenu").hide()
+         $("nav").css({width: 'calc(var(--spacing) * 64)'})
+         $("#icoOcuMenu").show()
+   }
+   function ocultarMenu(){
+      $("#menu").css({display: 'none'})
+         $("#icoMenu").show()
+         $("#icoOcuMenu").hide()
+         $("nav").css({width: '70px'})
+   }
+   
+</script>
+</html>
