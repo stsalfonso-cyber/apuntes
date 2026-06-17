@@ -1,9 +1,8 @@
-<h1 class="text-3xl text-bold text-teal-800 pl-10">1. El Propósito real: Más allá del backup</h1>
+﻿<h1 class="text-3xl text-bold text-teal-800 pl-10">1. El Propósito real: Más allá del backup</h1>
 
-<!-- probando github -->
 <!-- Git vs. GitHub -->
 
-<section id="que-es" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+<section id="prop" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
   <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">Git vs. GitHub: La Distinción Técnica Fundamental</h2>
   <p>Notas rápidas</p>
   <ul>
@@ -22,16 +21,18 @@
     <li class="list-disc"><b>Funcionamiento</b>: Cuando haces un git commit, estás tomando una "foto" (snapshot) de tu proyecto y guardándola en una carpeta oculta llamada .git dentro de tu ordenador.</li>
     <li class="list-disc"><b>Independencia</b>: Funciona perfectamente sin internet. Puedes hacer commits, ramas y fusiones mientras vas en un tren sin conexión.</li>
   </ul>
-<br>
+  <br>
   <h3 class="text-xl pb-2">2. <b class="text-cyan-700">GitHub</b>: El Centro de Colaboración (La Plataforma en la Nube)</h3>
   <p>GitHub es una empresa y un servicio web (SaaS) que vive en los servidores de Microsoft.</p>
   <ul>
     <li class="list-disc"><b>Técnicamente</b>: Es un servidor remoto que "entiende" Git. Aloja tus repositorios y añade una capa superior de herramientas de gestión.</li>
     <li class="list-disc"><b>Esencial en DAW</b>: GitHub añade lo que Git por sí solo no tiene:
-      <li class="list-disc list-inside ml-5"><b>Pull Requests (PRs)</b>: La forma en que propones cambios para que un profesor o compañero los revise.</li>
-      <li class="list-disc list-inside ml-5"><b>Gestión de proyectos (Issues/Projects)</b>: Organización de tareas.</li>
-      <li class="list-disc list-inside ml-5"><b>Actiones (CI/CD)</b>: Automatización de pruebas y despliegue (la web se publica sola al subir código).</li>
-      <li class="list-disc list-inside ml-5"><b>Wiki/Documentación</b>: El espacio para que tu proyecto sea legible.</li>
+      <ul>
+        <li class="list-disc list-inside ml-5"><b>Pull Requests (PRs)</b>: La forma en que propones cambios para que un profesor o compañero los revise.</li>
+        <li class="list-disc list-inside ml-5"><b>Gestión de proyectos (Issues/Projects)</b>: Organización de tareas.</li>
+        <li class="list-disc list-inside ml-5"><b>Acciones (CI/CD)</b>: Automatización de pruebas y despliegue (la web se publica sola al subir código).</li>
+        <li class="list-disc list-inside ml-5"><b>Wiki/Documentación</b>: El espacio para que tu proyecto sea legible.</li>
+      </ul>
     </li>
   </ul>
   <br>
@@ -39,10 +40,57 @@
   <ol>
     <li class="list-[upper-roman]"><b>La trampa de la plataforma</b>: Si crees que "Git es GitHub", pensarás que si GitHub falla, tu trabajo se pierde. Un profesional sabe que, si GitHub cae, su trabajo está seguro en su carpeta .git local.</li>
     <li class="list-[upper-roman]"><b>Seguridad y Privacidad</b>: En un entorno profesional, a veces no puedes usar GitHub por políticas de seguridad (puedes trabajar en un servidor privado usando Git, sin que el código salga de tus servidores). Debes ser capaz de levantar un "Git" propio si el proyecto lo requiere.</li>
-    <li class="list-[upper-roman]"><b>Velocidad vs. Colaboración</b>: Entender que Git es para desarrollar localmente (rápido, sin latencia) y GitHub es para colaborar globalmente (lento, sincronización por red) te ayudará a estructurar tus commits</li>
+    <li class="list-[upper-roman]"><b>Velocidad vs. Colaboración</b>: Entender que Git es para desarrollar localmente (rápido, sin latencia) y GitHub es para colaborar globalmente (lento, sincronización por red) te ayudará a estructurar tus commits.</li>
   </ol>
 </section>
 
+<br>
+
+<!--  El inicio -->
+
+<section id="inic" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+  <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2"> El inicio, primeros comandos</h2>
+  <h2 class="text-xl font-bold">Fase 1: Inicialización (Solo la primera vez que creas un proyecto)</h2>
+  <br>
+  <ul>
+    <li class="list-decimal"><b>Inicializar localmente</b>: <code class="logica">git init</code> (Crea la base de datos interna en la carpeta .git).</li>
+    <li class="list-decimal"><b>Configurar identidad</b>: <code class="logica">git config --global user.name "Nombre"</code> y <code class="logica">git config --global user.email "email"</code> (Registro de quién realiza los cambios).</li>
+    <li class="list-decimal"><b>Vincular el servidor remoto</b>: <code class="logica">git remote add origin &lt;URL&gt;</code> (Define que el destino oficial de tu trabajo es esa dirección URL)</li>
+    <li class="list-decimal"><b>Definir rama principal</b>: <code class="logica">git branch -M main</code> (Asegura que tu rama local se llame igual que la de la nube, evitando conflictos de nombre).</li>
+  </ul>
+  <br>
+  <h2 class="text-xl font-bold">Fase 2: El Flujo Diario (Tu rutina de trabajo)</h2>
+  <br>
+  <h2 class="text-xl">[A] al empezar el día (obtener lo último)</h2>
+  <p>Antes de tocar nada, trae lo último desde GitHub. Si trabajas solo, es buena costumbre. Si trabajas con otros, es obligatorio.</p>
+  <br>
+  <ul>
+    <li class="list-disc"><code class="logica">git pull origin main</code>: Descarga los cambios de la nube a tu local.</li>
+  </ul>
+  <br>
+  <h2 class="text-xl">[B] Durante el día (Trabajar)</h2>
+  <p>Escribe código, crea archivos, modifica. Git no hace nada aquí hasta que tú le pides que preste atención</p>
+  <br>
+  <h2 class="text-xl">[C] Al terminar el día o al alcanzar un hito (Guardar)</h2>
+  <ol>
+    <li class="list-decimal"><b>Revisar cambios</b>: <code class="logica">git status</code>
+(Crucial para ver qué ficheros están en la "zona de trabajo" comparados con el disco).</li>
+    <li class="list-decimal"><b>Preparar (Stage)</b>: <code class="logica">git add .</code>
+(Mueve los archivos del "área de trabajo" al "área de staging". Están listos para la foto).</li>
+    <li class="list-decimal"><b>Confirmar (Commit)</b>: <code class="logica">git commit -m "Mensaje descriptivo"</code>
+(Congela el estado actual. Cada commit es un "punto de guardado" inmutable).</li>
+    <li class="list-decimal"><b>Enviar (Push)</b>: <code class="logica">git push origin main</code>
+(Sincroniza tu base de datos local con la nube).</li>
+  </ol>
+  <br>
+  <h2 class="text-xl font-bold">Fase 3: Mantenimiento y diagnóstico</h2>
+  <ul>
+    <li><code class="logica">git log --oneline</code>: Te da un resumen del historial de cambios (formato corto). Es lo mejor para ver quién subió qué y cuándo.</li>
+    <li><code class="logica">git diff</code>: Si git status te dice que un archivo ha cambiado pero no sabes qué cambió exactamente, esto te muestra línea por línea qué líneas se han editado</li>
+    <li><code class="logica">git branch -a</code>: Por si en el futuro decides crear "ramas" (versiones paralelas de tu código para probar cosas nuevas). Te dirá en qué rama estás trabajando.</li>
+    <li><code class="logica">git remote -v</code>: Te dice a qué URL está vinculado tu proyecto. Muy útil si tienes varios repositorios y te confundes cuál es cuál.</li>
+  </ul>
+  </section>
 <br>
 
 <!-- Historial de versiones -->
@@ -58,10 +106,5 @@
   </ul>
   <p><b>Esta información es totalmente inútil</b>. En seis meses, cuando vuelvas a ese código, no tendrás ni idea de por qué hiciste esos cambios. La filosofía profesional es que <b>tus commits deben ser una narrativa lógica</b>.</p>
   <p>Un mensaje de commit profesional responde a tres preguntas: ¿Qué?, ¿Por qué? y ¿Cómo afecta?.</p>
-  
 
 </section>
-
-
-
-
