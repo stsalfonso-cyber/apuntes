@@ -1,0 +1,33 @@
+            <br>
+<!-- Import -->
+<h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2"><mark>Import/Export</mark></h2>
+<p>Los módulos son la forma estándar de organizar el código en archivos separados. Permiten dividir 
+   una aplicación grande en piezas pequeñas, reutilizables y fáciles de gestionar, en lugar de 
+   tener miles de líneas en un único archivo.</p>
+<p><u>Export:</u> Para compartir código entre archivos, se utiliza la palabra clave export.<br>
+   Puedes exportar varias cosas de un mismo archivo escribiendo export delante de cada elemento que 
+   quieras exportar:</p>
+<pre class="logica"><code>
+export function miFuncion() {
+    export const IVA = 0.21;
+    export class Producto {
+        constructor(nombre, precio) {
+            this.nombre = nombre;
+            this.precio = precio;
+        }
+}
+</code></pre>
+<p>Se utiliza default para exportar una función, variable o clase por defecto:</p>
+<pre class="logica"><code>
+export default function miFuncion() {
+    <em>// código</em>
+}
+</code></pre>
+<p><u>Import:</u> Para usar el código exportado en otro archivo, se utiliza la palabra clave import.</p>
+<p>se debe especificar el nombre del elemento que se quiere importar entre llaves:</p>
+<pre class="logica"><code>
+import { nombreElemento } from './miModulo.js';
+</code></pre>
+<p>Si el módulo exporta un elemento por defecto, no necesita llaves y se puede importar con cualquier nombre:</p>
+<p><span class="font-bold text-red-500">Ruta</span>. Utiliza ./ para buscar archivos en la misma carpeta o ../ para subir un nivel. Si usas bibliotecas externas, simplemente pones el nombre (ej: import { ... } from 'framer-motion').</p>
+         

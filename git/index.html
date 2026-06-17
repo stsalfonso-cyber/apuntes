@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Git & GitHub</title>
+   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.1.7"></script>
+   <link rel="stylesheet" href="../estilo.css">
+   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+</head>
+
+
+<body class="bg-gray-50 text-gray-900">
+   <div class="flex min-h-screen mx-auto p-6 md:p-10">
+
+      <!--     MENU IZQUIERDO        -->
+      <nav class="sticky top-10 h-screen flex-shrink-0 bg-white p-6 shadow-sm border border-gray-200">
+         <div id="menu">
+            <h2 class="text-xl font-bold mb-4">Git & GitHub - El flujo de trabajo del profesional</h2>
+            <ul><span class="text-lg text-blue-300 mb-3">1. El Propósito real</span>
+               <li><a href="#prop" class="btnfos btnfos-5">Git vs. GitHub</a></li>
+               <li><a href="#hist" class="btnfos btnfos-5">Historial</a></li>
+               <li><a href="#colab" class="btnfos btnfos-5">Colaboración</a></li>
+               <li><a href="#marca" class="btnfos btnfos-5">Tu marca personal</a></li>
+            </ul>
+            <ul><span class="text-lg text-blue-300 mb-3">2. Workflow</span>
+               <li><a href="#concep" class="btnfos btnfos-5">Concepto inicial</a></li>
+               <li><a href="#ciclo" class="btnfos btnfos-5">El ciclo</a></li>
+               <li><a href="#recup" class="btnfos btnfos-5">Recuperación</a></li>
+               <li><a href="#gitignore" class="btnfos btnfos-5">gitignore</a></li>
+            </ul>
+            <ul><span class="text-lg text-blue-300 mb-3">3. Ramas</span>
+               <li><a href="#rama" class="btnfos btnfos-5">Rama / Branch</a></li>
+               <li><a href="#integ" class="btnfos btnfos-5">El proceso de integración</a></li>
+               <li><a href="#conflic" class="btnfos btnfos-5">Conflictos de fusión</a></li>
+            </ul>
+            <ul><span class="text-lg text-blue-300 mb-3">4. Colaboración profesional</span>
+               <li><a href="#pullRequest" class="btnfos btnfos-5">Pull Requests (PRs)</a></li>
+               <li><a href="#codeReview" class="btnfos btnfos-5">Code Review</a></li>
+               <li><a href="#issues" class="btnfos btnfos-5">Issues</a></li>
+            </ul>
+            <ul><span class="text-lg text-blue-300 mb-3">5. Mejores Prácticas</span>
+               <li><a href="#commitMessages" class="btnfos btnfos-5">Commit Messages</a></li>
+               <li><a href="#smallCommit" class="btnfos btnfos-5">Small Commits</a></li>
+               <li><a href="#gitHubFlow" class="btnfos btnfos-5">GitHub Flow</a></li>
+            </ul>
+         </div>
+         <div id="icoMenu">
+            <span onclick="mostrarMenu()">▶</span>
+         </div>
+         <div id="icoOcuMenu">
+            <span onclick="ocultarMenu()">◀</span>
+         </div>
+      </nav>
+
+      <!--     CONTENIDO     -->
+      <main class="ml-10">
+
+         <header class="mb-10 text-center">
+            <h1 class="text-4xl font-extrabold text-cyan-700 text-shadow-sm">Apuntes de Git - GitHub</h1>
+            <p class="text-gray-600 mt-2">Guía completa basada en el documento original</p>
+         </header>
+
+
+
+         <!-- EL PROPOSITO REAL -->
+
+         <div id="prop">
+
+         </div>
+
+         <!-- WORKFLOW -->
+
+         <br>
+         <div id="workflow">
+
+         </div>
+         
+         <!-- RAMAS -->
+
+         <br>
+         <div id="ramas">
+
+         </div>
+
+         <!-- Pull Requests -->
+
+         <br>
+         <div id="pullReq">
+
+         </div>
+         
+         <!-- MEJORES PRACTICAS -->
+
+         <br>
+         <div id="mejPract">
+
+         </div>
+
+         <footer class="ml-72 mt-20 pt-10 border-t border-gray-200 text-center text-gray-500">
+            <p>Apuntes y notas Alfonso</p>
+         </footer>
+
+      </main>
+
+   </div>
+
+</body>
+
+
+<script>
+   async function cargarSeccion(idContenedor, rutaArchivo) {
+      try {
+         const response = await fetch(rutaArchivo);
+         if (!response.ok) throw new Error('No se pudo cargar el archivo');
+         const html = await response.text();
+         document.getElementById(idContenedor).innerHTML = html;
+      } catch (err) {
+         document.getElementById(idContenedor).innerHTML = '<p class="text-red-500">Error al cargar la sección.</p>';
+      }
+   }
+
+   // Llamada: carga secciones.html dentro del div
+   // Nota: Esto requiere estar sirviendo los archivos a través de un server (ej. Live Server, Nginx, Apache)
+   cargarSeccion('prop', 'prop.html')
+   cargarSeccion('hist', 'eventos.html')
+   cargarSeccion('ramas', 'datosCliente.html')
+   cargarSeccion('pullReq', 'debugging.html')
+   cargarSeccion('mejPract', 'mejPract.html')
+
+
+</script>
+<script>
+   function mostrarMenu() {
+      $("#menu").css({ display: 'inline' })
+      $("#icoMenu").hide()
+      $("nav").css({ width: 'calc(var(--spacing) * 64)' })
+      $("#icoOcuMenu").show()
+   }
+   function ocultarMenu() {
+      $("#menu").css({ display: 'none' })
+      $("#icoMenu").show()
+      $("#icoOcuMenu").hide()
+      $("nav").css({ width: '70px' })
+   }
+
+</script>
+
+</html>

@@ -1,0 +1,47 @@
+<br>
+<h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">Objeto <mark>JSON</mark></h2>
+<p>JSON es un formato de texto ligero utilizado para el intercambio de datos. Aunque deriva de la sintaxis 
+   de objetos de JavaScript, es un formato de datos independiente que puede ser utilizado por casi cualquier 
+   lenguaje de programación (Python, PHP, Java, etc.).</p>
+<p><u>Reglas de sintaxis básicas:</u></p>
+<ol>
+   <li class="list-decimal"><b>Claves: </b>Siempre deben estar entre comillas dobles ("clave").</li>
+   <li class="list-decimal"><b>Valores: </b>Solo se permiten cadenas (dobles comillas), números, booleanos, arrays, objetos o null. <b>No</b> se permiten funciones, undefined o fechas.</li>
+   <li class="list-decimal"><b>Sin comas finales: </b>El último par clave-valor no puede terminar con una coma.</li>
+</ol>
+<pre class="logica"><code>
+const persona = {
+    "name": "Dani",
+    "age": 30,
+    "isWorking": true,
+    "family": ["Miguel", "Maria"],
+    "address": {
+        "street": "Calle de la piruleta",
+        "number": 13,
+        "city": "Barcelona"
+    }
+}
+</code></pre>
+<p><u> Métodos principales:</u></p>
+<ul>
+   <li class="list-disc"><u><mark>JSON.stringify</mark>(objeto)</u>: Convierte un objeto JavaScript en una cadena con 
+      formato JSON. Es útil para enviar datos a través de la red o para almacenar datos en formato de texto.</li>
+   <pre class="logica"><code>
+const persona = { name: "Dani", age: 30 };
+const jsonString = JSON.stringify(persona);
+console.log(jsonString); <em>// Imprime '{"name":"Dani","age":30}'</em>
+</code></pre>
+   </li>
+   <li class="list-disc"><u><mark>JSON.parse</mark>(cadena)</u>: Convierte una cadena JSON en un objeto JavaScript. Es útil 
+      para recibir datos en formato JSON y convertirlos en objetos que se puedan manipular en JavaScript.</li>
+   <pre class="logica"><code>
+const jsonString = '{"name":"Dani","age":30}';
+const persona = JSON.parse(jsonString);
+console.log(persona.name); <em>// Imprime "Dani"</em>
+console.log(persona.age); <em>// Imprime 30</em>
+</code></pre>
+   </li>
+</ul>
+<u>Consejos prácticos</u>
+<li class="list-[upper-roman]">Es conveniente envolver a JSON.parse en un bloque try...catch para manejar posibles errores de sintaxis en la cadena JSON.</li>
+<li class="list-[upper-roman]">JSON.stringify() no puede convertir funciones, undefined ni fechas.</li>

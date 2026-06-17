@@ -1,0 +1,164 @@
+<h1 class="text-3xl text-bold text-teal-800 pl-10">3. Datos del cliente</h1>
+
+<br>
+
+<!-- localStorage   -->
+
+<section id="local" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+  <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">LocalStorage</h2>
+  <p>El localStorage es una API del navegador que te permite guardar datos en el dispositivo del
+    usuario de forma persistente. A diferencia de las variables de JavaScript, que se borran al
+    refrescar la página, lo que escribas en localStorage seguirá ahí incluso si el usuario cierra
+    el navegador o apaga el ordenador.</p>
+  <p>Métodos fundamentales</p>
+  <p><u>Estos son los comandos que usarás el 99% de las veces:</u></p>
+  <pre class="logica"><code>
+<em>// 1. Guardar datos (Siempre clave-valor)</em>
+localStorage.setItem('tema', 'oscuro');
+
+<em>// 2. Recuperar datos</em>
+const temaActual = localStorage.getItem('tema'); // Devuelve 'oscuro'
+
+<em>// 3. Eliminar un elemento específico</em>
+localStorage.removeItem('tema');
+
+<em>// 4. Limpiar todo el almacenamiento de Spagnolo</em>
+localStorage.clear();
+    </code></pre>
+
+  <p><b>La capacidad limitada y el QuotaExceededError</b></p>
+  <p>El localStorage no es un disco duro infinito. Tienes un límite (normalmente 5MB por dominio).</p>
+  <p>Si superas el limite de memoria el sistema lanza una excepción QuotaExceededError.</p>
+  <p><b>Best Practice</b>: Siempre envuelve las escrituras en un try...catch.</p>
+  <pre class="logica"><code>
+    try {
+    localStorage.setItem('datosMuyGrandes', JSON.stringify(objetoGigante));
+} catch (e) {
+    if (e.name === 'QuotaExceededError') {
+        console.error("¡Espacio lleno! Limpia el carrito.");
+    }
+}
+  </code></pre>
+</section>
+
+<br>
+
+<!-- stringify y parse   -->
+
+<section id="json-storage" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+  <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">JSON.stringify/parse</h2>
+
+  <p><u>La Regla de Oro: Solo guarda Strings</u></p>
+  <p>El localStorage es muy estricto: solo puede guardar cadenas de texto. Si intentas guardar un
+    objeto o un array directamente, el navegador lo convertirá a [object Object] y perderás la
+    información.</p>
+  <p>Para guardar objetos se usa Json</p>
+  <ul>
+    <li><b>Para guardar:</b> Usas JSON.stringify(objeto) para convertirlo a string antes de guardarlo en localStorage
+    </li>
+    <li><b>Para leer:</b> Usas JSON.parse(string) para convertirlo a objeto y trabajar en js</li>
+  </ul>
+
+  <p><b>El riesgo del "null"</b></p>
+  <p>Si intentas hacer JSON.parse(localStorage.getItem('claveNoExistente')), el resultado es null.
+    Si luego intentas acceder a una propiedad, la web explota. Solución profesional:</p>
+
+  <pre class="logica"><code>
+const carrito = JSON.parse(localStorage.getItem('carrito')) || []; 
+<em>// Si localStorage devuelve null, usamos un array vacío como red de seguridad.</em>
+  </code></pre>
+
+
+  <p><b>Sincronizacion entre pestañas</b></p>
+  <pre class="logica"><code>
+window.addEventListener('storage', (event) => {
+  console.log(`La clave ${event.key} cambió de ${event.oldValue} a ${event.newValue}`);
+  <em>// Aquí podrías actualizar el DOM de la otra pestaña automáticamente</em>
+});
+  </code></pre>
+  <p>El evento storage es una herramienta clave para la comunicación entre pestañas o ventanas del mismo origen (mismo
+    protocolo, dominio y puerto). </p>
+  <p>Es un error común pensar que este evento salta cada vez que se hace un localStorage.setItem(). No es así.</p>
+  <p>El evento storage solo se dispara en otras pestañas o ventanas que tengan tu sitio web abierto, nunca en la pestaña
+    donde se ejecutó la acción.</p>
+  <br>
+  <ul>
+    <li><b>Origen</b>: Debe ocurrir un cambio en localStorage (o sessionStorage en versiones antiguas - específicas) en
+      una pestaña distinta a la actual.</li>
+    <li><b>Acción</b>: El evento se dispara al ejecutar: setItem, removeItem o clear</li>
+    <li><b>Cambio real</b>: Si haces setItem('clave', 'valor') pero 'valor' ya es el valor actual en el localStorage, no
+      salta el evento (porque no hubo cambio real).</li>
+    <li><b>Ejecución</b>: En la pestaña que realizó el cambio, el evento no se ejecuta. Solo verás el evento en las
+      otras pestañas abiertas del mismo dominio.</li>
+  </ul>
+  <br>
+  <p>El objeto event: propiedades</p>
+  <table>
+    <tr>
+      <th class="w-40 text-left">Propiedad</th>
+      <th class="text-left">Ejecución</th>
+    </tr>
+    <tr>
+      <td>event.oldValue</td>
+      <td>
+        <li>El valor que tenía la clave antes del cambio.</li>
+        <li>Si la clave era nueva (no existía antes), será null.</li>
+      </td>
+    </tr>
+    <tr>
+      <td>event.newValue</td>
+      <td>
+        <li>El nuevo valor que se asignó.</li>
+        <li>Si se eliminó la clave (usando removeItem o se limpió el storage), será null.</li>
+      </td>
+    </tr>
+    <tr>
+      <td>event.url</td>
+      <td>
+        <li>La URL de la página donde se realizó el cambio en el localStorage. Es muy útil para filtrar si el evento vino de una fuente que te interesa o ignorar otros</li>
+      </td>
+    </tr>
+    <tr>
+      <td>event.storageArea</td>
+      <td>
+        <li>Referencia al objeto localStorage o sessionStorage afectado. Es útil si tu aplicación usa ambos y necesitas saber cuál fue el modificado.</li>
+      </td>
+    </tr>
+
+  </table>
+
+
+</section>
+
+
+<br>
+
+<!-- sessioStorage   -->
+
+<section id="session" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+  <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">sessionStorage VS localStorage</h2>
+  <p id="session"><u>Diferencia: localStorage VS sessionStorage</u></p>
+  <p>En DAW es muy importante saber elegir cuál usar según el caso de uso:</p>
+  <table>
+    <tr>
+      <th class="w-35 text-left">Característica</th>
+      <th class="text-left">localStorage</th>
+      <th class="text-left">sessionStorage</th>
+    </tr>
+    <tr>
+      <td>Persistencia</td>
+      <td>Permanente (hasta que se borra).</td>
+      <td>Solo mientras la pestaña esté abierta</td>
+    </tr>
+    <tr>
+      <td>Alcance</td>
+      <td>Todo el dominio.</td>
+      <td>Solo la pestaña actual.</td>
+    </tr>
+    <tr>
+      <td>Uso común</td>
+      <td>Preferencias de usuario, carritos de compra, tokens de login.</td>
+      <td>Datos temporales de formularios, navegación de un solo uso.</td>
+    </tr>
+  </table>
+</section>

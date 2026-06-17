@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>DOM, Browser APIs y Workflow Profesional</title>
+   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.1.7"></script>
+   <link rel="stylesheet" href="../estilo.css">
+   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+</head>
+
+
+<body class="bg-gray-50 text-gray-900">
+   <div class="flex min-h-screen mx-auto p-6 md:p-10">
+
+      <!--     MENU IZQUIERDO        -->
+      <nav class="sticky top-10 h-screen flex-shrink-0 bg-white p-6 shadow-sm border border-gray-200">
+         <div id="menu">
+            <h2 class="text-xl font-bold mb-4">DOM, Browser APIs y Workflow Profesional</h2>
+            <ul><span class="text-lg text-blue-300 mb-3">1. El DOM</span>
+               <li><a href="#que-es" class="btnfos btnfos-5">Nodos y jerarquía</a></li>
+               <li><a href="#seleccion" class="btnfos btnfos-5">Selección</a></li>
+               <li><a href="#manipulacion" class="btnfos btnfos-5">Manipulación</a></li>
+               <li><a href="#iteracion" class="btnfos btnfos-5">Iteración</a></li>
+            </ul>
+            <ul><span class="text-lg text-blue-300 mb-3">2. Manejo de Eventos</span>
+               <li><a href="#listener" class="btnfos btnfos-5">EventListener</a></li>
+               <li><a href="#event" class="btnfos btnfos-5">Objeto event</a></li>
+               <li><a href="#forms" class="btnfos btnfos-5">Formularios</a></li>
+               <li><a href="#consejos" class="btnfos btnfos-5">Consejos</a></li>
+            </ul>
+            <ul><span class="text-lg text-blue-300 mb-3">3. Datos en el Cliente</span>
+               <li><a href="#local" class="btnfos btnfos-5">localStorage</a></li>
+               <li><a href="#json-storage" class="btnfos btnfos-5">JSON.stringify/parse</a></li>
+               <li><a href="#session" class="btnfos btnfos-5">sessionStorage vs localStorage</a></li>
+            </ul>
+            <ul><span class="text-lg text-blue-300 mb-3">4. Debugging & Workflow</span>
+               <li><a href="#console" class="btnfos btnfos-5">Console Pro</a></li>
+               <li><a href="#network" class="btnfos btnfos-5">Inspección de peticiones</a></li>
+               <li><a href="#sources" class="btnfos btnfos-5">Breakpoints y Debugger</a></li>
+            </ul>
+            <ul><span class="text-lg text-blue-300 mb-3">5. Mejores Prácticas</span>
+               <li><a href="#separacion" class="btnfos btnfos-5">Lógica vs UI</a></li>
+               <li><a href="#seguridad" class="btnfos btnfos-5">Validación y Sanitización</a></li>
+               <li><a href="#orden" class="btnfos btnfos-5">Estructura y orden de archivos</a></li>
+            </ul>
+         </div>
+         <div id="icoMenu">
+            <span onclick="mostrarMenu()">▶</span>
+         </div>
+         <div id="icoOcuMenu">
+            <span onclick="ocultarMenu()">◀</span>
+         </div>
+      </nav>
+
+      <!--     CONTENIDO     -->
+      <main class="ml-10">
+
+         <header class="mb-10 text-center">
+            <h1 class="text-4xl font-extrabold text-cyan-700 text-shadow-sm">Apuntes de JavaScript</h1>
+            <p class="text-gray-600 mt-2">Guía completa basada en el documento original</p>
+         </header>
+
+
+
+         <!-- DOM -->
+
+         <div id="dom">
+
+         </div>
+
+         <!-- EVENTOS -->
+
+         <br>
+         <div id="eventos">
+
+         </div>
+         
+         <!-- DATOS DEL CLIENTE -->
+
+         <br>
+         <div id="cliente">
+
+         </div>
+
+         <!-- DEBUGGING -->
+
+         <br>
+         <div id="debug">
+
+         </div>
+         
+         <!-- MEJORES PRACTICAS -->
+
+         <br>
+         <div id="mejPract">
+
+         </div>
+
+         <footer class="ml-72 mt-20 pt-10 border-t border-gray-200 text-center text-gray-500">
+            <p>Apuntes y notas Alfonso</p>
+         </footer>
+
+      </main>
+
+   </div>
+
+</body>
+
+
+<script>
+   async function cargarSeccion(idContenedor, rutaArchivo) {
+      try {
+         const response = await fetch(rutaArchivo);
+         if (!response.ok) throw new Error('No se pudo cargar el archivo');
+         const html = await response.text();
+         document.getElementById(idContenedor).innerHTML = html;
+      } catch (err) {
+         document.getElementById(idContenedor).innerHTML = '<p class="text-red-500">Error al cargar la sección.</p>';
+      }
+   }
+
+   // Llamada: carga secciones.html dentro del div
+   // Nota: Esto requiere estar sirviendo los archivos a través de un server (ej. Live Server, Nginx, Apache)
+   cargarSeccion('dom', 'dom.html')
+   cargarSeccion('eventos', 'eventos.html')
+   cargarSeccion('cliente', 'datosCliente.html')
+   cargarSeccion('debug', 'debugging.html')
+   cargarSeccion('mejPract', 'mejPract.html')
+
+
+</script>
+<script>
+   function mostrarMenu() {
+      $("#menu").css({ display: 'inline' })
+      $("#icoMenu").hide()
+      $("nav").css({ width: 'calc(var(--spacing) * 64)' })
+      $("#icoOcuMenu").show()
+   }
+   function ocultarMenu() {
+      $("#menu").css({ display: 'none' })
+      $("#icoMenu").show()
+      $("#icoOcuMenu").hide()
+      $("nav").css({ width: '70px' })
+   }
+
+</script>
+
+</html>

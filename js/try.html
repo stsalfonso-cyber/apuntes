@@ -1,0 +1,18 @@
+<br>
+<h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2"><mark>Try...Catch</mark></h2>
+<p>El bloque try...catch es una estructura de control que permite manejar errores de manera elegante en JavaScript. 
+   Se utiliza para ejecutar código que podría generar una excepción (error) y proporcionar una forma de responder a ese error sin que el programa se detenga abruptamente.</p>
+<p>Estructura básica:</p>
+<pre class="logica"><code>try {
+  <em>// 1. Código que intentamos ejecutar ("probar")</em>
+} catch (error) {
+  <em>// 2. Este bloque se ejecuta SOLAMENTE si el código del 'try' falla</em>
+} finally {
+  <em>// 3. Este bloque se ejecuta SIEMPRE, haya habido error o no</em>
+}</code></pre>
+<p>Los métodos mas comunes son:</p>
+<ul>
+  <li class="list-disc"><b>error.message</b>: Es una cadena de texto que contiene el mensaje de error o la descripción de lo que ha fallado. Es la propiedad más utilizada para mostrar información al usuario final.</li>
+  <li class="list-disc"><b>error.name</b>: Es una cadena que indica el tipo de error. Por ejemplo: "TypeError", "ReferenceError", "SyntaxError" o simplemente "Error".</li>
+  <li class="list-disc"><b>error.stack</b>: Contiene un rastro (stack trace) detallado. Es una cadena de texto que enumera las llamadas a funciones que llevaron al error, mostrando los nombres de los archivos y los números de línea. Es indispensable para la depuración (debugging).</li>
+</ul>

@@ -1,0 +1,41 @@
+<br>
+<h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2"><mark>Async / Await</mark></h2>
+<p>Async / Await es una sintaxis que permite escribir código asíncrono de manera más legible y sencilla. 
+   Facilita la manipulación de promesas y evita el uso excesivo de callbacks.</p>
+<li class="list-decimal">Declaración async:</li>
+<p>Al añadir async delante de una función, esta garantiza que <mark>siempre retornará una promesa</mark>.</p>
+<pre class="logica"><code>
+async function obtenerTiendas() {
+    return "Lista de tiendas cargada";
+}
+<em>// Es equivalente a:
+// function obtenerTiendas() { return Promise.resolve("Lista de tiendas cargada");</em> 
+}
+</code></pre>
+<li class="list-decimal">Operador await:</li>
+<p>Solo se puede usar dentro de funciones async. Detiene la ejecución de la función hasta que la 
+   promesa se resuelve, lo que hace que el código sea mucho más fácil de leer que las antiguas 
+   cadenas de .then(). <mark>Se detiene la ejecución solo en esta funcion el resto de código continúa</mark></p>
+<p>🔹La forma antigua (Promesas con .then())</p>
+<pre class="logica"><code>
+fetch('https://api.spagnolo.es/productos')
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error("Hubo un problema: ", error));
+</code></pre>
+<p>🔹La forma moderna (async/await):</p>
+<pre class="logica"><code>
+async function cargarProductos() {
+    try {
+        const response = await fetch('api/productos'); 
+       <em> // el sistema espera a que se tramite la peticion antes de seguir ejecutando este bloque, el resto de código sigue su ejecución</em>
+        if (!response.ok) {
+            throw new Error(`Error inesperado: ${response.status}`);
+          }
+        const data = await response.json();   <em>// Espera a que los datos se parseen</em>
+        console.log(data); <em> // el sistema espera a que se termine el parseo antes de seguir ejecutando este bloque</em>
+    } catch (error) {
+        console.error("Error al obtener productos:", error);
+    }
+}
+</code></pre>

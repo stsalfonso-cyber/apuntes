@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>jQuery Apuntes</title>
+   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.1.7"></script>
+   <link rel="stylesheet" href="../estilo.css">
+   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+</head>
+<body class="bg-gray-50 text-gray-900">
+   <div class="flex min-h-screen mx-auto p-6 md:p-10">
+
+                     <!--     MENU IZQUIERDO        -->
+      <nav class="sticky top-10 h-screen flex-shrink-0 bg-white p-6 shadow-sm border border-gray-200">
+         <div id="menu">
+            <h2 class="text-xl font-bold mb-4">JQuery</h2>
+            <ul class="space-y-2 text-cyan-700">
+               <li><a href="#introduccion" class="btnfos btnfos-5">1. Introducción y carga</a></li>
+               <li><a href="#selectores" class="btnfos btnfos-5">2. Selectores comunes</a></li>
+               <li><a href="#manipulacion" class="btnfos btnfos-5">3. Manipulación de contenido (text, html)</a></li>
+               <li><a href="#css-atributos" class="btnfos btnfos-5">4. CSS y Atributos</a></li>
+               <li><a href="#eventos" class="btnfos btnfos-5">5. Administración de eventos</a></li>
+               <li><a href="#dom" class="btnfos btnfos-5">6. Manipulación del DOM</a></li>
+               <li><a href="#efectos" class="btnfos btnfos-5">7. Efectos Visuales</a></li>
+               <li><a href="#iteracion" class="btnfos btnfos-5">8. Iteración (each)</a></li>
+               <li><a href="#ajax" class="btnfos btnfos-5">9. AJAX</a></li>
+               <li><a href="#addClass" class="btnfos btnfos-5 ">10. addClass/removeClass</a></li>
+            </ul>
+         </div>
+         <div id="icoMenu" >
+            <span onclick="mostrarMenu()">▶</span>
+         </div>
+         <div id="icoOcuMenu" >
+            <span onclick="ocultarMenu()">◀</span>
+         </div>
+      </nav>
+
+                     <!--     CONTENIDO     -->
+      <main class="ml-10">
+
+         <header class="mb-10 text-center">
+            <h1 class="text-4xl font-extrabold text-cyan-700 text-shadow-sm">Apuntes de jQuery</h1>
+            <p class="text-cyan-700 mt-2">Guía completa basada en el documento original</p>
+         </header> 
+         
+         
+<!-- 1. Introducción y carga -->
+         <section id="introduccion">
+            <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">1. Introducción y carga</h2>
+            <p class="mt-2 text-gray-700">Se requiere incluir la librería jQuery antes de empezar. Es fundamental
+               esperar a que el DOM esté completamente cargado para evitar errores de ejecución.</p>
+            <pre
+               class="bg-cyan-700 text-white p-2 rounded-md mt-4 overflow-x-auto"><code>&lt;script src="https://code.jquery.com/jquery-3.4.1.min.js"&gt;&lt;/script&gt;</code></pre>
+         </section>
+<!-- 2. Selectores comunes -->
+         <section id="selectores">
+            <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">2. Selectores comunes</h2>
+            <p class="mt-2 text-gray-700">jQuery permite seleccionar elementos usando sintaxis CSS y selectores
+               propios.</p>
+            <div class="mt-4 space-y-2">
+               <p><code>$("#id")</code> -> Seleccionar por ID.</p>
+               <p><code>$("elemento")</code> -> Seleccionar por tipo (ej: $("p")).</p>
+               <p><code>$(".clase")</code> -> Seleccionar por clase CSS.</p>
+               <p><code>$(".container li:first")</code> -> Pseudoselectores (hijos).</p>
+            </div>
+         </section>
+<!-- 3. Manipulación de contenido -->
+         <section id="manipulacion">
+            <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">3. Manipulación de contenido</h2>
+            <div class="mt-4">
+               <p><strong>text(valor)</strong>: Lee o establece el texto de uno o más elementos.</p>
+               <pre
+                  class="bg-cyan-700 text-white p-2 rounded-md mt-2"><code>let x = $("#parrafo1"); x.text("Este es el nuevo texto");</code></pre>
+               <p class="mt-2"><strong>html(valor)</strong>: Establece contenido HTML, permitiendo inyectar tags.
+               </p>
+               <pre
+                  class="bg-cyan-700 text-white p-2 rounded-md mt-2"><code>$("#div").html('&lt;input type="text"&gt;');</code></pre>
+            </div>
+         </section>
+<!-- 4. CSS y Atributos -->
+         <section id="css-atributos">
+            <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">4. CSS y Atributos</h2>
+            <div class="mt-4">
+               <p>Para estilos: <code>.css(propiedad, valor)</code> o recibir un objeto para múltiples.</p>
+               <p>Nombre de propiedades css, Acepta guiones o camelCase:<br>
+                  <code>$(elemento).css('background-color','white')</code><br>
+                  <code>$(elemento).css('backgroundColor','white')</code>
+               </p>
+               <pre
+                  class="bg-cyan-700 text-white p-2 rounded-md"><code>$(el).css({color: 'red', width: '50px'});</code></pre>
+               <p class="mt-2">Para atributos: <code>attr(prop, valor)</code> y <code>removeAttr(prop)</code>.</p>
+            </div>
+         </section>
+<!-- 5. Administración de eventos -->
+         <section id="eventos">
+            <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">5. Administración de eventos</h2>
+            <p class="mt-2">jQuery simplifica el manejo de eventos (click, mouseover, hover, focus, blur, dblclick,
+               etc.).</p>
+            <ul class="list-disc pl-5 mt-2 space-y-1">
+               <li>ready: Función que se ejecuta cuando el DOM está completamente cargado.<br>
+                  <code class="bg-cyan-700 text-white p-1 rounded-md mt-2">$(document).ready(function() {...})</code>
+               </li>
+               <li>click: Función que se ejecuta cuando se hace click en el elemento.<br>
+                  <code class="bg-cyan-700 text-white p-1 rounded-md mt-2">$(documento).click(nombre de función)</code>
+               </li>
+               <li>hover: Función que se ejecuta cuando se pasa el ratón por encima del elemento.<br>
+                  <code class="bg-cyan-700 text-white p-1 rounded-md mt-2">$(documento).hover(nombre de función)</code>
+               </li>
+               <li>mousemove(e):<code> Útil para coordenadas e.clientX.</code><br>
+                  <code
+                     class="bg-cyan-700 text-white p-1 rounded-md mt-2">$(documento).mousemove(nombre de función)</code>
+               </li>
+               <li>focus / blur:
+                  <code> Gestión del foco en campos de formulario (focus cuando tiene el foco, blur cuando pierde el foco).</code><br>
+                  <code class="bg-cyan-700 text-white p-1 rounded-md mt-2">$(documento).focus(nombre de función)</code>
+               </li>
+               <li><strong>this</strong>
+                  <code>: Referencia al elemento que disparó el evento.</code><br>
+                  <code class="bg-cyan-700 text-white p-1 rounded-md mt-2">$(this).css("color", "red")</code>
+               </li>
+            </ul>
+         </section>
+<!-- 6. Manipulación del DOM -->
+         <section id="dom">
+            <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">6. Manipulación del DOM</h2>
+            <div class="mt-4">
+               <p>Métodos para insertar y eliminar elementos:</p>
+               <ul class="list-disc pl-5">
+                  <li><code>empty()</code>: Borra el contenido interno.
+                     <code class="bg-cyan-700 text-white p-1 rounded-md mt-2">$(documento).empty()</code>
+                  </li>
+                  <li><code>append()</code> / <code>prepend()</code>: Añadir al final o al principio.<br>
+                     <code
+                        class="bg-cyan-700 text-white p-1 rounded-md mt-2">$(documento).append("contenido") <br>$(documento).prepend("contenido")</code>
+                  </li>
+                  <li><code>eq(index).remove()</code>: Eliminar nodo específico por índice.
+                     <code class="bg-cyan-700 text-white p-1 rounded-md mt-2">$(documento).eq(index).remove()</code>
+                  </li>
+                  <li><code>slice(0, 2).remove()</code>: Eliminar un rango de elementos.
+                     <code class="bg-cyan-700 text-white p-1 rounded-md mt-2">$(documento).slice(0, 2).remove()</code>
+                  </li>
+               </ul>
+            </div>
+         </section>
+<!-- 7. Efectos Visuales -->
+         <section id="efectos">
+            <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">7. Efectos Visuales</h2>
+            <p class="mt-4">Métodos para animaciones rápidas:</p>
+            <div>
+               <div class="mb-3">
+                  <span class="bg-cyan-100 px-3 py-1 rounded">show() / hide()</span>
+                  <div class="flex flex-wrap gap-2">
+                     <p class="m-2"><code class="bg-cyan-700 text-white p-2 rounded-md mt-1">$(documento).show()</code>
+                        Oculta un elemento lentamente</p>
+                     <p class="m-2"><code class="bg-cyan-700 text-white p-2 rounded-md mt-1">$(documento).hide()</code>
+                        Muestra un elemento lentamente</p>
+                  </div>
+               </div>
+               <div class="mb-3">
+                  <span class="bg-cyan-100 px-3 py-1 rounded">fadeIn() / fadeOut()</span>
+                  <div class="flex flex-wrap gap-2">
+                     <p class="m-2"><code
+                           class="bg-cyan-700 text-white p-2 rounded-md mt-1">$(documento).fadeIn()</code>
+                        Oculta y muestra un elemento lentamente con opacidad</p>
+                     <p class="m-2"><code
+                           class="bg-cyan-700 text-white p-2 rounded-md mt-1">$(documento).fadeOut()</code>
+                        Oculta el elemento</p>
+                  </div>
+               </div>
+               <div class="mb-3">
+                  <span class="bg-cyan-100 px-3 py-1 rounded">fadeTo()</span><br>
+                  <p class="m-2"><code class="bg-cyan-700 text-white p-2 rounded-md mt-1">$(documento).fadeTo(speed,
+                            opacity)</code>
+                     Oculta y muestra un elemento lentamente. El método fadeTo puede modificar la opacidad
+                     de un elemento, el efecto es llevar la opacidad
+                     actual hasta el valor que le pasamos al método fadeTo</p>
+                  <p class="m-2"><code class="bg-cyan-700 text-white p-2 rounded-md mt-1">$(documento).fadeTo()</code>
+                     Oculta el elemento.</p>
+               </div>
+               <div class="mb-3">
+                  <span class="bg-cyan-100 px-3 py-1 rounded">toggle()</span>
+                  <p class="m-2"><code class="bg-cyan-700 text-white p-2 rounded-md mt-1">$(documento).toggle()</code>
+                     Oculta y muestra un elemento lentamente</p>
+                  <p class="m-2"><code class="bg-cyan-700 text-white p-2 rounded-md mt-1">$(documento).toggle()</code>
+                     Oculta el elemento.</p>
+               </div>
+               <div class="mb-3">
+                  <span class="bg-cyan-100 px-3 py-1 rounded">slideDown() / slideUp()</span>
+                  <p class="m-2"><code class="bg-cyan-700 text-white p-2 rounded-md mt-1">$(documento).slideDown(speed,
+                        callback)</code> Oculta y muestra un elemento lentamente</p>
+                  <p class="m-2"><code class="bg-cyan-700 text-white p-2 rounded-md mt-1">$(documento).slideUp(speed,
+                        callback)</code> Oculta el elemento.</p>
+               </div>
+            </div>
+         </section>
+<!-- 8. ITERACIONES POR ELEMENTOS -->
+         <section id="iteracion">
+            <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">8. Iteración por los elementos (each)
+            </h2>
+            <p class="mt-2">jQuery dispone de un método que nos permite asociar una función que se ejecutará por
+               cada elemento que contenga la lista del objeto jQuery</p>
+            <ul class="list-disc pl-5 space-y-2 mt-2">
+               <p class="bg-cyan-700 text-white p-4 rounded-md mt-2">
+                  <code>
+                            &lt;ul id="mi-lista"&gt;<br>
+                            &nbsp;&nbsp;&lt;li&gt;Elemento 1&lt;/li&gt;<br>
+                            &nbsp;&nbsp;&lt;li&gt;Elemento 2&lt;/li&gt;<br>
+                            &nbsp;&nbsp;&lt;li&gt;Elemento 3&lt;/li&gt;<br>
+                            &lt;/ul&gt;<br>
+                            &lt;script&gt;<br>
+                            &nbsp;&nbsp;$('#mi-lista li').each(function (index) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;console.log("Índice: " + index + ", Texto: " + $(this).text());<br>
+                            &nbsp;&nbsp;}<br>
+                            );<br>
+                            &lt;/script&gt;
+                        </code>
+               </p>
+            </ul>
+         </section>
+<!-- 9. AJAX -->
+         <section id="ajax">
+            <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">9. AJAX</h2>
+            <p class="mt-2">jQuery maneja peticiones asíncronas de forma muy sencilla:</p>
+            <ul class="list-disc pl-5 space-y-2 mt-2">
+               <li>
+                  <code>load(url, params, callback)</code>
+                  <p>Este método permite cargar datos desde el servidor y actualizar el contenido de un elemento HTML sin necesidad de recargar toda la página</p>
+                  <code class="bg-cyan-700 text-white p-2 rounded-md mt-1 block">
+                     $("#contenedor").load("archivo.html");
+                  </code>
+               </li>
+               <li>
+                  <code>ajaxStart / ajaxStop</code>
+                  <p>Son eventos globales en jQuery que permiten gestionar indicadores de carga (spinners) de forma automática</p>
+                  <code  class="bg-cyan-700 text-white p-2 rounded-md mt-1 block">
+                     $(document).ajaxStart(function() {<br>&nbsp;&nbsp;&nbsp;$('#spinner-cargando').show();<br>});
+                  </code>
+               </li>
+               <li>
+                  <code>$.get() / $.post()</code>: Peticiones HTTP básicas.
+                  <code  class="bg-cyan-700 text-white p-2 rounded-md mt-1 block">
+                     // Obtener información de un usuario<br>
+                     $.get("https://example.com", function(respuesta) {<br>
+                        &nbsp;&nbsp;&nbsp;// Código que se ejecuta si la petición tiene éxito<br>
+                        &nbsp;&nbsp;&nbsp;console.log("Nombre: " + respuesta.nombre);<br>
+                        &nbsp;&nbsp;&nbsp;$("#resultado").html("Usuario cargado: " + respuesta.nombre);<br>
+                     }).fail(function() {<br>
+                        &nbsp;&nbsp;&nbsp;console.log("Error al cargar los datos.");<br>
+                     });
+                  </code>
+               </li>
+               <li>
+                  <code>$.getJSON()</code>
+                  <p>Se le puede pasar un objeto JSON o una url que devuelva un JSON. Convierte automáticamente el objeto JSON en un objeto JavaScript, facilitando su manipulación.</p>
+                  <code class="bg-cyan-700 text-white p-2 rounded-md mt-1 block">                    
+                     $.getJSON('https://api.tuweb.com/datos', function(data) {<br>
+                        &nbsp;&nbsp;&nbsp;// Procesamos el objeto 'data' recibido<br>
+                        &nbsp;&nbsp;&nbsp;let htmlContenido = `
+                        <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Perfil: ${data.nombre}</h3>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Edad: ${data.edad}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rol: ${data.rol}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Habilidades: ${data.habilidades.join(', ')}</p>
+                        &nbsp;&nbsp;&nbsp;`;<br>
+                        &nbsp;&nbsp;&nbsp;$('#resultado').html(htmlContenido);<br>
+                     }).fail(function() {<br>
+                        &nbsp;&nbsp;&nbsp;alert("Error al cargar el archivo JSON.");<br>
+                     });<br>
+               </code>
+               </li>
+               <li><code>$.ajax(config)</code>: La configuración completa (async, type, beforeSend, success, etc).
+               </li>
+            </ul>
+         </section>
+<!-- 10. Metodos addClass y removeClass -->
+         <section id="addClass">
+            <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">10. Metodos addClass y removeClass</h2>
+            <p class="mt-2">Métodos para añadir y quitar clases CSS:</p>
+            <div class="mt-2">
+               <p><span class="bg-cyan-100 px-3 py-1 rounded">addClass()</span>
+                  <code>
+                     $(elemento).addClass("recuadro")
+                  </code>
+               </p>
+               <p><span class="bg-cyan-100 px-3 py-1 rounded">removeClass()</span>
+                  <code>
+                     $(elemento).removeClass("recuadro")
+                  </code>
+               </p>
+               <p><span class="bg-cyan-100 px-3 py-1 rounded">toggleClass()</span>
+                  <code>
+                     $(elemento).toggleClass("recuadro")
+                  </code>
+            </div>
+         </section>
+
+         <footer class="ml-72 mt-20 pt-10 border-t border-gray-200 text-center text-cyan-500">
+         <p>Apuntes y notas Alfonso</p>
+         </footer>
+
+      </main>
+
+
+
+   </div>
+
+
+</body>
+<script>
+   function mostrarMenu(){
+      $("#menu").css({display: 'inline'})
+         $("#icoMenu").hide()
+         $("nav").css({width: 'calc(var(--spacing) * 64)'})
+         $("#icoOcuMenu").show()
+   }
+   function ocultarMenu(){
+      $("#menu").css({display: 'none'})
+         $("#icoMenu").show()
+         $("#icoOcuMenu").hide()
+         $("nav").css({width: '70px'})
+   }
+   
+</script>
+
+</html>

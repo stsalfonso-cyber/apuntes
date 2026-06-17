@@ -1,0 +1,49 @@
+           <br>
+
+            <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">Estructura de datos <mark>MAP</mark></h2>
+            <p>El objeto Map es una de las estructuras de datos más potentes introducidas en ES6. 
+               Aunque a primera vista parece un objeto ({}), su comportamiento es drásticamente distinto 
+               y está diseñado específicamente para gestionar conjuntos de datos dinámicos donde necesitas asociar 
+               claves con valores.</p>
+            <ul>- Map vs Objeto:
+               <li class="list-disc"><u>Claves versátiles:</u> A diferencia de los objetos, las claves pueden ser cualquier cosa 
+                  (funciones, objetos, números, arrays, no solo strings).</li>
+               <li class="list-disc"><u>Orden de inserción:</u> Los elementos en un Map mantienen el orden en que fueron añadidos, 
+                  lo que no ocurre con los objetos.</li>
+               <li class="list-disc">El tamaño de un Map se puede obtener con <u>la propiedad size</u>, mientras que en los objetos 
+               no hay una forma directa de obtener el número de propiedades.</li>
+               <li class="list-disc">
+                  <u>Sintaxis básica:</u>
+                  <pre class="logica"><code>
+const login = new Map([   
+                        ['user', 'alfonso'],
+                        ['password', '123456']
+                     ]); <em>// Crea un Map con un par clave-valor inicial</em>
+</code></pre>
+               </li>
+            </ul>  
+            <ul>Metodos principales:
+               <li class="list-disc"><u>set(clave, valor)</u>: Agrega un nuevo par clave-valor al Map o actualiza el valor de una clave existente.</li>
+                  <pre class="logica"><code>
+login.set("user", "alfonso"); <em>// Agrega un nuevo par clave-valor al Map</em>
+login.set("password", "123456"); <em>// Agrega otro par clave-valor al Map</em>
+console.log(login.get("user")); <em>// Imprime "alfonso"</em>
+</code></pre>
+               </li>
+               <li class="list-disc"><u>get(clave)</u>: Devuelve el valor asociado a la clave especificada, o undefined si la clave no existe.</li>
+                  <pre class="logica"><code>
+console.log(login.get("user")); <em>// Imprime "alfonso"</em>
+console.log(login.get("password")); <em>// Imprime "123456"</em>
+console.log(login.get("email")); <em>// Imprime undefined (clave no existe)</em>
+</code></pre>
+               </li>
+               <li class="list-disc">
+                  <u>has(clave)</u>: Devuelve true si el Map contiene la clave especificada
+                  , o false si no la contiene.
+                  <pre class="logica"><code>
+console.log(login.has("user")); <em>// Imprime true</em>
+console.log(login.has("email")); <em>// Imprime false</em>
+</code></pre>
+               </li>
+               <li class="list-disc"><u>delete(clave)</u>: Elimina el par clave-valor asociado a la clave especificada. Devuelve true si la clave existía y fue eliminada, o false si la clave no existía.</li> 
+            </ul>  

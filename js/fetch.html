@@ -1,0 +1,72 @@
+<br>
+<h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">El método <mark>Fetch</mark></h2>
+<p>El método fetch() es la forma moderna y estándar que utiliza JavaScript para hacer peticiones HTTP 
+   a servidores (APIs) y obtener datos (como listas de productos, precios o información de usuarios).</p>
+<p><u>El flujo: fetch → response → .json() → data.</u></p>
+<p>Funcionamiento básico:</p>
+<pre class="logica"><code>
+fetch('https://api.spagnolo.es/productos')
+     .then(response => {
+         <em>// Aquí recibes el objeto de respuesta</em>
+         console.log(response.status); <em>// 200 en caso de éxito</em>
+         return response.json();        <em>// Convertimos el cuerpo de la respuesta a JSON</em>
+     })
+     .then(data => {
+        <em>// Aquí ya tienes los datos listos para usar</em>
+         console.log(data);
+     })
+     .catch(error => {
+         <em>// Manejo de errores de red (ej: no hay conexión o la URL no existe)</em>
+         console.error("Hubo un problema:", error);
+     });
+</code></pre>
+<ul>Conceptos claves:
+   <li class="list-decimal"><b>Petición asíncrona</b>: El código no espera a que el servidor responda para seguir ejecutándose; por ello usamos promesas (.then()).</li>
+   <li class="list-decimal"><b>Objeto Response:</b> fetch no devuelve directamente los datos, devuelve un objeto de respuesta que contiene información como el status (ej: 200 OK, 404 Not Found, 500 Server Error).</li>
+   <li class="list-decimal"><b>Parseo de datos:</b> El cuerpo de la respuesta suele venir en formato stream. Para extraerlo, debemos invocar métodos como .json(), que a su vez devuelven otra promesa.</li>
+</ul>
+<b>Validar la respuesta:</b>
+<p>Un error común es pensar que un error 404 o 500 dispara el .catch(). No es así. El .catch() solo se dispara si la red falla (ej. estás sin internet).</p>
+<p>Para manejar errores de servidor, debes verificar la propiedad .ok:</p>
+<pre class="logica"><code>
+fetch('https://api.spagnolo.es/productos')
+    .then(response => {
+        if (!response.ok) { <em>// Verificamos si la respuesta fue exitosa</em>
+            throw new Error("Error en la respuesta: " + response.status); <em>// Si no es exitosa, lanzamos un error para que se maneje en el catch</em>
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
+    })
+    .catch(error => {
+        console.error("Hubo un problema:", error);
+    });
+</code></pre>
+<p>Resumen técnico:</p>
+<table>
+   <tr>
+      <th class="border px-4 py-2">Paso</th>
+      <th class="border px-4 py-2">Acción</th>
+      <th class="border px-4 py-2">¿qúe es?</th>
+   </tr>
+   <tr>
+      <td class="border px-4 py-2">fetch(url)</td>
+      <td class="border px-4 py-2">Inicia la petición HTTP</td>
+      <td class="border px-4 py-2">Devuelve una Promesa (esperando la respuesta).</td>
+   </tr>
+   <tr>
+      <td class="border px-4 py-2">.then(response => ...)</td>
+      <td class="border px-4 py-2">Recibe el objeto Response</td>
+      <td class="border px-4 py-2">Este objeto contiene la información de la respuesta del servidor. Pero no los datos</td>
+   </tr>
+   <tr>
+      <td class="border px-4 py-2">response.json()</td>
+      <td class="border px-4 py-2">Convierte el cuerpo de la respuesta a JSON</td>
+      <td class="border px-4 py-2">Devuelve otra Promesa que se resuelve con los datos parseados en formato JSON. Hace lo mismo que JSON.parse()</td>
+   </tr>
+   <tr>
+      <td class="border px-4 py-2">.then(data => ...)</td>
+      <td class="border px-4 py-2">Recibe los datos parseados</td>
+      <td class="border px-4 py-2">Aquí ya tienes los datos listos para usar en tu aplicación.</td>
+   </table>

@@ -1,0 +1,28 @@
+<br>
+<h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">Estructura de datos <mark>SET</mark></h2>
+<p><u>Conjunto de valores únicos</u>. Su característica principal es que no se puede repetir ningún elemento</p>
+ <pre class="logica"><code>
+const conjunto = new Set([1 ,8, 2, 7 ,8, 1, 2, 3])
+console.log(conjunto)   <em>// 1, 8, 2, 7, 3</em>    
+</code></pre>
+<p class="pb-2 pt-2"><code class="logica">conjunto.add(elemnt)</code> añade si no está</p>
+<p class="pb-2"><code class="logica">conjunto.delete(elemnt)</code> elimina si está</p>
+<p class="pb-2"><code class="logica">conjunto.has(elemnt)</code> devuelve true si el elemento está en el conjunto, o false si no lo está</p>
+<p class="pb-2"><code class="logica">conjunto.size</code> devuelve el número de elementos únicos en el conjunto</p> 
+<br>
+<p>🟤<mark>Acceso </mark></p>
+<p class="disc-decimal">Lo mas común es acceder por iteración con los bucles for of y forEach</p>
+<pre class="logica"><code>
+const miSet = new Set(['Spagnolo', 'Moda', 'España']);
+for (const valor of miSet) {
+     console.log(valor);
+}
+</code></pre>
+<p>Otra manera es la conversión a Array y acceder por índice. Para convertir a Array se usa el <mark>spread operator</mark></p>
+<pre class="logica"><code>
+const arr = [...miSet];
+console.log(arr[0]); // 'Spagnolo'
+</code></pre>
+<br>
+<p>Los principales usos de un Set son para eliminar duplicados de un array o para verificar la existencia de un elemento en una colección.</p>
+<p><span class="font-bold text-red-500">Importante. </span>No se puede acceder a los elementos de un Set por índice, ya que no tienen un orden definido.</p>     

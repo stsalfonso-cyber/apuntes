@@ -1,0 +1,75 @@
+<h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">Tipos de datos</h2>
+<p class="mt-2 text-gray-700">JavaScript tiene varios tipos de datos, incluyendo números, cadenas,
+   booleanos, objetos y arrays.</p>
+
+<!-- numeros -->
+<br>
+<h2 class="text-xl font-bold pb-2">🔸 <u>números</u></h2>
+<ul>
+   <li>+: suma</li>
+   <li>-: resta</li>
+   <li>*: multiplicación</li>
+   <li>/: división</li>
+   <li>%: módulo (resto de la división)</li>
+   <li>**: exponente</li>
+</ul>
+<!-- strings -->
+<br>
+<h2 class="text-xl font-bold pb-2">🔸 <u>cadenas/strings</u></h2>
+<ul>
+   <li class="p-2"><code class="logica">let nombre = "Pedro"</code></li>
+   <li class="p-2"><code class="logica">let nombre = 'Pedro'</code></li>
+   <li class="p-2"><code class="logica">let nombre = `Pedro` Esta permite ${vble}</code></li>
+</ul>
+<b class="text-m pb-2"><mark>Template strings</mark></b>
+<p class="mt-2 text-gray-700">Permite incluir variables dentro de una cadena de texto utilizando la sintaxis ${variable}.</p>
+<code class="logica">´el valor de la variable es: ${variable}´</code><span> (´´son tildes)</span>
+<br>
+<h2 class="text-xl font- pb-2"><mark>Concatenar</mark></h2>
+<p>Para unir dos cadenas de texto, podemos usar el operador +:</p>
+<code class="logica">let saludo = "Hola, " + nombre;</code>
+<br>
+<p>Añadir <mark>caracteres especiales</mark>. Con el carácter \ mas el símbolo</p>
+<ul>
+   <li class="p-2">- <code class="logica">let x = "Este símbolo \" es un carácter especial";</code></li>
+   <li class="p-2">- El carácter \n es un salto de línea</li>
+   <li class="p-2">- no puedes imprimir &lt;div> de esta forma para ello tienes que escribirlo asi <code class="text-blue">&amp;</code>lt;div></li>
+</ul>
+<br>
+<b class="text-m pb-2">Funciones de strings</b>
+<ul>
+   <li class="m-1">- <code class="logica">cadena.<mark>length</mark></code> (devuelve el nº de letras)</li>
+   <li class="m-1">- <code class="logica">“ingredientes”.<mark>slice</mark>(5,11)</code> = “diente” (extrae)</li>
+   <li class="m-1">- <code class="logica">“patrulla”.<mark>replace</mark>('ru', 'i')</code> = 'patilla'
+      (remplaza)</li>
+   <li class="m-1">- <code class="logica">“la_casa_del_árbol”.<mark>split</mark>(' ')</code> = [ 'la',
+      'casa', 'del', 'árbol' ] devuelve un array</li>
+   <li class="m-1">- <code class="logica">“separa”.split('')</code> = ['s', 'e', 'p', 'a', 'r', 'a']</li>
+</ul>
+<br>
+<!-- booleanos -->
+<h2 class="text-xl font-bold pb-2">🔸 <u>lógicos / booleanos</u></h2>
+<div class="grid sm:grid-cols-2 max-w-sm">
+   <span>5 > 3 // true</span>
+   <span>5 &lt; 3 // false</span>
+         <span>5 >= 3 // true</span>
+         <span>5 >= 5 // true</span>
+         <span>5 &lt;= 3 // false</span>
+               <span>5 &lt;= 5 // true</span>
+                     <span>5 === 5 // true</span>
+                     <span>5 !== 5 // false</span>
+</div>
+<!-- operadores logicos -->
+<div class="grid grid-rows-15 lg:grid-rows-4 grid-flow-col">
+   <b>Operador lógico AND &&</b>
+   <span>true && true // → true</span>
+   <span>true && false // → false</span>
+   <span>false && false // → false</span>
+   <b>Operador lógico OR ||</b>
+   <span>true || true // → true</span>
+   <span>true || false // → true</span>
+   <span>false || false // → false</span>
+   <b>Operador lógico NOT !</b>
+   <span>!true // → false</span>
+   <span>!false // → true</span>
+</div>

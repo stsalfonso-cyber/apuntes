@@ -1,0 +1,254 @@
+
+<h1 class="text-3xl text-bold text-teal-800 pl-10">2. MANEJO DE EVENTOS</h1>
+
+<br>
+
+<!-- Manejos de eventos   -->
+
+<section id="listener" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+    <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">EventListener</h2>
+    <p>El DOM no es estático; el sitio web debe reaccionar</p>
+    <p>La sintaxis básica es: <code><i>elemento.addEventListener(evento, manejador, [opciones]);</i></code></p>
+    <pre class="logica"><code>
+<em>// La forma correcta: addEventListener</em>
+const btn = document.querySelector('#btn-compra');
+
+btn.addEventListener('click', (event) => {
+    console.log('Botón clickeado');
+    <em>// Prevenir comportamiento por defecto (ej. evitar que un formulario se envíe antes de validar)</em>
+    event.preventDefault(); 
+});
+    </code></pre>
+
+    <p>Listado de eventos</p>
+    <table>
+        <tr>
+            <th class="w-3xs text-left">EVENTO</th>
+            <th class="text-left">SE ACTIVA CUANDO</th>
+        </tr>
+        <tr>
+            <td>click</td>
+            <td>El usuario hace clic en un elemento.</td>
+        </tr>
+        <tr>
+            <td>dblclick</td>
+            <td>El usuario hace doble clic en un elemento.</td>
+        </tr>
+        <tr>
+            <td>mousedown</td>
+            <td>El usuario presiona un botón del ratón sobre un elemento.</td>
+        </tr>
+        <tr>
+            <td>mouseup</td>
+            <td>El usuario suelta un botón del ratón sobre un elemento.</td>
+        </tr>
+        <tr>
+            <td>mousemove</td>
+            <td>El usuario mueve el ratón sobre un elemento.</td>
+        </tr>
+        <tr>
+            <td>mouseenter</td>
+            <td>El ratón entra en el área de un elemento.</td>
+        </tr>
+        <tr>
+            <td>mouseleave</td>
+            <td>El ratón sale del área de un elemento.</td>
+        </tr>
+        <tr>
+            <td>dragstart</td>
+            <td> El usuario comienza a arrastrar un elemento.</td>
+        </tr>
+        <tr>
+            <td>drag</td>
+            <td>El usuario arrastra un elemento (se activa continuamente mientras el elemento se arrastra).</td>
+        </tr>
+        <tr>
+            <td>dragend</td>
+            <td>El usuario suelta el elemento que estaba arrastrando.</td>
+        </tr>
+        <tr>
+            <td>dragenter</td>
+            <td>Un elemento arrastrado entra en el área de un destino válido de drop.</td>
+        </tr>
+        <tr>
+            <td>dragover</td>
+            <td>Un elemento arrastrado se mueve dentro del área de un destino válido.</td>
+        </tr>
+        <tr>
+            <td>keydown</td>
+            <td>Un elemento arrastrado sale del área de un destino válido de drop.</td>
+        </tr>
+        <tr>
+            <td>dragleave</td>
+            <td>El usuario presiona una tecla..</td>
+        </tr>
+        <tr>
+            <td>keyup</td>
+            <td>El usuario suelta una tecla.</td>
+        </tr>
+        <tr>
+            <td>keypress</td>
+            <td>El usuario presiona una tecla que produce un carácter.</td>
+        </tr>
+    </table>
+</section>
+
+<br>
+
+<!-- Event -->
+
+<section id="event" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+    <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">Event. Propiedades y métodos</h2>
+    <table>
+        <tr>
+            <th class="w-3xs text-left">Propiedad</th>
+            <th class="text-left">Descripción</th>
+        </tr>
+        <tr>
+            <td>type</td>
+            <td>El tipo de evento (como 'click', 'keydown').</td>
+        </tr>
+        <tr>
+            <td>target</td>
+            <td>El elemento que desencadenó el evento..</td>
+        </tr>
+        <tr>
+            <td>currentTarget</td>
+            <td>El elemento al que se ha agregado el manejador de eventos.</td>
+        </tr>
+        <tr>
+            <td>bubbles</td>
+            <td>Indica si el evento burbujea a través del DOM.</td>
+        </tr>
+        <tr>
+            <td>cancelable</td>
+            <td>Indica si el evento puede ser cancelado.</td>
+        </tr>
+        <tr>
+            <th class="w-3xs text-left">Métodos</th>
+            <th class="text-left">Descripción</th>
+        </tr>
+        <tr>
+            <td>preventDefault()</td>
+            <td>Previene la acción por defecto del evento.</td>
+        </tr>
+        <tr>
+            <td>stopPropagation()</td>
+            <td>Detiene la propagación del evento a otras fases.</td>
+        </tr>
+    </table>
+
+    <pre class="logica"><code>
+boton.addEventListener('click', (evento) => {
+  console.log(evento.type);    <em>// 'click'</em>
+  console.log(evento.target);  <em>// El botón clickeado</em>
+  evento.preventDefault();     <em>// Previene la acción por defecto (si aplica)</em>
+  evento.stopPropagation();    <em>// Detiene la propagación del evento</em>
+});
+    </code></pre>
+</section>
+
+<br>
+
+<!-- Formularios   -->
+
+<section id="forms" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+    <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">Formularios</h2>
+    <p>Los formularios son la herramienta principal para que el usuario envíe información a tu aplicación.
+        En JavaScript no "enviamos" el formulario a la vieja usanza (recargando la página), sino que
+        interceptamos
+        el envío para procesarlo con nuestra lógica.</p>
+    <h3 class="m-3">1. El evento submit y preventDefault()</h3>
+    <p>Cuando un usuario pulsa el botón de "Enviar", el navegador intenta enviar el formulario a un servidor y
+        recargar la página. <b>¡Esto es lo que queremos evitar!</b></p>
+    <pre class="logica"><code>
+const formulario = document.querySelector('#miFormulario');
+
+formulario.addEventListener('submit', (e) => {
+    <em>// ESTO ES OBLIGATORIO: Detiene el envío automático del navegador</em>
+    e.preventDefault(); 
+
+    <b>console.log("Formulario interceptado, ahora lo proceso yo");</b>
+});
+    </code></pre>
+    <h3 class="m-3">2. Recuperar datos: </h3>
+    <b>Método A: Por nombre de campo (individual)</b>
+    <pre class="logica"><code>
+const nombre = formulario.querySelector('#nombre').value;
+console.log(nombre);
+    </code></pre>
+    <b>Método B: La API FormData (Nivel Pro)</b>
+    <p>FormData recolecta automáticamente todos los campos del formulario que tengan el atributo name.</p>
+    <pre class="logica"><code>
+<em>/* HTML necesario: &lt;input name="email" /> */</em>
+
+formulario.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(formulario);
+
+    <em>// Convertir FormData a un objeto JS plano para trabajar cómodamente</em>
+    const datos = Object.fromEntries(formData.entries());
+
+    console.log(datos); <em>// { email: "usuario@ejemplo.com", password: "123" }</em>
+});
+    </code></pre>
+    <h3 class="m-3">3. Validación básica (UX) </h3>
+    <p>ntes de procesar, siempre debes validar. Una validación básica consiste en comprobar si el dato llega vacío:</p>
+    <pre class="logica"><code>
+if (datos.email === "") {
+    alert("El email no puede estar vacío");
+    return; <em>// Detenemos la ejecución</em>
+}
+    </code></pre>
+
+</section>
+
+<br>
+
+<!-- Consejos -->
+
+<section id="consejos" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+    <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">Consejos a niviel profesional</h2>
+    <p>En lugar de poner un "escuchador" a cada botón, se lo pones al padre. Fundamental si tienes una lista de
+        miles de productos.</p>
+    <pre class="logica"><code>
+<em>// Ponemos el evento en el padre (contenedor) y preguntamos por el hijo</em>
+const lista = document.querySelector('#contenedor-productos');
+
+lista.addEventListener('click', (e) => {
+    if (e.target.matches('.btn-producto')) {
+        console.log('Click en un producto específico');
+    }
+});
+    </code></pre>
+    <br>
+    <p>Si necesitas añadir 100 productos a la lista, <b>no hagas 100 append</b>.
+        Eso obliga al navegador a repintar la página 100 veces. Crea un contenedor
+        invisible (fragmento) y añádelo de golpe.</p>
+    <pre class="logica"><code>
+            const fragment = document.createDocumentFragment();
+
+for (let i = 0; i < 100; i++) {
+    const li = document.createElement('li');
+    li.textContent = `Producto ${i}`;
+    fragment.append(li); <em>// Se guarda en memoria, no repinta la página</em>
+}
+
+<em>// Un solo repaint</em>
+document.querySelector('#lista').append(fragment);
+    </code></pre>
+    <p><b>Atributo data (Dataset)</b>.Muy usado en e-commerce. Permite guardar datos técnicos en el HTML para
+        que JavaScript los lea luego (ej. el ID de un producto).</p>
+    <pre class="logica"><code>
+<em>&lt;!-- En tu HTML --></em>
+&lt;div class="producto" data-id="12345" data-categoria="polos">&lt;/div>
+
+&lt;script>
+<em>// En tu JS</em>
+const prod = document.querySelector('.producto');
+console.log(prod.dataset.id);        <em>// "12345"</em>
+console.log(prod.dataset.categoria); <em>// "polos"</em>
+&lt;/script>
+    </code></pre>
+</section>

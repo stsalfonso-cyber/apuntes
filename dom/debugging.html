@@ -1,0 +1,64 @@
+<h1 class="text-3xl text-bold text-teal-800 pl-10">4. Debugging & Professional Workflow</h1>
+
+<br>
+
+<!-- Console Pro   -->
+
+<i>"El 90% de programar es resolver problemas. El debugger es tu linterna en la oscuridad."</i>
+
+<section id="console" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+  <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">Más allá del console.log</h2>
+  <p>Otros métodos a parte del console.log...</p>
+  <ul>
+    <li class="list-disc"><b>console.table(arrayDeObjetos)</b> Si recibes una lista de productos desde un fetch, no hagas un log gigante. table() te dibuja una tabla perfecta en consola donde puedes ordenar las columnas. Es obligatorio para trabajar con arrays de objetos.</li>
+    <li class="list-disc"><b>console.dir(elementoDOM)</b> Si haces un log de un div, te mostrará el HTML. Si haces dir, te mostrará todas sus propiedades de objeto (clases, eventos, estilo). Úsalo cuando quieras ver qué propiedades tiene un elemento que acabas de seleccionar.</li>
+  </ul>
+</section>
+
+
+<br>
+
+<section id="network" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+  <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">Pestaña Network: El monitor de salud de tu API</h2>
+  <p>Si un fetch falla, no pierdas tiempo en tu código antes de mirar aquí. Esta pestaña te dice exactamente qué está pasando en la "autopista" de datos:</p>
+  <ul>
+    <li class="list-disc"><b>Status Code</b>: ¿Viene un 200 (OK)? ¿Un 404 (No encontrado)? ¿Un 500 (El servidor de Spagnolo ha petado)?</li>
+    <li class="list-disc"><b>Preview / Response</b>: Aquí puedes ver exactamente qué te ha devuelto el servidor (el JSON "crudo"). Útil para saber si el error está en tu código JS o si el servidor te está devolviendo algo que no esperabas.</li>
+    <li class="list-disc"><b>Headers</b>: vital para ver si estás enviando (o recibiendo) la autenticación correcta (ej: Authorization: Bearer...).</li>
+  </ul>
+</section>
+
+<br>
+
+<section id="sources" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+  <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">Pestaña Sources: Breakpoints y paso a paso</h2>
+  <p>Aquí es donde controlas la ejecución del código como si fuera un video.</p>
+  <br>
+  <ol>
+    <li class="list-decimal mb-10"><b>Breakpoints (Puntos de interrupción)</b>: Haz clic en el número de cualquier línea en la pestaña Sources. La ejecución se detendrá ahí antes de ejecutar esa línea.
+    <li class="list-decimal mb-10"><b>Botones de control (La barra superior de Debug)</b>:
+      <ul>
+        <li class="pl-10">◻ <b>Step Over (la flecha saltando una línea)</b>: Ejecuta la siguiente línea. Si hay una función, la ejecuta de golpe sin entrar en ella.</li>
+        <li class="pl-10">◻ <b>Step Into (la flecha entrando hacia abajo)</b>: Si la línea tiene una función, entra dentro para que veas qué pasa en su interior.</li>
+      </ul>
+    </li>
+    <li class="list-decimal"><b>Scope (Ámbito)</b>: Mientras el código está detenido en un breakpoint, mira el panel lateral "Scope". Te dirá exactamente <b>qué valor tiene cada variable</b> en ese milisegundo. Es la mejor forma de cazar errores de variables undefined.</li>
+  </ol>
+</section>
+
+<br>
+
+<section id="scope" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+  <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">La palabra clave debugger;</h2>
+  <p>Es tu "botón de pausa manual".</p>
+  <pre class="logica"><code>
+  async function procesarPago() {
+    const total = 50;
+    debugger; <em>// &lt;--- El navegador se detendrá aquí automáticamente al abrir la consola.</em>
+    <em>// ...resto del código</em>
+}
+  </code></pre>
+  <li class="list-disc"><b>Ventaja</b>: No necesitas abrir DevTools y buscar el archivo; el navegador se pone en modo "Stop" tú solo. Es ideal cuando estás trabajando en un archivo gigante y quieres ir directo al kit de la cuestión.</li>
+
+</section>
+

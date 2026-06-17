@@ -1,0 +1,155 @@
+
+
+<h1 class="text-3xl text-bold text-teal-800 pl-10">1. El DOM</h1>
+
+
+<!-- Nodos y jerarquia -->
+
+<section id="que-es" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+    <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">Nodos y jerarquia</h2>
+    <p>El DOM <b>(Document Object Model)</b> es la forma en la que el navegador "entiende" tu página.
+        Cuando el navegador lee tu archivo .html, no lo ve como texto plano, lo convierte
+        internamente en una estructura de árbol de objetos que JavaScript puede leer y modificar.</p>
+    <br>
+    <p>El concepto de Nodo (Node)</p>
+    <p>Un Nodo es la unidad básica del árbol. Es un error pensar que solo las etiquetas HTML son nodos;
+        absolutamente todo, es un nodo:</p>
+    <ul>
+        <li class="list-disc ml-5">El documento completo es un nodo raíz.</li>
+        <li class="list-disc ml-5">Cada etiqueta HTML (&lt;div&gt;) es un nodo elemento.</li>
+        <li class="list-disc ml-5">El texto dentro de las etiquetas "Hola mundo" es un nodo de texto.</li>
+        <li class="list-disc ml-5">Los atributos (class="btn") de las etiquetas también son nodos.</li>
+    </ul>
+    <br>
+    <p>La jerarquía (la estructura de árbol) es importante para entender cómo navegar y manipular el DOM.</p>
+    <ol>
+        <li class="list-decimal ml-5"><b>Document:</b> La "raíz" de todo. Es el nodo superior.</li>
+        <li class="list-decimal ml-5"><b>Parent (Padre):</b> Es el nodo que contiene a otros.</li>
+        <li class="list-decimal ml-5"><b>Child (Hijo):</b> Es el nodo que está dentro de otro.</li>
+        <li class="list-decimal ml-5"><b>Sibling (Hermano):</b> Son nodos que tienen el mismo padre (están al
+            mismo nivel).</li>
+    </ol>
+    <br>
+    <ol>Navegar por el DOM
+        <li class="mb-2"><code class="logica">element.parentNode</code> (para obtener el padre)</li>
+        <li class="mb-2"><code class="logica">element.childNodes</code> o <code class="logica">element.children</code>
+            (para obtener todos los hijos)</li>
+        <li class="mb-2"><code class="logica">element.firstChild</code> (para obtener el primer hijo)</li>
+        <li class="mb-2"><code class="logica">element.lastChild</code> (para obtener el último hijo)</li>
+        <li class="mb-2"><code class="logica">element.nextElementSibling</code> (para obtener el hermano
+            siguiente)</li>
+    </ol>
+</section>
+
+
+<br>
+
+
+<!-- manipulacion del DOM   -->
+
+<section id="seleccion" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+    <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">Seleccion</h2>
+    <p>Ejemplos de selección: document.getElementById(), document.querySelector(),
+        document.querySelectorAll().</p>
+
+    <pre class="logica"><code>
+<em>// Seleccionar por ID</em>
+const titulo = document.getElementById('titulo-principal');
+
+<em>// Seleccionar por clase, devuelve HTMLCollection, colección de objetos</em>
+const elements = document.getElementsByClassName('nameClass')
+
+<em>// Seleccionar por etiqueta, devuelve HTMLCollection</em>
+const parrafos = document.getElementsByTagName('p');
+
+<em>// Seleccionar por cualquier selector css (devuelve el primero)</em>
+const element = document.querySelector(div);
+const element = document.querySelector(p);
+const element = document.querySelector('#nameId');
+const element = document.querySelector('nameClass');
+
+<em>// Seleccionar todos los elementos de un selector css (NodeList)</em>
+const todosLosItems = document.querySelectorAll('.item-lista');
+
+<em>// O convinando varios selectores</em>
+const todosLosItems = document.querySelectorAll('div p.nameClass2');
+         </code></pre>
+
+</section>
+
+
+<br>
+
+<!-- manipulacion -->
+
+<section id="manipulacion" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+    <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">Manipulación</h2>
+    <br>
+    <pre class="logica"><code>
+               <em>//Modifica stilo</em>
+const caja = document.getElementById('caja')
+
+               <em>//Modifica texto</em>
+caja.style.backgroundColor = 'blue' <em>//Cambia el fondo</em>
+console.log(caja.innerText); <em>//Devuelve o modifica el texto</em>
+caja.innerHTML = "<b>Título</b>" <em>//Devuelve o modifica toda las extructura contenida, hijos</em>
+caja.textContent = "contenido" <em>//Modifica o devuelve el texto contenido aunque esté oculto</em>
+<em>//A efectos de rendimiento es preferible el uso de textContent frente al innerText</em>
+
+               <em>//Modifica atributo</em>
+&lta href='http://esetese.com'>Esetese</a>
+&ltscript>
+   const enlaces = getElementsByTagName('a')
+   enlaces[0].getAttribute('href')		<em>//devuelve el valor del atributo</em>
+   enlaces[0].removeAttribute('href')	<em>//elimina ese atributo</em>
+   enlaces[0].setAttribute('href','https://spagnolo.es') <em>//actualiza el atributo</em>
+&lt/script>
+
+               <em>//Agregar o eliminar clases</em>
+console.log(element.classList)  <em>//devuelve un listado de todas las clases de este elemento</em>
+console.log(element.classList.length)    <em>//devuelve el numero de clases de ese elemento</em>
+console.log(element.classList[0])     <em>//devuelve el nombre de la primera clase que encuentra</em>
+console.log(element.classList.value)   <em>//devuelve el nombre de todas las clases</em>
+element.classList.add('miClase1', 'miClase2')  	<em>//añade esa/s clase/s</em>
+element.classList.remove('miClase')	<em>//elimina esa clase</em>
+console.log(element.classList.contains('miClase'))  <em>//comprueba si tiene esa clase y devuelve true o false</em>
+element.classList.replace('old', 'new')
+
+               <em>//Agregar o eliminar elementos del DOM</em>
+const listado = document.getElementById('lista')  <em>//es donde se va a añadir</em>
+const newElemList = listado.createElement('li')<em>// es el nuevo elemento pero sin ubicar</em>
+newElemList.classList.add('nombClass1') <em>//se le añade clases para que tenga estilo</em>
+listado.append(newElemList)	<em>//agrega el elemento nuevo dentro de otro elemento</em>
+newElemList.remove()		<em>//elimina ese elemento</em>
+
+         </code></pre>
+</section>
+
+<br>
+
+<!-- Recorrer una coleccion de elementos   -->
+
+<section id="iteracion" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+    <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">Iteración elementos</h2>
+    <p>Es prefiere el uso de for...of sobre forEach cuando necesites usar break o trabajar con asincronía.
+    </p>
+    <pre class="logica"><code>
+<em>// 1. Obtenemos una NodeList con todos los items</em>
+const productos = document.querySelectorAll('.producto-item');
+
+<em>// 2. Recorremos con for...of</em>
+for (const producto of productos) {
+
+    <em>// Acción: Aseguramos un estilo base</em>
+    producto.classList.add('visible');
+
+    <em>// Control de flujo: Si encontramos un producto agotado, </em>
+    <em>// lo marcamos y detenemos el bucle (ahorro de rendimiento)</em>
+    if (producto.textContent.includes('Agotado')) {
+        producto.style.border = '2px solid red';
+        console.log('Se encontró el primer agotado, deteniendo búsqueda...');
+        break; <em>// <--- ¡Esto es lo que forEach no puede hacer!</em>
+    }
+}
+    </code></pre>
+</section>

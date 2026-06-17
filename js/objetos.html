@@ -1,0 +1,67 @@
+<br>
+<h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">Objetos</h2>
+<p>Los objetos en JavaScript son colecciones de propiedades, donde cada propiedad es una asociación entre un nombre (clave) y un valor. 
+   Los objetos pueden contener cualquier tipo de dato, incluyendo otros objetos y funciones.</p>
+<ul>Contienen:
+   <li class="mb-2"><u>Propiedades:</u> Son las características o atributos del objeto, representados como pares clave-valor. 
+      Pueden ser datos de texto, numero, etc…, arrays y otros objetos</li> 
+   <li class="mb-2"><u>Métodos:</u> Son funciones que están asociadas a un objeto y pueden operar sobre sus propiedades.
+</ul>
+<ul>
+   <li class="mb-2 list-disc">Declaración: 
+      <pre class="logica"><code>
+const persona = {
+    name: 'Dani'   <em>// <- variable</em>
+    age: 30,
+    isWorking: true,
+    family: ['Miguel', 'Maria'],
+    address: { <em>// <- Otro objeto</em>
+        street: 'Calle de la piruleta',
+        number: 13,
+        city: 'Barcelona'
+    },
+    walk: function () { <em>// <- método</em>
+        console.log('Estoy caminando')
+    }
+}
+</code></pre>
+   </li>
+   <li class="mb-2 list-disc">Acceso a valores: 
+      <p><code class="logica">console.log(persona.name); <em>// Dani</em></code></p>
+      <p> o </p>
+      <p><code class="logica">console.log(persona["name"]); <em>// Dani</em></code></p>
+      <p>* también se usa corchetes si se quiere acceder a la propiedad usando una variable 
+         o si el nombre de la propiedad tiene un espacio en blanco ‘ ‘.</p>  
+      <p>Ej. <code class="logica">const propiedad = "name";
+         console.log(persona[propiedad]); <em>// Dani</em></code></p>                
+   </li>
+   <li class="mb-2 list-disc">Modificación de valores: <code class="logica">persona.edad = 31;</code></li>
+   <li class="mb-2 list-disc">Visualización del objeto: <code class="logica">console.log(persona); <em>// { nombre: "Alice", edad: 31, ciudad: "Madrid" }</em></code></li>
+   <li>Acceso a métodos: <code class="logica">persona.walk() <em>// -> Estoy caminando</em></code></li>
+   <li>Añadir o modificar propiedades: <code class="logica">persona.newProperty = "value";</code>Si el valor existe 
+      modifica su valor, y si no, lo crea</li>
+</ul>
+<p><mark>Atajos</mark></p>
+<p>Para crearlos con varibles que ya existen:</p>
+<pre class="logica"><code>
+const name = "Dani";
+const age = 30;
+const persona = { name, age }; <em>// Equivale a { name: name, age: age }</em>
+</code></pre>
+<p>Para crear métodos sin escribir la palabra function:</p>
+<pre class="logica"><code>
+const persona = {
+    name: 'Dani',
+    age: 30,
+    walk() { <em>// Equivale a walk: function() {...}</em>
+        console.log('Estoy caminando')
+    }
+}
+</code></pre>
+<p><mark>Método destructuring</mark>:  Recuperar valores de un objeto de forma sencilla</p>
+<pre class="logica"><code>
+const persona = { name: 'Dani', age: 30, city: 'Barcelona' };
+const { name, age } = persona; <em>// Extrae las propiedades name y age del objeto persona</em>
+console.log(name) <em>// Dani</em>
+console.log(age) <em>// 30</em>
+</code></pre> 

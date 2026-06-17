@@ -1,0 +1,47 @@
+1. El Propósito real: Más allá del backup
+
+    Git vs. GitHub: Diferencia fundamental entre el motor (Git) y la plataforma (GitHub).
+
+    El historial como registro de intent: Por qué cada commit cuenta una historia de por qué cambiaste el código, no solo qué cambiaste.
+
+    La herramienta de colaboración: Cómo permite que 10 personas trabajen en el mismo archivo sin pisarse.
+
+    Tu marca personal: Tu perfil de GitHub como "Currículum vivo" ante reclutadores.
+
+
+2. El "Workflow" de supervivencia (Git básico)
+
+    Configuración inicial: SSH keys (adiós a perder contraseñas) y git config.
+
+    El ciclo dorado: git status -> git add -> git commit -> git push.
+
+    Recuperación: git pull (cómo traer cambios de otros) y git clone (cómo empezar el trabajo de otros).
+
+    El olvidado .gitignore: Impedir que subas cosas que no deben estar ahí (carpetas pesadas como node_modules, archivos de configuración, o contraseñas).
+
+
+3. Ramas: La piedra angular del trabajo en DAW
+
+    Qué es una rama (Branch): Desarrollar funciones sin romper el código que ya funciona ("Main" vs "Feature branches").
+
+    El proceso de integración: git checkout, git merge.
+
+    Conflictos de fusión: Qué hacer cuando dos personas tocan la misma línea (tu primera gran pesadilla como estudiante).
+
+
+4. Colaboración profesional (Pull Requests)
+
+    Pull Requests (PRs): La base del trabajo profesional. Cómo proponer cambios y pedir revisión.
+
+    Code Review: Aprender a recibir feedback sobre tu código sin tomárselo como algo personal.
+
+    Issues: Gestión de tareas dentro de GitHub (la unión entre gestión de proyecto y código).
+
+
+5. Mejores prácticas "Senior"
+
+    Commit Messages: Cómo escribir mensajes que el resto del equipo pueda entender (feat, fix, docs, refactor).
+
+    Small Commits: Por qué hacer 10 commits pequeños es infinitamente mejor que hacer 1 commit gigante al final de la semana.
+
+    GitHub Flow: Un flujo de trabajo estandarizado que usan las empresas

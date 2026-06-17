@@ -1,0 +1,188 @@
+<br>
+<h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">Arrays</h2>
+<p class="mb-2">Los arrays son estructuras de datos que almacenan una colección de elementos ordenados. En JavaScript, 
+   los arrays pueden contener cualquier tipo de dato, incluyendo otros arrays y objetos.</p>
+<ul>
+   <li class="mb-2"><code class="logica">const numbers = [1, 2, 3, 4, 5];</code></li>
+   <li class="mb-2"><code class="logica">const frutas = ["manzana", "banana", "cereza"];</code></li>
+</ul>
+<p class="mb-2"><mark>Acceder</mark> a un elemento del array <code class="logica">console.log(frutas[0]); <em>// manzana</em><br></code></p>
+<p class="mb-2"><mark>Modificar</mark>: <code class="logica">frutas[0] = "pera";</code></p>
+<p class="mb-2"><mark>Propiedad length</mark>: <code class="logica">console.log(frutas.length); <em>// 3</em></code></p>
+<p class="mb-2"><mark>Método push()</mark>		añade un elemento al final y devuelve la longitud</p>
+<p class="mb-2"><mark>Método pop()</mark>		elimina y devuelve el último elemento de un array</p>
+<p class="mb-2"><mark>Método splice()</mark>		 Elimina o sustituye elementos en una posición específica.</p>
+<pre class="logica"><code>
+const frutas = ["plátano", "fresa"]
+frutas.push("naranja")
+console.log(frutas) <em>// ["plátano", "fresa", "naranja"]</em>
+</code></pre>
+<p class="mb-2"><mark>Método shift()</mark>	elimina y devuelve el primer elemento de un array</p>
+<pre class="logica"><code>
+const frutas = ["plátano", "fresa", "naranja"]
+const primeraFruta = frutas.shift()
+console.log(frutas) <em>// ["fresa", "naranja"]</em>
+console.log(primeraFruta) <em>// "plátano"</em>
+</code></pre>
+<p class="mb-2"><mark>Método unshift()</mark>	 	añade un elemento al principio de un array.</p>
+<p class="mb-2"><mark>Método concat()</mark>	concatena dos array</p>
+<!-- spread operator -->  
+<p class="mb-2"><mark>Spread Operator ...</mark></p>
+<p class="mb-2">Permite <u>expandir</u> los elementos de un array dentro de otro array o dentro 
+   de una función. Es una forma más concisa y legible de concatenar arrays o pasar 
+   elementos como argumentos.</p>
+   <h4 class="text-amber-600"><code class="logica">...array</code> equivale a <code class="logica">array[0],array[1], array[2], etc.</code></h4>
+   <p>Transformas los elementos de un array en elementos individuales:</p>
+<pre class="logica"><code>
+const numbers = [1, 2, 3]
+const numbers2 = [4, 5]
+<em>//                    1, 2, 3        4, 5     </em>
+const allNumbers = [...numbers, ...numbers2]
+console.log(allNumbers) <em>// [1, 2, 3, 4, 5]</em>
+</code></pre>      
+<p>Los usos mas avanzados del spread operator son para la fusión de objetos o para el envio  de argumentos a funciones.</p>     
+<p><u> - Para la Fusión de objetos</u>, antes se usaba object.assign(), con '...' es mucho mas limpio:</p>            
+<pre class="logica"><code>
+const obj1 = { a: 1, b: 2 };
+const obj2 = { c: 3, d: 4 };
+const obj3 = { ...obj1, ...obj2 };
+console.log(obj3) <em>// { a: 1, b: 2, c: 3, d: 4 }</em>
+</code></pre>
+<p><u> - Para el envío de argumentos</u> a funciones, el spread operator permite pasar los elementos
+    de un array como argumentos individuales: (evita usar apply())</p>
+<pre class="logica"><code>
+const coordenadas = [10, 20]; 
+ubicar(...coordenadas); <em>// Equivale a ubicar(10, 20)</em>
+</code></pre>
+            <br>
+<!--parametro rest-->
+<p><mark>Parametro rest ...</mark></p>
+<p>Agrupa múltiples elementos y los convierte en un array <u>dentro de la declaracion de una función</u></p>
+<pre class="logica"><code>
+function sumar(...numeros) {
+  return numeros.reduce((total, num) => total + num, 0);
+}
+console.log(sumar(1, 2, 3, 4)); <em>// Resultado: 10</em>
+</code></pre>
+<p>Destructuring</p>
+<p>Puedes extraer partes de un objeto o array y "guardar lo que sobre" en una variable</p>
+<pre class="logica"><code>
+const numeros = [1, 2, 3, 4, 5];
+const [primero, segundo, ...resto] = numeros;
+console.log(primero) <em>// 1</em>
+console.log(segundo) <em>// 2</em>
+console.log(resto) <em>// [3, 4, 5]</em>
+</code></pre>
+<p>El parametro rest ... debe ser el último parámetro de la función</p>
+<p>A diferencia del spread operator, el parametro rest se utiliza en la definicion de la función,
+   el spread operator se usa en la invocación de la función</p>
+<h3 class="font-bold">En la Llamada (Invocación): ... = Spread</h3>
+<h3 class="font-bold">En la Declaración (Definición): ... = Rest</h3>
+<br>
+<h3><mark>Iteración de arrays en JavaScript</mark></h3>
+<p>Bucle<mark> while</mark></p>
+<pre class="logica"><code>
+let frutas = ['🍎', '🍌', '🍓']
+let i = 0 <em>// lo usaremos como índice</em>
+while (i < frutas.length) {
+    console.log(frutas[i]) <em>// imprime el elemento en la posición i</em>
+    i++ <em>// incrementamos el índice en 1 para la siguiente iteración</em>
+}
+</code></pre>
+<p>Bucle<mark> for</mark></p>
+<pre class="logica"><code>
+let frutas = ['🍎', '🍌', '🍓']
+for (let i = 0; i < frutas.length; i++) {
+    console.log(frutas[i]) <em>// imprime el elemento en la posición i</em>
+}
+</code></pre>
+<p><mark>for...in</mark> para objetos</p>
+<pre class="logica"><code>
+const persona = { nombre: 'Alice', edad: 30, ciudad: 'Madrid' };
+for (let clave in persona) {
+    console.log(clave + ": " + persona[clave]) <em>// imprime cada clave y su valor</em>
+}
+<em>// clave = nombre, edad, ciudad</em>
+<em>// persona[clave] = Alice, 30, Madrid</em>
+</code></pre>
+<p><mark>forEach()</mark> método de arrays</p>
+<pre class="logica"><code>
+let frutas = ['🍎', '🍌', '🍓']
+frutas.forEach(function(fruta, index, originalArray){
+    console.log(fruta) <em>// imprime cada elemento del array</em>
+});
+<em>// También se puede usar con funciones flecha:</em>
+frutas.forEach(fruta => console.log(fruta));
+</code></pre>
+<p><mark>for...of</mark> se puede usar para arrays, NodeLists (lo que obtienes con .childNodes), HTMLCollections 
+   (lo que obtienes con .children), maps, sets y strings. A diferencia del forEach, este no ejecuta 
+   una función, solo ejecuta el bloque, pero permite detener el codigo con break, continue, return 
+   e incluso admite await. ForEach no permite nada de esto</p>
+<pre class="logica"><code>
+let frutas = ['🍎', '🍌', '🍓']
+for (let fruta of frutas) {
+    console.log(fruta) <em>// imprime cada elemento del array</em>
+}
+</code></pre>
+<p><mark>Arreglos bidimensionales</mark> o matrices</p>
+<p>Un arreglo bidimensional (o matriz) en JavaScript es simplemente una estructura anidada: 
+   un arreglo donde cada elemento, a su vez, contiene otro arreglo.</p>
+<p>🟤<mark> Búsqueda</mark> en Arrays con sus métodos</p>
+<ul>
+   <li class="mb-2">
+      <mark>.indexOf()</mark>: 
+      <code class="logica">array.indexOf("buscar elemento")</code>
+       devuelve el índice de la primera aparición del elemento o -1 si no se encuentra
+      </li>
+   <li class="mb-2">
+      <mark>.includes()</mark>: 
+      <code class="logica">array.includes("buscar elemento")</code> 
+      devuelve true si el elemento existe en el array, o false si no se encuentra
+   </li>
+   <li class="mb-2">
+      <mark>.some()</mark>: 
+      <code class="logica">array.some(codigo => codigo === "buscar elemento")</code>
+       devuelve true si al menos un elemento cumple con la condición, o false si ninguno lo hace
+   </li>
+   <li class="mb-2">
+      <mark>.every()</mark>: 
+      <code class="logica">array.every(codigo => codigo === "buscar elemento")</code>
+       devuelve true si todos los elementos cumplen con la condición, o false si al menos uno no lo hace
+   </li>
+   <li class="mb-2">
+      <mark>.find()</mark>: 
+      <code class="logica">array.find(elem => elem === "buscar elemento")</code>
+       devuelve el primer elemento que cumple con la condición o undefined si no se encuentra
+      </li>
+   <li class="mb-2">
+      <mark>.findIndex()</mark>: 
+      <code class="logica">array.findIndex(elem => elem === "buscar elemento")</code> 
+      devuelve el índice del primer elemento que cumple con la condición o -1 si no se encuentra
+   </li>
+   <li class="mb-2">
+      <mark>.sort()</mark>: 
+      <code class="logica">array.sort()</code> 
+      ordena los elementos del array en su lugar, <u>modifica el array original</u> y devuelve el array ordenado
+   </li>
+    <li class="mb-2">
+      <mark>.toSorted()</mark>: 
+      <code class="logica">array.toSorted()</code> 
+      devuelve un nuevo array con los elementos ordenados, sin modificar el array original
+   </li>
+   <p>🟤<mark> Transformar Arrays</mark></p>
+   <li class="mb-2">
+      <mark>.map()</mark>: 
+      <code class="logica">array.map(elem => elem * 2)</code> 
+      devuelve un nuevo array con los resultados de aplicar la función a cada elemento del array original
+   </li>
+   <li class="mb-2">
+      <mark>.filter()</mark>: 
+      <code class="logica">array.filter(elem => elem > 5)</code> 
+      devuelve un nuevo array con los elementos que cumplen la condición especificada en la función
+   </li>
+   <li class="mb-2">
+      <mark>.reduce()</mark>: 
+      <code class="logica">array.reduce((acumulador, elem) => acumulador + elem, 0)</code> 
+      devuelve un único valor que resulta de aplicar la función a un acumulador y a cada elemento del array (de izquierda a derecha)
+   </li>               
+</ul>

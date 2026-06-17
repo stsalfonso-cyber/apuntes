@@ -1,0 +1,48 @@
+<br>
+<h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">Variables y constantes</h2>
+<ul> Declaración de variables y constantes:
+   <li class="m-1"> <code class="logica">var numero = 1</code> alcance global</li>
+   <li class="m-1"> <code class="logica">let nombre = "Pedro"</code> alcance de bloque, (SCOPE)</li>
+   <li class="m-1"> <code class="logica">let camelCase = 1</code> a partir de la segunda palabra la primera letra es
+      mayúscula</li>
+   <li class="m-1"> <code class="logica">let PascalCase = 1</code> todas las palabras con la primera letra en mayúscula
+   </li>
+   <li class="m-1"> <code class="logica">let snake_case = 1</code> las palabras están separadas por guiones bajos</li>
+   <li class="m-1"> <code class="logica">const PI = 3.14</code> alcance local</li>
+   <li class="m-1"> <code class="logica">const SCREAMING_CASE = 1</code> todo en mayúsculas</li>
+</ul>
+<br>
+<b class="text-m pb-2"><mark>Scope</mark></b>
+<div>
+   <pre class="logica p-2"><code>
+const x = 2 
+console.log('Salida:')
+function ejemplo() {
+  const x = 5
+  console.log(x, ", valor dentro de la función")  
+}
+ejemplo()
+console.log(x,", valor fuera de la función")
+   </code></pre>
+
+   <pre class="consola">
+Salida:
+ 5, valor dentro de la función
+ 2, valor fuera de la función
+   </pre>
+</div>
+<br>
+<b class="text-m pb-2"><mark>Comentarios</mark></b>
+<p>// Comentarios de una sola línea</p>
+<p>/* Comentarios de<br> varias líneas */</p>
+<br>
+<b class="text-m pb-2"><mark>Salida por consola</mark></b>
+<p>console.log(), console.error(), console.warn(), console.info()</p>
+<p><code class="logica">console.log("Hola, mundo!")</code></p>
+<br>
+<p><mark>Operador TypeOf</mark></p>
+<p>Se llama sobre una variable y devuelve el tipo de dato</p>
+<p><code class="logica">typeof 'texto'</code> devuelve string</p>
+<p><code class="logica">typeof 54</code> devuelve number</p>
+<p><code class="logica">typeof true</code> devuelve boolean</p>
+<p>Los objetos, arrays, sets, maps y null devuelve object</p>

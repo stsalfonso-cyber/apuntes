@@ -1,0 +1,123 @@
+<br>
+<h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">Estructuras de control</h2>
+<p>Permiten controlar el flujo de ejecución del código.</p>
+<ul>
+   <li class="m-1">
+      <h2 class="text-xl font-bold pb-2"><u><mark>if</mark>(condición) { ... } else { ... }</u></h2>
+
+      <pre class="logica"><code>
+         if (edad >= 18) {
+  console.log('Eres mayor de edad')
+} else if (edad >= 16) {
+  console.log('Eres casi mayor de edad')
+} else {
+  console.log('Eres menor de edad')
+}
+      </code></pre>
+      Las llaves {} no siempre son obligatorios. Si el bloque de código sólo tiene una línea, puedes omitir las llaves
+   </li>
+
+   <!-- el operador ternario -->
+
+   <li class="m-1">
+      <h2 class="text-xl font-bold pb-2"><u><mark>El operador ternario</mark></u></h2>
+      <p>Es la forma abreviada de escribir un if...else. Su estructura es: condición ? valor_si_true : valor_si_false.
+      </p>
+      <pre class="logica"><code>
+const esMayorDeEdad = edad >= 18 ? 'Sí' : 'No';
+console.log(`¿Eres mayor de edad? ${esMayorDeEdad}`);
+      </code></pre>
+   </li>
+
+   <!-- cortocircuito && y || -->
+
+   <li class="m-1">
+      <h2 class="text-xl font-bold pb-2"><u><mark>El operador && como "Cortocircuito"</mark></u></h2>
+      <p>Este no es solo un operador lógico, es una técnica de renderizado condicional. Funciona así:
+         condición && acción. Es un atajo para ejecutar un código si se cumple la condición.</p>
+      <p><b>¿Cómo funciona?</b> Si la condición es true, ejecuta la acción. Si es false, se detiene (hace
+         "cortocircuito") y no
+         hace nada.</p>
+      <pre class="logica"><code>
+<em>// Si el usuario está logueado, mostramos el botón</em>
+const estaLogueado = true;
+estaLogueado && mostrarBotonCerrarSesion();
+</code></pre>
+      <h2 class="text-xl font-bold pb-2"><u><mark>El operador || como "Cortocircuito"</mark></u></h2>
+      <p>Parecido al && pero este comprueba el primer valor y si es verdadero devuelve ese valor y si es
+         falso devuelve el segundo</p>
+      <pre class="logica"><code>
+const carrito = JSON.parse(localStorage.getItem('carrito')) ?? [];
+      </code></pre>
+      <p>Resumen:</p>
+      <ul>
+         <li class="list-disc">Con &&: Si izquierda = falso se ejecuta derecha</li>
+         <li class="list-disc">Con ||: Si izquierda = null devuelve derecha, si no, devuelve izquierda</li>
+      </ul>
+   </li>
+   <br>
+   <!-- switch -->
+
+   <li class="m-1">
+      <h2 class="text-xl font-bold pb-2"><u><mark>switch</mark> (expresión) { case valor1: ... break; case valor2: ...
+            break; default: ... }</u></h2>
+      <pre class="logica"><code>
+const dia = new Date().getDay()
+switch (dia) {
+   case 0:
+   case 6:
+      console.log("¡Hoy es fin de semana! 🥳")
+      break
+   case 1:
+   case 2:
+   case 3:
+   case 4:
+      console.log("¡Nooo, a trabajar! 😢")
+      break
+   case 5:
+      console.log("¡Hoy es viernes! 🤓")
+   break
+}
+   </code></pre>
+      <p>
+         Es muy importante que no te olvides de poner el break al final de cada caso.</p>
+   </li>
+
+   <!-- bucle for -->
+
+   <li class="m-1">
+      <h2 class="text-xl font-bold pb-2"><u><mark>for</mark> (inicialización; condición; incremento) { ... }</u></h2>
+      Ejecuta un bloque de código un número específico de veces
+      <pre class="logica"><code>
+for (let number = 1; number &lt;= 10; number++) {
+   console.log(number)
+}
+   </code></pre>
+      <p>Al igual que en while, for también tiene las palabras reservadas continue y break para controlar el flujo de
+         ejecución del bucle.</p>
+   </li>
+   <li class="m-1">
+      <h2 class="text-xl font-bold pb-2"><u><mark>while</mark> (condición){...}</u></h2>
+      <pre class="logica"><code>
+let contador = 10;
+while (contador>0) {
+  console.log(contador);
+  contador--;
+}
+      </code></pre>
+      Ejecuta un bloque de código mientras la condición sea verdadera
+      <p>Cuando el intérprete de JavaScript encuentra la palabra <mark>break</mark>, sale del bucle y continúa
+         ejecutando el código que haya después.</p>
+      <p>Cuando encuentra la palabra <mark>continue</mark>, salta a la siguiente iteración del bucle.</p>
+
+   </li>
+   <li class="m-1">
+      <h2 class="text-xl font-bold pb-2"><u><mark>do</mark> {...} <mark>WHILE</mark> (condición)</u></h2>
+      Ejecuta un bloque de código al menos una vez y luego continúa ejecutándolo mientras la condición sea verdadera
+      <pre class="logica"><code>let respuesta
+do {
+  respuesta = confirm("¿Te gusta JavaScript?");
+} while (!respuesta)
+      </code></pre>
+   </li>
+</ul>

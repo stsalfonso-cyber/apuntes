@@ -1,0 +1,157 @@
+<br>
+<h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">Funciones</h2>
+<p>Las funciones son bloques de código reutilizables que realizan una tarea específica.</p>
+<ul>
+   <li class="m-1">
+      <h2 class="text-xl font-bold pb-2"><u><mark>Funciones declaradas</mark></u></h2>
+      <!--declaradas-->
+      <p>Son las más comunes. Se definen con la palabra clave function seguida de un nombre.
+         Tienen la ventaja de sufrir <mark>hoisting</mark> (elevación), lo que significa que
+         pueden ser llamadas antes de ser declaradas en el código</p>
+      <pre class="logica"><code>
+function saludar(nombre) {
+  return `Hola, ${nombre}!`;
+}
+</code></pre>
+   </li>
+   <li class="m-1">
+      <h2 class="text-m pb-2"><u><mark>Llamar a una funcion</mark></u></h2>
+      <!--llamar-->
+      <p>Para ejecutar una función, simplemente escribimos su nombre seguido de paréntesis.
+         Si la función requiere argumentos, los colocamos dentro de los paréntesis. si la función
+         devuelve algun valor se le asigna a una variable o dentro de una expresión</p>
+      <pre class="logica"><code>
+console.log(saludar("Alfonso")); <em>// Imprime "Hola, Alfonso!"</em>
+</code></pre>
+   </li>
+   <li class="m-1">
+      <h2 class="text-xl font-bold pb-2"><u><mark>Funciones expresadas</mark></u></h2>
+      <!--expresadas-->
+      <p>Estas funciones se crean dentro de una expresión, normalmente asignándolas a una variable o
+         constante. No tienen hoisting, por lo que debes declararlas antes de poder usarlas</p>
+      <pre class="logica"><code>
+const saludar = function(nombre) {
+  return `Hola, ${nombre}!`;
+};
+</code></pre>
+   </li>
+   <li class="m-1">
+      <h2 class="text-xl font-bold pb-2"><u><mark>Funciones flecha</mark></u></h2>
+      <!--arrow func-->
+      <p>Introducidas en ES6, ofrecen una sintaxis más corta. Son muy útiles para <mark>callbacks</mark>
+         (pasadas como argumentos) y no tienen su propio contexto this, heredándolo del ámbito
+         donde fueron creadas</p>
+      <pre class="logica"><code>
+const saludar = (nombre) => {
+  return `Hola, ${nombre}!`;
+};
+</code></pre>
+      <p><mark>Retorno implícito</mark>: Si la función tiene una sola expresión, no hay que poner
+         llaves, ni parentesis en parámetros, ni usar return, se devuelve automáticamente el
+         resultado de esa expresión</p>
+      <pre class="logica"><code>
+const duplicar = x => x * 2; 
+console.log(duplicar(5)); // 10
+</code></pre>
+      <p>O sólo para ejecutar una acción sin devolver un valor</p>
+      <pre class="logica"><code>
+const saludar = nombre => console.log("Hola " + nombre);
+saludar("Eva"); <em>// Imprime "Hola Eva"</em>
+</code></pre>
+   </li>
+   <li class="m-1">
+      <h2 class="text-xl font-bold pb-2"><u><mark>Funciones anónimas</mark></u></h2>
+      <!-- anómimas -->
+      <p>Son aquellas que no tienen un identificador o nombre. Se utilizan comúnmente como asignación
+         a una variable, como argumentos de otras funciones (llamadas callbacks) o dentro de expresiones
+         y funciones flecha</p>
+      <div>
+         <u>Asignadas a una variable:</u>
+         <pre class="logica"><code>
+const calcularArea = function(base, altura) {
+  return base * altura;
+};
+</code></pre>
+      </div>
+      <div>
+         <u>Como <mark>callback</mark>: (como método de setTimeout, map o filter)</u>
+         <pre class="logica"><code>
+setTimeout(function() {
+  console.log("¡Ejecutado después de 1 segundo!");
+}, 1000);
+</code></pre>
+         <u>Función anónima y funcion flecha a la vez</u>
+         <pre class="logica"><code>
+  <em>// Función flecha principal</em>
+const obtenerCuadrados = (numeros) => {
+    <em>// Función anónima (arrow function) pasada como callback dentro del .map</em>
+  return numeros.map((numero) => {
+    return numero * numero;
+  });
+};
+console.log(obtenerCuadrados([2, 4, 6])); 
+<em>// Resultado: [4, 16, 36]</em>
+</code></pre>
+         <u>Funciones Inmediatas <mark>(IIFE)</mark></u>
+         <u> (Inmediatly Invoked Function Expressions)</u>
+         <p>Se definen y se ejecutan inmediatamente después de ser creadas. Se envuelven entre paréntesis
+            para que JavaScript las trate como una expresión y no como una declaración</p>
+         <pre class="logica"><code>
+(function() {
+  console.log("Esta función se ejecuta automáticamente al cargar.");
+})();
+</code></pre>
+         <p>
+            Estas funciones son útiles para crear un ámbito local y evitar la contaminación del espacio de nombres
+            global,
+            lo que ayuda a prevenir conflictos entre variables y funciones en proyectos más grandes (es habitual
+            utilizar
+            nombles génericos como url, contador... en cualquier otro lugar del código).
+         </p>
+      </div>
+   </li>
+   <li class="m-1">
+      <h2 class="text-xl font-bold pb-2"><u><mark>Callbacks</mark></u></h2>
+      <!-- callback -->
+      <p>Una función retrollamada, también conocida como callback, es una función que se pasa como argumento
+         a otra función y se ejecuta una vez que se completa una tarea determinada. Muy usado en operaciones
+         asíncronas, como peticiones de APIs, temporizadores o lectura de archivos, y también en manejo de eventos</p>
+   </li>
+   <li class="m-1">
+      <h2 class="text-xl font-bold pb-2"><u><mark>Recursividad</mark></u></h2>
+      <!--recursvdad-->
+      <p>Consiste en que una función se llame a sí misma.</p>
+      <pre class="logica"><code>function cuentaAtras(numero) {
+                 <em>// Condición base: Si el número que recibe es menor de 0 entonces salimos de la función</em>>
+                 if (numero < 0) { return }
+                 <em>// Si el número era mayor o igual a 0, lo mostramos </em>
+                 console.log(numero) 
+                 <em>// y llamamos a la función con el número anterior</em>
+                 cuentaAtras(numero - 1)
+               }
+</code></pre>
+   </li>
+   <li class="m-1">
+      <h2 class="text-xl font-bold pb-2"><u><mark>Closure</mark> y funciones de orden superior</u></h2>
+      <!--closure-->
+      <p> Las FOS son funciones que manejan funciones, reciben una función como argumento o devuelven una función
+         resultado.</p>
+      <pre class="logica"><code>
+function crearDescuento(porcentaje) {
+    <em>// Esta variable 'porcentaje' vive aquí dentro</em>
+    return function(precio) {
+      <em>// La función interna "recuerda" el porcentaje aunque la externa ya se haya ejecutado</em>
+      return precio - (precio * porcentaje / 100);
+    };
+}
+const descuentoBlackFriday = crearDescuento(20); <em>// Aquí el descuento tiene un 20% guardado</em>
+<em>// no hará falta pasar el porcentaje en cada llamada, sólo el importe</em>
+console.log(descuentoBlackFriday(100)); <em>// Resultado: 80</em>
+console.log(descuentoBlackFriday(500)); <em>// Resultado: 400</em>
+</code></pre>
+      <p>La función descuentoBlackFriday no recibe el 20 por ciento directamente en cada llamada;
+         lo recuerda gracias al closure.</p>
+      <p>El objetivo del closure es recordar el entorno en el que fue creada la función
+         y guardar el valor de las variables en ese entorno.</p>
+   </li>
+</ul>

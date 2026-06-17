@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>JavaScript Apuntes</title>
+   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.1.7"></script>
+   <link rel="stylesheet" href="../estilo.css">
+   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+</head>
+
+
+<body class="bg-gray-50 text-gray-900">
+   <div class="flex min-h-screen mx-auto p-6 md:p-10">
+
+<!--     MENU IZQUIERDO        -->
+      <nav class="sticky top-10 h-screen flex-shrink-0 bg-white p-6 shadow-sm border border-gray-200">
+         <div id="menu">
+            <h2 class="text-xl font-bold mb-4">JavaScript</h2>
+            <ul class="space-y-2 text-blue-800">
+               <li><a href="#tiposDatos" class="btnfos btnfos-5">Tipos de datos</a></li>
+               <li><a href="#variables" class="btnfos btnfos-5">Variables y constantes</a></li>
+               <li><a href="#estructurasControl" class="btnfos btnfos-5">Estructuras de control</a></li>
+               <li><a href="#funciones" class="btnfos btnfos-5">Funciones</a></li>
+               <li><a href="#arrays" class="btnfos btnfos-5">Arrays</a></li>
+               <li><a href="#set" class="btnfos btnfos-5">Estructura Set</a></li>
+               <li><a href="#objetos" class="btnfos btnfos-5">Objetos</a></li>
+               <li><a href="#map" class="btnfos btnfos-5">Estructura Map</a></li>
+               <li><a href="#json" class="btnfos btnfos-5">Estructura Json</a></li>
+               <li><a href="#try" class="btnfos btnfos-5">Try...catch</a></li>
+               <li><a href="#fetch" class="btnfos btnfos-5">Fetch API</a></li>
+               <li><a href="#async" class="btnfos btnfos-5">Async / Await</a></li>
+               <li><a href="#modulos" class="btnfos btnfos-5">Import / Export</a></li>
+            </ul>
+         </div>
+         <div id="icoMenu">
+            <span onclick="mostrarMenu()">▶</span>
+         </div>
+         <div id="icoOcuMenu">
+            <span onclick="ocultarMenu()">◀</span>
+         </div>
+      </nav>
+
+<!--     CONTENIDO     -->
+      <main class="ml-10">
+
+         <header class="mb-10 text-center">
+            <h1 class="text-4xl font-extrabold text-cyan-700 text-shadow-sm">Apuntes de JavaScript</h1>
+            <p class="text-gray-600 mt-2">Guía completa basada en el documento original</p>
+         </header>
+         <section id="tiposDatos";>
+
+         </section>
+         <section id="variables">
+
+         </section>
+         <section id="estructurasControl">
+            
+         </section>
+         <section id="funciones">
+            
+         </section>
+         <section id="arrays">
+            
+         </section>
+         <section id="set">
+            
+         </section>
+         <section id="objetos">
+
+         </section>  
+         <section id="map">
+            
+         </section>
+         <section id="json">
+            
+         </section>
+         <section id="try">
+            
+         </section>
+         <section id="fetch">
+            
+         </section>
+         <section id="async">
+            
+         </section>
+         <section id="modulos">
+
+         </section>  
+         <footer class="ml-72 mt-20 pt-10 border-t border-gray-200 text-center text-gray-500">
+            <p>Apuntes y notas Alfonso</p>
+         </footer>
+      </main>
+   </div>
+</body>
+<script>
+
+   // esta es una funcion para cargar el contenido de <section> de html en archivos externos
+   async function cargarSeccion(idContenedor, rutaArchivo)  {
+      try {
+            const response = await fetch(rutaArchivo);
+            if (!response.ok) throw new Error('No se pudo cargar el archivo');
+            const html = await response.text();
+            document.getElementById(idContenedor).innerHTML = html;
+      } catch (err) {
+            document.getElementById(idContenedor).innerHTML = '<p class="text-red-500">Error al cargar la sección.</p>';
+      }
+   }
+
+        // Llamada: carga secciones.html dentro del div
+        // Nota: Esto requiere estar sirviendo los archivos a través de un server (ej. Live Server, Nginx, Apache)
+   cargarSeccion('tiposDatos', 'tiposDatos.html')
+   cargarSeccion('variables', 'variables.html')
+   cargarSeccion('estructurasControl', 'estructurasControl.html')
+   cargarSeccion('funciones', 'funciones.html')  
+   cargarSeccion('arrays', 'arrays.html')
+   cargarSeccion('set', 'set.html')
+   cargarSeccion('objetos', 'objetos.html')
+   cargarSeccion('map', 'map.html')
+   cargarSeccion('json', 'json.html')
+   cargarSeccion('try', 'try.html')
+   cargarSeccion('fetch', 'fetch.html')
+   cargarSeccion('async', 'async.html')
+   cargarSeccion('modulos', 'import.html')
+
+</script>
+<script>
+
+   //se ocunta y muestra menú mediante jquery
+   function mostrarMenu() {
+      $("#menu").css({ display: 'inline' })
+      $("#icoMenu").hide()
+      $("nav").css({ width: 'calc(var(--spacing) * 64)' })
+      $("#icoOcuMenu").show()
+   }
+   function ocultarMenu() {
+      $("#menu").css({ display: 'none' })
+      $("#icoMenu").show()
+      $("#icoOcuMenu").hide()
+      $("nav").css({ width: '70px' })
+   }
+
+</script>
+
+</html>
