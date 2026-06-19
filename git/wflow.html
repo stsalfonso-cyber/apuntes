@@ -1,0 +1,94 @@
+<h1 class="text-3xl text-bold text-teal-800 pl-10">2. El "Workflow" </h1>
+
+<!-- Configuracion inicial -->
+
+<section id="config" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+	<h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">Configuración Inicial</h2>
+	<h2 class="text-xl font-bold">Identidad: git config</h2>
+	<p>GitHub necesita asociar tus commits con tu cuenta. Si no haces esto, tus aportaciones aparecerán como "anónimas".
+	</p>
+	<pre class="logica"><code>
+# Configura tu nombre (se verá en el historial)
+git config --global user.name "Tu Nombre Real"
+
+# Configura tu email (DEBE ser el mismo que usas en GitHub)
+git config --global user.email "tu-email-de-github@ejemplo.com"
+	</code></pre>
+	<p><b>--global</b>: Significa que esta configuración se aplicará a todos los repositorios
+		de tu ordenador. Si algún día trabajas en un proyecto de empresa con un email distinto,
+		podrás usar <b>--local</b> solo para ese proyecto.</p>
+	<br>
+	<h2 class="text-xl font-bold">Seguridad: Autenticación con SSH</h2>
+	<p>Olvídate de introducir tu contraseña cada vez que haces un push. Las claves SSH permiten
+		que tu ordenador y GitHub se "reconozcan" de forma segura mediante un par de llaves:
+		una pública (que se la das a GitHub) y una privada (que vive solo en tu ordenador y
+		nunca se comparte).</p>
+	<br>
+	<p><u>1 - Generar la clave:</u></p>
+	<pre class="logica"><code>ssh-keygen -t ed25519 -C "tu-email-de-github@ejemplo.com"</code></pre>
+	<p><i>(Pulsa "Enter" a todo para aceptar las rutas por defecto. No hace falta poner contraseña a la clave si estás en
+			un ordenador personal seguro).</i></p>
+	<br>
+	<p><u>2 - Copiar tu clave pública:</u></p>
+	<p>En Windows (Git Bash): clip &lt; ~/.ssh/id_ed25519.pub (esto copia el contenido al portapapeles).</p>
+	<p>En Mac/Linux: cat ~/.ssh/id_ed25519.pub (copia el texto que sale en pantalla)</p>
+	<br>
+	<p><u>3 - Vincularla a GitHub:</u></p>
+	<ul>
+		<li class="pr-5">Ve a tu perfil de GitHub > Settings (esquina superior derecha).</li>
+		<li class="pr-5">En el menú lateral izquierdo, busca SSH and GPG keys.</li>
+		<li class="pr-5">Haz clic en New SSH Key.</li>
+		<li class="pr-5">Ponle un título (ej: "Portátil DAW") y pega el texto que copiaste en el paso anterior.</li>
+	</ul>
+	<br>
+	<p><u>4 - Verifica la conexión:</u></p>
+	<pre class="logica"><code>ssh -T git@github.com</code></pre>
+	<p>Si te sale un mensaje diciendo: "Hi [TuUsuario]! You've successfully authenticated…", ¡felicidades!, ya tienes
+		seguridad de grado profesional.</p>
+</section>
+
+<br>
+<!-- Tu rutina diaria -->
+
+<section id="config" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+	<h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">Tu rutina diaria</h2>
+	<ol>
+		<li class="list-decimal"><code>git status</code> - El mapa de situación
+			<p>Es el primer comando que debes ejecutar siempre. Te dice: ¿Qué archivos has modificado? (Aparecen en rojo).
+				¿Están siendo rastreados por Git?.
+				Es tu brújula: Nunca tomes una decisión sin saber qué archivos tienes tocados.</p>
+		<li class="list-decimal"><code>git add &lt;archivo></code> — La Sala de Espera (Staging Area)
+			<p>Añade cada archivo que quieras que se suba a gitHub. Con <code>git add .</code> especificas todos los archivos</p>
+		</li>
+		<li class="list-decimal"><code>git commit -m "mensaje"</code> — La Foto
+			<p>Aquí es donde registras el cambio de forma permanente en la historia.	</p>
+				<p>Una vez haces el commit, ya no hay marcha atrás para ese registro.</p>
+				<p><b>La importancia del mensaje</b>: Como vimos en el punto anterior, aquí es donde explicas el "por qué" (el intent).</p>
+				<br>
+				<i>Nota: Este comando solo guarda el cambio en tu ordenador local. Si se rompe tu portátil, esto no está en GitHub todavía.</i>
+		</li>
+
+		</li>
+	</ol>
+</section>
+
+<br>
+<!-- Tu rutina diaria -->
+
+<section id="recup" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+	<h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">Recuperación y sincronización</h2>
+	<p><b>1. <code>git clone</code> - El punto de partida</b></p>
+	<p>Se usa una sola vez por proyecto. Es el comando que ejecuta cuando vas a descargar el código base de un repositorio de GitHub para empezar a trabajar en tu ordenador por primera vez.</p>
+	<pre class="logica"><code>
+bash git clone https://github.com/usuario/nombre-repo.git
+	</code></pre>
+	<p>Descarga el historial completo, todas las ramas y todos los archivos del repositorio remoto y crea una carpeta local configurada como un repositorio de Git.</p>
+	<p><b>2. <code>git pull</code> — El "Ciclo de Vida Diario"</b></p>
+	<p>Este comando se trae los cambios que no estan aplicados en el proyecto local y los actualiza</p>
+	<p>Este proceso tambien se puede hacer en dos partes</p>
+	<p><code>git fetch</code>: Descarga del servidor remoto los cambios y <code>git merge</code>: aplilca esos cambios</p>
+
+
+
+
+</section>

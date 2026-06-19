@@ -135,6 +135,7 @@
   </table>
 </section>
 
+<br>
 
 <!-- Historial de versiones -->
 
@@ -163,3 +164,89 @@ Se detectó que el usuario podía enviar el formulario de compra con campos vac�
 <br>  
 <p><i>"La regla de oro del Commit": "Escribe cada mensaje de commit como si el destinatario fuera tu 'yo' del futuro dentro de 6 meses". Si él no entiende qué hiciste y por qué, el commit no es bueno.</i></p>
 </section>
+
+<br>
+
+<!-- Colaboracion -->
+
+<section id="colab" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+  <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2"> Trabajar en equipo</h2>
+  <p>Para que 10 personas trabajen en el mismo código sin pisarse, Git utiliza tres pilares: <b>Ramas (Branches), Resolución de Conflictos y PRs (Pull Requests)</b>.</p>
+  <br>
+  <ol>
+    <li>
+      <h2 class="text-xl text-bold">1. Ramas (Branches): Tu "zona de pruebas"</h2>
+      <p>En Git, nadie trabaja directamente sobre el código "oficial" (la rama main o master).</p>
+      <ul>
+        <li>◾<b>Creas un "paralelo"</b>: Cuando empiezas una tarea, haces una ramificación. Es como sacar un "clon" del proyecto.</li>
+        <li>◾<b>Aislamiento</b>: Puedes romper lo que quieras en tu rama que el resto del equipo ni se entera. El código principal sigue intacto y funcionando.</li>
+        <li>◾<b>Merge</b>: Una vez que tu tarea está perfecta y probada, "fusionas" (haces merge) tu rama con la principal.</li>
+      </ul>
+    </li>
+    <br>
+    <li>
+      <h2 class="text-xl text-bold">2. Conflictos: Cuando Git dice "¡Alto!"</h2>
+      <p>Cuando dos personas tocan la misma línea del mismo archivo y Git no sabe cuál de las dos 
+        versiones es la correcta, Git marcará los conflictos con unas etiquetas, el usuario eligirá 
+      que opcion permanecerá y Git lo registrará</p>
+    </li>
+    <br>
+    <li>
+      <h2 class="text-xl text-bold">3. El Pull Request (PR): El filtro de calidad</h2>
+      <p>Cuando la rama está terminada, antes de realiza el proceso merge, abres un Pull Request, 
+        todos los compañeros que comparten el trabajo tienen que aprobar el cambio primero</p>
+    </li>
+    <br>
+    <p>Resumen: <i>"La colaboración profesional en DAW se basa en no trabajar NUNCA en la rama principal (main). Para cada tarea, creas una rama, trabajas aislado, abres un Pull Request para revisión, y solo cuando el código es aprobado, se fusiona (merge) en el proyecto principal."</i></p>
+  </ol>
+  </section>
+  
+<br>
+
+<!-- Tu marca personal -->
+
+<section id="colab" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+  <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2"> Marca Personal: Tu vitrina profesional</h2>
+  <p>GitHub no es un "servidor de archivos", es tu portfolio técnico. En el entorno DAW, un perfil bien cuidado es el primer filtro que supera un candidato antes incluso de la entrevista personal.</p>
+  <br>
+  <h2 class="text-xl text-bold">El Perfil (Landing Page)</h2>
+  <p>Cualquier usuario en GitHub tiene un repositorio especial con su nombre de usuario.</p>
+  <p>El README.md de este repositorio es tu página de aterrizaje.</p>
+  <ul>
+    <li>◻ <b>Debe contener</b>: Quién eres, qué tecnologías dominas (JavaScript, DOM, Git…), en qué proyecto emocionante estás trabajando ahora e información de contacto profesional.</li>
+    <li>◻ <b>La regla del "cuadro verde"</b>: La actividad (los cuadraditos verdes de tu perfil) demuestra constancia. No busques perfección, busca frecuencia. Un estudiante activo es un estudiante que aprende.</li>
+  </ul>
+  <br>
+  <h2 class="text-xl text-bold">Plantilla profesional para todo repositorio</h2>
+  <p>Nunca subas un repositorio vacío o sin explicaciones. Todo proyecto que subas a GitHub como estudiante de DAW debe llevar un README.md con esta estructura mínima:</p>
+  <br>
+  <pre class="logica"><code>
+    # Nombre del Proyecto
+Breve descripción: ¿Qué problema resuelve este código?
+
+## Tecnologías utilizadas
+- JavaScript (ES6+)
+- DOM API
+- Fetch API
+
+## Cómo ejecutarlo
+1. Clona este repositorio: `git clone [url]`
+2. Abre `index.html` en tu navegador.
+
+## Aprendizajes clave
+- Gestión de promesas con async/await.
+- Manipulación del DOM mediante querySelector.
+  </code></pre>
+  <br>
+  <h2 class="text-xl text-bold">Checklist de Higiene Profesional</h2>
+  <p>Para que tu perfil luzca como el de un desarrollador senior desde el primer día:</p>
+  <ul>
+    <li>◻ <b>Naming</b>: Nombres descriptivos y en minúsculas (ej: spagnolo-buscador-productos, no proyecto1 o test).</li>
+    <li>◻ <b>.gitignore real</b>: Asegúrate de que no estás subiendo archivos temporales, contraseñas o carpetas gigantes (node_modules).</li>
+    <li>◻ <b>Licencia</b>: Añade siempre un archivo LICENSE. Aunque sea pequeña, una licencia tipo MIT indica que te preocupas por el aspecto legal y profesional de tu trabajo.</li>
+    <li>◻ <b>Small Commits</b>: Un repositorio profesional tiene decenas de commits pequeños y atómicos, no dos o tres commits gigantes que dicen "subiendo proyecto".</li>
+  </ul>
+
+
+  </section>
+
