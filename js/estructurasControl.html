@@ -3,7 +3,7 @@
 <p>Permiten controlar el flujo de ejecución del código.</p>
 <ul>
    <li class="m-1">
-      <h2 class="text-xl font-bold pb-2"><u><mark>if</mark>(condición) { ... } else { ... }</u></h2>
+      <h2 class="text-xl font-bold pb-2"><u>if(condición) { ... } else { ... }</u></h2>
 
       <pre class="logica"><code>
          if (edad >= 18) {
@@ -47,19 +47,19 @@ estaLogueado && mostrarBotonCerrarSesion();
       <p>Parecido al && pero este comprueba el primer valor y si es verdadero devuelve ese valor y si es
          falso devuelve el segundo</p>
       <pre class="logica"><code>
-const carrito = JSON.parse(localStorage.getItem('carrito')) ?? [];
+const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
       </code></pre>
       <p>Resumen:</p>
       <ul>
-         <li class="list-disc">Con &&: Si izquierda = falso se ejecuta derecha</li>
-         <li class="list-disc">Con ||: Si izquierda = null devuelve derecha, si no, devuelve izquierda</li>
+         <li class="list-disc">Con &&: Si izquierda = falsy se ejecuta derecha</li>
+         <li class="list-disc">Con ||: Si izquierda = falsy devuelve derecha, si no, devuelve izquierda</li>
       </ul>
    </li>
    <br>
    <!-- switch -->
 
    <li class="m-1">
-      <h2 class="text-xl font-bold pb-2"><u><mark>switch</mark> (expresión) { case valor1: ... break; case valor2: ...
+      <h2 class="text-xl font-bold pb-2"><u>switch (expresión) { case valor1: ... break; case valor2: ...
             break; default: ... }</u></h2>
       <pre class="logica"><code>
 const dia = new Date().getDay()
@@ -86,7 +86,7 @@ switch (dia) {
    <!-- bucle for -->
 
    <li class="m-1">
-      <h2 class="text-xl font-bold pb-2"><u><mark>for</mark> (inicialización; condición; incremento) { ... }</u></h2>
+      <h2 class="text-xl font-bold pb-2"><u>for (inicialización; condición; incremento) { ... }</u></h2>
       Ejecuta un bloque de código un número específico de veces
       <pre class="logica"><code>
 for (let number = 1; number &lt;= 10; number++) {
@@ -97,7 +97,7 @@ for (let number = 1; number &lt;= 10; number++) {
          ejecución del bucle.</p>
    </li>
    <li class="m-1">
-      <h2 class="text-xl font-bold pb-2"><u><mark>while</mark> (condición){...}</u></h2>
+      <h2 class="text-xl font-bold pb-2"><u>while (condición){...}</u></h2>
       <pre class="logica"><code>
 let contador = 10;
 while (contador>0) {
@@ -112,7 +112,7 @@ while (contador>0) {
 
    </li>
    <li class="m-1">
-      <h2 class="text-xl font-bold pb-2"><u><mark>do</mark> {...} <mark>WHILE</mark> (condición)</u></h2>
+      <h2 class="text-xl font-bold pb-2"><u>do {...} WHILE (condición)</u></h2>
       Ejecuta un bloque de código al menos una vez y luego continúa ejecutándolo mientras la condición sea verdadera
       <pre class="logica"><code>let respuesta
 do {
