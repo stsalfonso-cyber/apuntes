@@ -1,0 +1,37 @@
+<h1 class="text-3xl font-bold text-teal-800 pl-10">3. Ramas</h1>
+
+<!-- Git vs. GitHub -->
+
+<section id="rama" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+  <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">Rama / Branch</h2>
+  <p>Las ramas permiten que cada desarrollador (o cada tarea) viva en su propia realidad paralela.</p>
+  
+  <h2 class="text-xl">1. Conceptos básicos</h2>
+  <ul>
+    <li><b>main (o master)</b>: Es la rama principal. Es la "realidad oficial". Todo lo que está aquí debe estar probado y funcionando.</li>
+    <li><b>Rama (Branch)</b>: Es un clon de main en un momento determinado. Al crear una rama, creas un espacio donde puedes hacer cambios sin afectar a la realidad oficial.</li>
+  </ul>
+
+  <h2 class="text-xl">2 Los comandos más comunes</h2>
+  <pre class="logica"><code>
+<em># 1. Crear una rama y saltar a ella inmediatamente</em>
+git checkout -b nombre-de-la-tarea
+
+<em># 2. Listar ramas para saber dónde estás</em>
+git branch
+
+<em># 3. Volver a la rama principal (antes de hacer un merge o pull)</em>
+git checkout main
+  </code></pre>
+  <p>(Nota<i>: En versiones modernas de Git, git switch -c nombre-de-la-tarea es el comando preferido, pero checkout es el clásico que verás en todos sitios</i>).</p>
+  <h2 class="text-xl">3 El Flujo de Trabajo (El "Workflow" de clase)</h2>
+  <ol>
+    <li class="list-disc"><b>Sincronizas</b>: git pull origin main (Traes el código oficial al día).</li>
+    <li class="list-disc"><b>Ramificas</b>: git checkout -b logo-spagnolo-nuevo.</li>
+    <li class="list-disc"><b>Trabajas</b>: Haces tus cambios en CSS/HTML y haces tus git add + git commit.</li>
+    <li class="list-disc"></li>
+    <li class="list-disc"></li>
+  </ol>
+</section>
+
+
