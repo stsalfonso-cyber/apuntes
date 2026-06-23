@@ -1,0 +1,43 @@
+1. Desarrollo de software (Introducción y Lógica)
+	Conceptos de algoritmo y codificación.
+	Estructura de un programa informático.
+	Herramientas de desarrollo (IDE) y fases de ejecución.
+	Tipos de datos simples, variables, constantes y operadores.
+
+2. Estructuras de control del flujo.
+	Estructuras condicionales o de selección (if, else, switch).
+	Estructuras repetitivas o bucles (while, do-while, for).
+	Anidamiento de estructuras y control de excepciones básico.
+
+3. Programación Orientada a Objetos (POO)
+	Conceptos fundamentales: clases, objetos, atributos y métodos.
+	Mecanismos de encapsulación y visibilidad (público, privado, protegido).
+	Constructores y sobrecarga de métodos.
+	Uso de librerías y paquetes de clases.
+
+4. Gestión de Estructuras de Almacenamiento (Colecciones)
+	Estructuras unidimensionales y multidimensionales (arrays / matrices).
+	Cadenas de caracteres (clase String).
+	Utilización de colecciones dinámicas (listas, conjuntos, mapas/diccionarios).
+
+5. POO Avanzada: Herencia, Polimorfismo e Interfaces
+	Concepto de herencia y reutilización de código (clases base y derivadas).
+	Clases y métodos abstractos.
+	Polimorfismo.
+	Definición e implementación de interfaces.
+
+6. Lectura y Escritura de Información (Ficheros)
+	Concepto de flujo u objeto stream.
+	Gestión del sistema de archivos mediante código.
+	Ficheros de texto (lectura y escritura secuencial).
+	Ficheros binarios y serialización de objetos.
+
+7. Introducción a las Interfaces Gráficas de Usuario (GUI)
+	Componentes visuales básicos (ventanas, botones, etiquetas, campos de texto). 
+	Control de eventos y listeners (interacción del usuario).
+	Librerías estándar (como JavaFX o Swing si se estudia en Java).
+
+8. Gestión de Bases de Datos Relacionales (Persistencia)
+	Conexión desde el código hacia un Sistema Gestor de Bases de Datos (SGBD).
+	Protocolos de conexión (como JDBC en Java).
+	Ejecución de sentencias de manipulación de datos (SELECT, INSERT, UPDATE, DELETE) desde la aplicación.

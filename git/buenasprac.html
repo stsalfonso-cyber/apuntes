@@ -1,0 +1,58 @@
+<h1 class="text-3xl font-bold text-teal-800 pl-10">5. Buenas Prácticas</h1>
+
+<!-- Commit Messages -->
+
+<section id="commitMessages" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+  <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">Commit Messages (Convenciones)</h2>
+    <p>No escribas frases largas. Sigue una estructura predecible. En DAW, te recomiendo usar el estándar "<b>Conventional Commits</b>". Es simple y tu profesor te agradecerá la claridad:</p>
+    <ul>
+        <li class="list-disc"><b>Estructura</b>: tipo(ámbito): descripción corta</li>
+        <li class="list-disc"><b>Tipos comunes</b>:
+            <ul>
+                <li class="list-disc mx-4"><code>feat</code> (feature): Una función nueva</li>
+                <li class="list-disc mx-4"><code>fix</code>: Un error corregido.</li>
+                <li class="list-disc mx-4"><code>refactor</code>: Cambio de código que no añade ni quita funciones (limpieza).</li>
+                <li class="list-disc mx-4"><code>docs</code>: Cambios en los comentarios o README.</li>
+            </ul>
+        </li>
+        <li class="list-disc"><b>Ejemplo</b>: feat(auth): añadir validación de email en login</li>
+    </ul>
+
+</section>
+
+<br>
+
+<!-- Small Commits -->
+
+<section id="smallCommit" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+  <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">Small Commits (Commit Atómicos)</h2>
+  <p>El error de novato es trabajar 4 horas y hacer un solo commit gigante con 20 archivos modificados. Eso es una bomba de relojería.</p>
+  <ol>
+    <li class="list-disc"><b>¿Qué es un commit atómico?</b>: Es el commit más pequeño posible que resuelve una sola tarea lógica.</li>
+    <li class="list-disc"><b>Ventaja</b>: Si algo falla, un commit pequeño es fácil de "deshacer" sin perder todo tu trabajo.</li>
+    <li class="list-disc"><b>La prueba de ácido</b>: Si tu commit intenta explicar algo y tienes que usar la palabra "y" (Ej: "Añadí el menú y arreglé el pie de página"), es un commit demasiado grande. Divídelo en dos.</li>
+  </ol>
+
+</section>
+
+<br>
+
+<!-- GitHub Flow -->
+
+<section id="gitHubFlow" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+  <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">GitHub Flow (Tu "hoja de ruta")</h2>
+  <p>El GitHub Flow es el flujo de trabajo más ágil y sencillo del mundo. Si sigues estos 5 pasos, nunca tendrás problemas en DAW:</p>    
+    <ol>
+      <li class="list-decimal"><b>Todo nace en main</b>: Siempre ten tu main limpio y listo para desplegar.</li>
+      <li class="list-decimal"><b>Crea una rama</b>: Para cada tarea, crea una rama desde main con un nombre descriptivo.</li>
+      <li class="list-decimal"><b>Commits atómicos</b>: Trabaja y haz commits frecuentes en esa rama.</li>
+      <li class="list-decimal"><b>Abre un PR</b>: Cuando acabes, abre el Pull Request. Aquí es donde se discute si el código es apto.</li>
+      <li class="list-decimal"><b>Merge y despliegue</b>: Una vez aprobado, haz merge a main. A partir de aquí, tu cambio ya vive en la rama oficial y está listo para ser publicado.</li>
+    </ol>
+
+
+  </section>
+
+
+
+

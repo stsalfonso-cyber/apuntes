@@ -1,0 +1,68 @@
+<h1 class="text-3xl font-bold text-teal-800 pl-10">4. Colaboración profesional</h1>
+
+<!-- PullRequests -->
+
+<section id="pullRequest" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+  <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">Pull Requests (PRs): La base del trabajo profesional</h2>
+  <p>El Pull Request (PR) es el mecanismo mediante el cual propones formalmente que tus cambios (en tu rama) sean integrados 
+    en la rama principal (main). Olvida el enviar archivos por correo o decir "profe, ya funciona"; 
+    en DAW, el PR es el único canal oficial para solicitar revisión.</p>
+  <br>
+  <h3 class="text-2xl font-bold pb-2">El flujo del PR</h3>
+  <ol>
+    <li class="list-decimal"><b>Push</b>: Subes tu rama a GitHub mediante git push -u origin &lt;rama>.</li>
+    <li class="list-decimal"><b>Solicitud</b>: En el portal de GitHub, seleccionas tu rama y pulsas el botón verde "Compare & pull request".</li>
+    <li class="list-decimal"><b>Descripción</b>: Escribes brevemente qué has hecho y por qué.</li>
+    <li class="list-decimal"><b>Revisión</b>: El "supervisor" (profesor/compañero) revisa tu código y puede dejar comentarios directamente en las líneas o aprobarlo (Approve).</li>
+    <li class="list-decimal"><b>Merge:</b> Una vez aprobado, el sistema integra (funde) tu código en main</li>
+  </ol>
+  <br>
+  <p><b>Consejos.</b><i> "Un Pull Request es una invitación a la revisión. Tu objetivo no es solo pasar código, es facilitar el trabajo a quien debe revisarlo. Un buen PR tiene una descripción clara, cambios atómicos (pequeños) y facilita la comunicación técnica necesaria para mantener el proyecto sano."</i></p>
+
+</section>
+
+<br>
+
+<!-- Code Review -->
+
+<section id="codeReview" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+  <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">Code Review (Revisión de Código)</h2>
+  <p>La Code Review es el proceso de analizar el código de un compañero antes de que se fusione con main. No es un examen ni una crítica; es una herramienta de aprendizaje mutuo y control de calidad.</p>
+  <p>El objetico principal es dejar comentarios tecnicos en el código, detectando fallos de seguridad (XSS), errores de performance (peticiones innecesarias y falta de legitibilidad)</p>
+</section>
+
+<br>
+
+<!-- Issues-->
+
+<section id="issues" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+  <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">GitHub Issues: Gestión de Tareas</h2>
+  <p>Un Issue es un ticket de trabajo. Si el Pull Request es la "solución", el Issue es el "problema" o la "necesidad". 
+    En DAW, usarás esto para organizar tus prácticas, gestionar errores encontrados y definir nuevas funcionalidades.</p>
+  <ol>
+    <li class="list-decimal">¿Para qué sirven los Issues?
+      <ul>
+        <li class="list-disc ml-4">Seguimiento de Bugs: "El formulario no envía datos en Firefox".</li>
+        <li class="list-disc ml-4">Solicitud de Funcionalidades (Features): "Añadir botón de 'Descargar PDF' en el recibo".</li>
+        <li class="list-disc ml-4">Debate: Discutir cómo resolver un problema antes de escribir siquiera una línea de código.</li>
+      </ul>
+
+    </li>
+    <li class="list-decimal">Anatomía de un buen Issue
+      <ul>
+        <li class="list-disc ml-4">Título descriptivo: Breve y claro.</li>
+        <li class="list-disc ml-4">Descripción detallada: Contexto, pasos para reproducir, resultado esperardo, resultado actual.</li>
+      </ul>
+    </li>
+
+    <li class="list-decimal">El Flujo de trabajo profesional (Issue + PR)
+      <ol>
+        <li class="list-decimal ml-4">Issue: Abres un ticket: "Falta validación en el formulario de login"</li>
+        <li class="list-decimal ml-4">Asignación: Te asignas el Issue a ti mismo.</li>
+        <li class="list-decimal ml-4">Desarrollo: Creas una rama llamada fix/validar-login.</li>
+        <li class="list-decimal ml-4">Vinculación: Cuando abras el Pull Request, escribes en la descripción</li>
+      </ol>
+    </li>
+  </ol>
+
+</section>
