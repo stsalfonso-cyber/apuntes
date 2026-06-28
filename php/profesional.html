@@ -1,0 +1,152 @@
+<h1 class="text-3xl font-bold text-teal-800 pl-10">[6] PHP Profesional (Ecosistema Moderno)</h1>
+
+<!-- Composer: Gestión de Dependencias (El "npm" de PHP) -->
+
+<section id="composer" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+  <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">Composer: Gestión de Dependencias (El "npm" de PHP)
+  </h2>
+  <p>Composer es el gestor de dependencias estándar en PHP. Si vienes de JavaScript, piensa en él como npm o yarn.
+    Es una herramienta que permite instalar librerías externas (código escrito por otros) de forma fácil, segura y
+    automática en tus proyectos.</p>
+
+  <h3 class="text-xl font-gold">Paso a paso:</h3>
+  <p><b>1. Iniciamos Composer</b>: <code class="logica">composer init</code></p>
+  <p>Esto crea un archivo <code>composer.json</code> en tu carpeta. Es como el "carnet de identidad" de tu proyecto,
+    donde se apuntará todo lo que instales.</p>
+  <p><b>2. Instalamos una librería (ej: Faker)</b>: <code class="logica">composer require fzaninotto/faker</code></p>
+  <ol> ¿Qué ha pasado?
+    <li class="list-decimal ml-6">Composer ha conectado con el "App Store" de PHP.</li>
+    <li class="list-decimal ml-6">Ha descargado <code>faker</code> en la carpeta <code>/vendor</code>.</li>
+    <li class="list-decimal ml-6">Ha actualizado el <code>composer.json</code> para recordar que ahora este proyecto
+      depende de <code>faker</code></li>
+    <li class="list-decimal ml-6">Ha creado el archivo <code>vendor/autoload.php</code> (sta carpeta va en el
+      gitignore).</li>
+  </ol>
+  <p><b>Usamos la librería en tu código</b>:</p>
+  <pre class="logica">
+    <code>
+&lt;?php
+<em>// 1. Cargas el autocargador (solo se hace una vez al inicio)</em>
+require 'vendor/autoload.php';
+
+<em>// 2. Usas la librería directamente</em>
+$faker = Faker\Factory::create();
+
+<em>// Genera datos falsos al instante</em>
+echo $faker->name;      <em>// "Juan Pérez"</em>
+echo $faker->email;     <em>// "juan@example.com"</em>
+echo $faker->address;   <em>// "Calle Falsa 123"</em>
+    </code>
+  </pre>
+</section>
+
+<br>
+
+<!-- Autoloading: La carga inteligente de archivos -->
+
+<section id="autoloading" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+  <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">Autoloading: La carga inteligente de archivos</h2>
+  <p>El <b>Autoloading</b> evita tener que cargar decenas de archivos con require o include. lo automatiza.
+    detecta cuándo intentas usar una clase que aún no se ha cargado y la busca y <b>carga en el servidor automáticamente
+      por ti</b>.
+  </p>
+  <ol>
+    <li class="list-decimal"> <b>El concepto: "Lazy Loading" (Carga bajo demanda)</b>
+      <p>El Autoloading funciona bajo la filosofía: <i>"No cargues nada en memoria hasta que sea estrictamente
+          necesario</i>". Esto ahorra memoria RAM del servidor y evita conflictos de carga.</p>
+    </li>
+    <li class="list-decimal"> <b>El estándar profesional: PSR-4</b>
+      <p>El mundo PHP se puso de acuerdo en un estándar llamado PSR-4. La regla es simple: <b>Tu carpeta y tu namespace
+          deben hablar el mismo idioma</b>.</p>
+      <ul>Si tu clase se llama <code>Spagnolo\Controllers\Usuario</code> y sigue la regla PSR-4:
+        <li class="list-disc ml-7">PHP buscará automáticamente en la carpeta
+          <code>/Spagnolo/Controllers/Usuario.php</code>.</li>
+        <li class="list-disc ml-7"><b>Si el archivo no existe en esa ruta exacta, PHP te dará error.</b></li>
+      </ul>
+    </li>
+    <li class="list-decimal"> <b>La magia de Composer</b>
+      <p><i>¿Cómo sabe PHP dónde está cada archivo si yo no uso require?</i></p>
+      <b>Aquí entra la magia de Composer</b>. Cuando ejecutas <code>composer require...</code>, Composer analiza todos
+      los archivos que ha descargado y crea un mapa (o índice) en el archivo <code>vendor/autoload.php</code>.</b>
+      <p>Cuando tú escribes <code>require 'vendor/autoload.php'</code>; en tu script principal, lo que realmente haces
+        es <b>inyectar un "buscador profesional"</b> que consulta ese mapa y sabe exactamente dónde está cada clase que
+        necesites.</p>
+    </li>
+  </ol>
+  <ol> <b>Resumen del proceso</b>:
+    <li class="list-decimal ml-7">Instalas una librería con Composer (ej: fakerphp/faker).</li>
+    <li class="list-decimal ml-7">No haces include de nada de faker.</li>
+    <li class="list-decimal ml-7">Haces require 'vendor/autoload.php'; al inicio.</li>
+    <li class="list-decimal ml-7">Usas la clase: new Faker\Factory();</li>
+  </ol>
+</section>
+
+<br>
+
+<!-- Estándares PSR (PHP Standards Recommendations) -->
+
+<section id="psr" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+  <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">Estándares PSR (PHP Standards Recommendations)</h2>
+  <p>Los PSR son una serie de recomendaciones publicadas por el PHP-FIG (PHP Framework Interoperability
+    Group). Su objetivo es simple: que tú puedas escribir código, y que cualquier otro desarrollador
+    en el mundo pueda entenderlo al instante.</p>
+  <p>Estos son los tres estándares existentes mas importantes y pilares en DAW</p>
+  <ol>
+    <li class="list-decimal ml-5">
+      <h3 class="text-2xl">El pilar de la estructura: PSR-4 (Autoloading)</h3>
+      <p>Ya lo hemos visto: <b>Namespace = Rutas de carpetas</b>.</p>
+      <p> ◽ Si tu clase es <code>Spagnolo\Modelos\Usuario</code>, Composer debe buscarla en
+        <code>src/Modelos/Usuario.php</code>.</p>
+      <p> ◽ Aceptar este estándar es lo que permite que el <code>vendor/autoload.php</code> funcione. <b>Si rompes el
+          PSR-4, el autoloading se rompe</b>.</p>
+    </li>
+    <br>
+    <li class="list-decimal ml-5">
+      <h3 class="text-2xl">El pilar del estilo: PSR-1 y PSR-12 (Coding Style)</h3>
+      <p>Estas son las normas de "limpieza":</p>
+      <p> ◽ <b>PSR-1 (Basic)</b>: Define que PHP debe usar &lt;?php y ?> (o solo &lt;?php), que los nombres de clase
+        deben ser StudlyCaps (Ej: MiClasePro), y los nombres de constante UPPER_CASE.</p>
+      <p> ◽ <b>PSR-12 (Extended)</b>: Es el estándar de formato más usado actualmente. Define cosas como:</p>
+      <ol class="ml-8">
+        <li> - <b>Indentación</b>: 4 espacios (no tabulaciones).</li>
+        <li> - <b>Llaves</b>: Las llaves de apertura de una clase van en una línea nueva.</li>
+        <li> - <b>Espacios</b>: Obliga a poner un espacio después de una palabra clave como if o foreach.</li>
+      </ol>
+    </li>
+    <br>
+    <li class="list-decimal">
+      <h3 class="text-2xl">El estándar de facto: ¿Por qué seguirlo?</h3>
+      <ol>
+        <li class="list-disc"><b>Interoperabilidad</b>: Si usas librerías de terceros (como faker o dompdf), todas ellas
+          siguen PSR. Si tu código también lo sigue, todo "encaja" perfectamente.</li>
+        <li class="list-disc"><b>Lectura</b>: La mayoría de los proyectos empresariales en PHP (Laravel, Symfony)
+          aplican PSR-12 automáticamente. Si escribes a tu manera, serás un "cuerpo extraño" en el equipo.</li>
+      </ol>
+    </li>
+  </ol>
+  <br>
+  <h3 class="text-2xl font-bold">Uso de herramientas automáticas</h3>
+  <ul>
+    <li class="list-decimal ml-3">
+      <b>PHP-CS-Fixer</b>: Es una herramienta que instalas en tu proyecto (con Composer) que leí tu código y lo corrige
+      automáticamente para cumplir con PSR-12.
+      <p class="ml-6"> ▫ Tú solo escribes código; ejecutas la herramienta y ella corrige cada espacio, cada llave y cada
+        salto de línea</p>
+    </li>
+    <li class="list-decimal ml-3"><b>Plugins de VS Code</b>: Instala una extensión llamada php-cs-fixer o PHP
+      Intelephense. Configurándolas correctamente, tu código se formatea solo al darle a guardar (Ctrl+S).</li>
+  </ul>
+
+</section>
+
+<br>
+
+<!-- PHP Frameworks: O más allá del código plano -->
+
+<section id="framawork" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+  <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">PHP Frameworks: O más allá del código planos</h2>
+  <p>Un framework no es una "librería" más. Es un entorno de trabajo estructurado.</p>
+
+
+
+</section>
