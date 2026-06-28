@@ -1,0 +1,200 @@
+<h1 class="text-3xl font-bold text-teal-800 pl-10">[2] Lógica y Estructuras de Datos</h1>
+
+<!-- Variables y Tipos de datos -->
+
+<section id="variables" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+  <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">Variables y Tipos de datos</h2>
+  <h3 class="text-xl font-bold">Tipos Escalares</h3>
+  <ul>
+    <li class="list-disc"><b>Strings</b>: (Cadenas) "Hola".</li>
+    <li class="list-disc"><b>Integers</b>: (Números enteros) $edad = 25.</li>
+    <li class="list-disc"><b>Floats</b>: (Números decimales) $precio = 19.99.</li>
+    <li class="list-disc"><b>Booleans</b>: (Verdadero/Falso) $activo = true.</li>
+    <li class="list-disc"><b>Null</b>: Representa una variable sin valor o inexistente.</li>
+  </ul>
+  <br>
+  <h3 class="text-xl font-bold">La importancia de los "Falsy" (Valores falsos)</h3>
+  <p><b>Variables ($variable)</b> Se pueden declarar e inicializar al vuelo con el símbolo $. Son dinámicas (aunque apliquemos tipado estricto en funciones).</p>
+  <p><b>Constantes (const IVA)</b> Se definen fuera o dentro de clases y no llevan $ delante.</p>
+  <br>
+  <p>En PHP, estos valores son considerados false (falsy):</p>
+  <ol>
+    <li class="list-decimal ml-6">false (el booleano en sí).</li>
+    <li class="list-decimal ml-6">0 (integer) y 0.0 (float)</li>
+    <li class="list-decimal ml-6">"0" (el string que contiene el número cero). ¡Cuidado! Este es el mayor peligro en PHP.</li>
+    <li class="list-decimal ml-6">"" (string vacío).</li>
+    <li class="list-decimal ml-6">null.</li>
+    <li class="list-decimal ml-6">[] (array vacío). En JavaScript, [] (array vacío) es true.</li>
+  </ol>
+  <br>
+  <h3 class="text-xl font-bold"><mark>El operador ??</mark></h3>
+  <h3 class="text-xl">$variable = (variable o expresión) ?? (Valor si lo de derecha no existe o es null)</h3>
+  <p>Es equivalente al operador || de JS pero mas seguro porque solo actua cuando el valor es realmente null o undefined evitando falsos positivos con otros valores falsy</p>
+  <pre class="logica">
+    <code>
+<em>// Si $_GET['nombre'] existe, úsalo; si es null, usa 'Invitado'.</em>
+$nombre = $_GET['nombre'] ?? 'Invitado';
+    </code>
+  </pre>
+
+</section>
+
+<!-- Arrays asociativo -->
+
+<section id="arrays" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+  <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">Arrays Asociativos</h2>
+  <p>En un array normal (indexado), el acceso es por número: <code>$colores[0] = "rojo"</code>.</p>
+  <p>En un <b>Array Asociativo</b>, el acceso es por una <b>clave (string)</b>: <code>$datos['nombre'] = "Alfonso"</code>. En JS tambien existía el método objeto.campo en PHP no se puede hacer de este modo</p>
+  <br>
+  <h3 class="text-xl font-bold">Sintaxis</h3>
+  <p>Se usa el operador de asignación flecha =>.</p>
+  <pre class="logica">
+    <code>
+$usuario = [
+    'nombre' => 'Alfonso',
+    'rol'    => 'admin',
+    'edad'   => 25
+];
+
+<em>// Acceso y modificación</em>
+echo $usuario['nombre']; // Imprime: Alfonso
+$usuario['rol'] = 'editor'; // Modificar     
+    </code>
+  </pre>
+  <h3 class="text-xl font-bold">Por qué son el "Objeto" de PHP</h3>
+  <p>Aunque PHP tiene Clases y Objetos, durante años (y en muchos frameworks), los desarrolladores han usado arrays asociativos para todo porque son extremadamente ligeros. Si recibes una fila de una base de datos (ej: una fila de la tabla productos del inventario de Spagnolo), lo más normal es que PHP te la devuelva como un array asociativo.</p>
+  <br>
+  <h3 class="text-xl font-bold">La iteración</h3>
+  <p>En JS usas <code>.map()</code> o <code>.forEach()</code>. En PHP, la construcción reina es <code>foreach</code></p>
+  <pre class="logica">
+    <code>
+  foreach ($usuario as $clave => $valor) {
+    echo "La propiedad $clave tiene el valor: $valor";
+}
+    </code>
+  </pre>
+  <p>▫ <code>$clave</code>: Es el nombre del índice ('nombre', 'rol', 'edad').</p>
+  <p>▫ <code>$valor</code>: Es el contenido ('Alfonso', 'admin', 25)..</p>
+  <br>
+  <h3 class="text-xl font-bold">Funciones últiles</h3>
+  <ol>
+    <li class="list-disc"><b>count($array)</b>: Devuelve el número de elementos.</li>
+    <li class="list-disc"><b>array_keys($array)</b>: Devuelve solo las claves (['nombre', 'rol', 'edad']).</li>
+    <li class="list-disc"><b>array_values($array)</b>: Devuelve solo los valores (['Alfonso', 'admin', 25]).</li>
+    <li class="list-disc"><b>in_array($valor, $array)</b>: Comprueba si un valor existe dentro del array.</li>
+  </ol>
+  </section>
+  
+<!-- Estructuras de control -->
+
+<section id="estrucCont" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+  <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">Estructuras de control</h2>
+  <ol>
+    <li class="list-decimal"><mark><code> if / elseif / else</code></mark>
+      <pre class="logica">
+        <code>
+if ($edad >= 18) {
+    echo "Mayor de edad";
+} elseif ($edad >= 16) {
+    echo "Casi mayor";
+} else {
+    echo "Menor de edad";
+}
+        </code>
+      </pre>
+    </li>
+    <li class="list-decimal"><mark><code>switch</code></mark> (¡Cuidado con la trampa!)
+      <p>Al igual que en JS, el switch compara valores. Pero en PHP <b>el <code>break</code> es obligatorio</b> si no quieres que el código siga ejecutándose hacia abajo.</p>
+    </li>
+    <li class="list-decimal">La estrella moderna: <mark><code>match</code></mark> (PHP 8+)
+      <p>El match es la evolución del switch introducida en PHP 8. Es mucho más seguro y limpio.</p>
+      <p>▪ <b>Diferencia clave</b>: A diferencia del <code>switch</code>, <code>match</code> devuelve un valor (es una expresión), no necesita <code>break</code> y es estricto con los tipos de datos.</p>
+      <pre class="logica">
+        <code>
+$resultado = match ($rol) {
+    'admin'  => "Acceso total",
+    'editor' => "Acceso limitado",
+    default  => "Invitado",
+};
+
+echo $resultado; <em>// Devuelve el valor directamente</em>
+        </code>
+      </pre>
+    </li>
+  </ol>
+  <br>
+  <h3 class="text-xl font-bold"><mark>El operador ternario</mark></h3>
+  <h3 class="text-xl">$variable = (condición) ? valor_si_verdadero : valor_si_falsy;</h3>
+  <pre class="logica">
+    <code>
+$edad = 18;
+$mensaje = ($edad >= 18) ? "Eres mayor de edad" : "Eres menor de edad";
+
+echo $mensaje; <em>// Imprime: Eres mayor de edad</em>
+    </code>
+  </pre>
+  </section>
+
+<!-- Iteración foreach -->
+
+<section id="iteracion" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+  <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">Arrays iteraciones</h2>
+  <h3 class="text-xl font-bold">foreach</h3>
+  <p>A diferencia de JS en PHP el foreach no es un método del array sino una funcion que recibe el array como argumento. 
+    Olvídate del for, en PHP, el 99% de las iteraciones se manejan mejor con el foreach, ya que gestiona igual de bien 
+    arrays normales como asociativos</p>
+  <ul>
+    <li class="list-disc">Sintaxis normal:
+      <pre class="logica">
+        <code>
+$frutas = ["🍎", "🍌", "🍓"]; 
+foreach ($frutas as $fruta) { 
+  echo $fruta; 
+}
+        </code>
+      </pre>
+    </li>
+    <li class="list-disc">Sintaxis clave-valor:
+      <pre class="logica">
+        <code>
+$usuario = ['nombre' => 'Alfonso', 'edad' => 25]; 
+foreach ($usuario as $key => $value) { 
+  echo "$key es $value"; 
+}
+        </code>
+      </pre>
+    </li>
+  </ul>
+  <br>
+  <h3 class="text-xl font-bold">array_map, array_filter, array_reduce</h3>
+  <p>PHP tiene equivalentes a los métodos de JS, pero con un "pero" técnico: el nombre de las funciones empieza por array_, reciben una funcion de primer argumento y el array como segundo argumento</p>
+  <br>
+  <p><b>array_map (Transformación)</b></p>
+  <pre class="logica">
+    <code>
+<em>// En JS: arr.map(x => x * 2)</em>
+$numeros = [1, 2, 3];
+$dobles = array_map(fn($n) => $n * 2, $numeros);
+    </code>
+  </pre>
+  <br>
+  <p><b>array_filter (Filtrado)</b></p>
+  <pre class="logica">
+    <code>
+<em>// En JS: arr.filter(x => x > 2)</em>
+$numeros = [1, 2, 3, 4];
+$mayores = array_filter($numeros, fn($n) => $n > 2);
+    </code>
+  </pre>
+  <br>
+  <p><b>array_reduce (Acumulación)</b></p>
+  <pre class="logica">
+    <code>
+<em>// En JS: arr.reduce((acc, x) => acc + x, 0)</em>
+$numeros = [1, 2, 3];
+$total = array_reduce($numeros, fn($acc, $n) => $acc + $n, 0);
+    </code>
+  </pre>
+
+
+  </section>

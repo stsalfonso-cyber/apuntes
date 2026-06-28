@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>PHP</title>
+   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.1.7"></script>
+   <link rel="stylesheet" href="../estilo.css">
+   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+</head>
+
+
+<body class="bg-gray-50 text-gray-900">
+   <div class="flex min-h-screen mx-auto p-6 md:p-10">
+
+      <!--     MENU IZQUIERDO        -->
+      <nav class="sticky top-10 h-screen flex-shrink-0 bg-white p-6 shadow-sm border border-gray-200">
+         <div id="menu">
+            <h2 class="text-xl font-bold mb-4">PHP - El Lenguaje del Backend</h2>
+            <ul><span class="text-lg text-blue-300 mb-3">[1] Fundamentos del Backend</span>
+               <li><a href="#compara" class="btnfos btnfos-5">JS vs PHP</a></li>
+               <li><a href="#clisServ" class="btnfos btnfos-5">Cliente-Servidor</a></li>
+               <li><a href="#sintaxis" class="btnfos btnfos-5">Sintaxis</a></li>
+               <li><a href="#tipado" class="btnfos btnfos-5">Tipado</a></li>
+
+            </ul>
+            <ul><span class="text-lg text-blue-300 mb-3">[2] Lógica y Estructuras de Datos</span>
+               <li><a href="#variables" class="btnfos btnfos-5">Variables y tipos</a></li>
+               <li><a href="#arrays" class="btnfos btnfos-5">Arrays asociativos</a></li>
+               <li><a href="#estrucCont" class="btnfos btnfos-5">Estructuras de Control</a></li>
+               <li><a href="#iteracion" class="btnfos btnfos-5">Iteración</a></li>
+            </ul>
+            <ul><span class="text-lg text-blue-300 mb-3">[3] Funciones y Modelo de Objetos (POO)</span>
+               <li><a href="#funciones" class="btnfos btnfos-5">Funciones</a></li>
+               <li><a href="#poo" class="btnfos btnfos-5">Prog. Orie. a Obj. (POO)</a></li>
+               <li><a href="#namespaces" class="btnfos btnfos-5">Namespaces</a></li>
+            </ul>
+            <ul><span class="text-lg text-blue-300 mb-3">[4] Web Layer (La capa web)</span>
+               <li><a href="#superglobals" class="btnfos btnfos-5">Superglobals</a></li>
+               <li><a href="#cookies" class="btnfos btnfos-5">Gestión de sesiones y cookies</a></li>
+               <li><a href="#headers" class="btnfos btnfos-5">Cabeceras (Headers)</a></li>
+            </ul>
+            <ul><span class="text-lg text-blue-300 mb-3">[5] Acceso a Datos y Seguridad</span>
+               <li><a href="#PDO" class="btnfos btnfos-5">Bases de Datos (PDO)</a></li>
+               <li><a href="#seguridad" class="btnfos btnfos-5">Seguridad</a></li>
+            </ul>
+            <ul><span class="text-lg text-blue-300 mb-3">[6] PHP Profesional (Ecosistema Moderno)</span>
+               <li><a href="#composer" class="btnfos btnfos-5">Composer</a></li>
+               <li><a href="#autoloading" class="btnfos btnfos-5">Autoloading (PSR-4)</a></li>
+               <li><a href="#psr" class="btnfos btnfos-5">Estándares PSR</a></li>
+               <li><a href="#frameworks" class="btnfos btnfos-5">Frameworks</a></li>
+            </ul>
+         </div>
+         <div id="icoMenu">
+            <span onclick="mostrarMenu()">▶</span>
+         </div>
+         <div id="icoOcuMenu">
+            <span onclick="ocultarMenu()">◀</span>
+         </div>
+      </nav>
+
+      <!--     CONTENIDO     -->
+      <main class="ml-10">
+
+         <header class="mb-10 text-center">
+            <h1 class="text-4xl font-extrabold text-cyan-700 text-shadow-sm">Apuntes de PHP</h1>
+            <p class="text-gray-600 mt-2">Guía completa basada en el documento original</p>
+         </header>
+
+
+
+         <!-- 1. Fundamentos del Backend -->
+         <div id="fundamentos">
+         </div>
+
+         <!-- 2. Lógica y Estructuras de Datos -->
+         <br>
+         <div id="datos">
+         </div>
+         
+         <!-- 3. Funciones y Modelo de Objetos (POO) -->
+         <br>
+         <div id="funciones">
+         </div>
+
+         <!-- 4. Web Layer (La capa web) -->
+         <br>
+         <div id="webLayer">
+         </div>
+         
+         <!-- 5. Acceso a Datos y Seguridad -->
+         <br>
+         <div id="accDatSeg">
+         </div>
+
+         <!-- 6. PHP Profesional (Ecosistema Moderno) -->
+         <br>
+         <div id="profesional">
+         </div>
+
+         <footer class="ml-72 mt-20 pt-10 border-t border-gray-200 text-center text-gray-500">
+            <p>Apuntes y notas Alfonso</p>
+         </footer>
+
+      </main>
+
+   </div>
+
+</body>
+
+
+<script>
+   async function cargarSeccion(idContenedor, rutaArchivo) {
+      try {
+         const response = await fetch(rutaArchivo);
+         if (!response.ok) throw new Error('No se pudo cargar el archivo');
+         const html = await response.text();
+         document.getElementById(idContenedor).innerHTML = html;
+      } catch (err) {
+         document.getElementById(idContenedor).innerHTML = '<p class="text-red-500">Error al cargar la sección.</p>';
+      }
+   }
+
+   // Llamada: carga secciones.html dentro del div
+   // Nota: Esto requiere estar sirviendo los archivos a través de un server (ej. Live Server, Nginx, Apache)
+   cargarSeccion('fundamentos', 'fundamentos.html')
+   cargarSeccion('datos', 'datos.html')
+   cargarSeccion('funciones', 'funciones.html')
+   cargarSeccion('webLayer', 'webLayer.html')
+   cargarSeccion('accDatSeg', 'seguridad.html')
+   cargarSeccion('profesional', 'profesional.html')
+
+
+
+</script>
+<script>
+   function mostrarMenu() {
+      $("#menu").css({ display: 'inline' })
+      $("#icoMenu").hide()
+      $("nav").css({ width: 'calc(var(--spacing) * 64)' })
+      $("#icoOcuMenu").show()
+   }
+   function ocultarMenu() {
+      $("#menu").css({ display: 'none' })
+      $("#icoMenu").show()
+      $("#icoOcuMenu").hide()
+      $("nav").css({ width: '70px' })
+   }
+
+</script>
+
+</html>

@@ -1,0 +1,143 @@
+<h1 class="text-3xl font-bold text-teal-800 pl-10">1. Fundamentos del Backend</h1>
+
+<!-- Mapeo de Conceptos: De JS a PHP -->
+
+<section id="compara" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+  <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">Mapeo de Conceptos: De JS a PHP</h2>
+  <table class="w-180">
+    <tr class="border-b-2 border-gray-350">
+      <th class="text-left">Concepto</th>
+      <th class="text-left">JavaScript (Frontend)</th>
+      <th class="text-left">PHP (Backend)</th>
+    </tr>
+    <tr class="border-b-1 border-gray-200">
+      <td class="font-semibold">Etiquetas</td>
+      <td>&lt;script></td>
+      <td>&lt;php ... ?></td>
+    </tr>
+    <tr class="border-b-1 border-gray-200">
+      <td class="font-semibold">Variables</td>
+      <td>let, const</td>
+      <td>$variable</td>
+    </tr>
+    <tr class="border-b-1 border-gray-200">
+      <td class="font-semibold">Salida</td>
+      <td>console.log() o DOM</td>
+      <td>echo</td>
+    </tr>
+    <tr class="border-b-1 border-gray-200">
+      <td class="font-semibold">Consatenación</td>
+      <td>+</td>
+      <td>.</td>
+    </tr>
+    <tr class="border-b-1 border-gray-200">
+      <td class="font-semibold">Tipado</th>
+      <td>Débil</td>
+      <td>Débil, pero con tipado estricto opcional</td>
+    </tr>
+    <tr class="border-b-1 border-gray-200">
+      <td class="font-semibold">Estructura</td>
+      <td>if, while, for</td>
+      <td>Idénticas (con muy pocos cambios)</td>
+    </tr>
+  </table>
+  <br>
+  <h3 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">Los 4 choques culturales</h3>
+  <ol>
+    <li class="list-decimal"><b>El ';'</b>. Estrictamente obligatorio</li>
+    <li class="list-decimal"><b>El signo del dólar $</b>. Para nombrar variables, sin más
+    </li>
+    <li class="list-decimal"><b>La concatenación con punto '.'</b>. En PHP el + sirve solo para sumar números
+    </li>
+    <li class="list-decimal"><b>El ciclo de vida</b> (EL GRAN CAMBIO)
+      <p>JS se carga una vez y vive en la RAM del navegador mientras el usuario está en la página</p>
+      <p><b><mark>El ciclo de vida</mark> de un script PHP es de milisegundos</b> PHP ejecuta el código en el servidor genera el HTML envía y llega a su fin, muere</p>
+    </li>
+  </ol>
+</section>
+
+<br>
+
+<!-- La arquitectura Cliente-Servidor en PHP -->
+
+<section id="clisServ" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+  <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">La arquitectura Cliente-Servidor en PHP</h2>
+  <p>PHP no es un lenguaje que se ejecute en el navegador del usuario. Es un lenguaje <b>del lado del servidor</b>. Esto significa que cuando alguien entra en tu web de Spagnolo, ocurre una cadena de eventos invisible:</p>
+  <br>
+  <h3 class="text-xl font-bold">El proceso: Petición y Respuesta</h3>
+  <ol>
+    <li class="list-decimal"><b>La Petición (Request)</b>: El usuario escribe spagnolo.es/index.php en su navegador (el Cliente). Esta petición viaja por internet hasta el servidor web.</li>
+    <li class="list-decimal"><b>El Servidor Intercepta</b>: El servidor (Apache o Nginx) detecta que se está pidiendo un archivo .php.</li>
+    <li class="list-decimal"><b>El Motor de PHP</b>: El servidor no envía ese archivo directamente. Se lo pasa al motor de PHP.</li>
+    <li class="list-decimal"><b>Procesamiento</b>: El motor de PHP ejecuta las instrucciones línea a línea (conecta a la BD, hace cálculos, etc.).</li>
+    <li class="list-decimal"><b>Generación de Respuesta</b>: El motor de PHP genera una página en HTML puro (o JSON).</li>
+    <li class="list-decimal"><b>La Respuesta (Response)</b>: El servidor envía ese HTML final al navegador del cliente.</li>
+  </ol>
+  <img src="img/esquema.jpg" alt="esquema" width="85%">
+  <br>
+  <p><b>Dato clave</b>: El navegador del usuario recibe HTML, CSS y JS, pero <mark><b>PHP nunca llega al navegador</b></mark>. El código fuente de tu PHP se queda "en casa", en el servidor.</p>
+</section>
+
+<br>
+
+<!--  Sintaxis esencial: Archivos, Etiquetas e Impresión -->
+
+<section id="sintaxis" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+  <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2"> Sintaxis esencial: Archivos, Etiquetas e Impresión</h2>
+  <h3 class="text-xl font-bold">Reglas de sintaxis en PHP</h3>
+  <ol>
+    <li class="list-decimal">Archivo: Debe ser .php.</li>
+    <li class="list-decimal">Inicio: Siempre &lt;?php. El cierre ?> es opcional si solo hay PHP en el archivo.</li>
+    <li class="list-decimal">Impresión: Usa echo siempre. Ignora print.</li>
+    <li class="list-decimal">Concatenación: El punto . es para strings, el + es solo para matemáticas.</li>
+    <li class="list-decimal">Flexibilidad: Puedes mezclar PHP y HTML libremente. La sintaxis <mark><b>&lt;?= $var ?></b></mark> es el estándar moderno para imprimir variables dentro de templates HTML.</li>
+  </ol>
+</section>
+
+<br>
+
+<!--  Tipado: La lucha entre "La flexibilidad" y "La seguridad" -->
+
+<section id="tipado" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+  <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2"> Tipado: La lucha entre "La flexibilidad" y "La seguridad"</h2>
+  <p>Si intentas sumar una cadena con un número, PHP intenta adivinar lo que quieres y lo convierte automáticamente. A esto los profesionales lo llamamos <b>"Type Juggling"</b> (malabarismo de tipos).</p>
+  <p>Pero, ¡cuidado! En un entorno profesional (como la empresa donde trabajarás), el "Type Juggling" es <b>la fuente número uno de bugs catastróficos</b>.</p>
+  <br>
+  <h3 class="text-xl">◾ El peligro del Tipado Débil (Type Juggling)</h3>
+  <pre class="logica">
+    <code>
+echo 5 + "5";      <em>// Resultado: 10 (PHP adivinó que querías sumar)</em>
+echo 5 + "5 coches"; <em>// Resultado: 10 (PHP extrajo el 5 inicial y descartó el texto</em>)
+    </code>
+  </pre>
+  <p>Esto es útil para un script rápido, pero peligroso si estás calculando impuestos o saldos bancarios de clientes.</p>
+  <br>
+  <h3 class="text-xl">◾ La solución: Tipado Fuerte (Type Hinting)</h3>
+  <p>Aunque PHP <b>no te obliga a declarar</b> tipos para variables sueltas (como let x = 5), desde PHP 7 y 8, el lenguaje permite (y exige en entornos profesionales) declarar tipos en <b>argumentos de funciones y retornos</b>.</p>
+  <p><b>Así es como escribimos PHP profesionalmente hoy:</b></p>
+  <pre class="logica">
+    <code>
+<em>// Definimos que el nombre DEBE ser string y la edad un int</em>
+<em>// Y la función DEBE devolver un string</em>
+function saludar(string $nombre, int $edad): string {
+    return "Hola " . $nombre . ", tienes " . $edad;
+}
+
+echo saludar("Alfonso", 25); <em>// Perfecto</em>
+echo saludar("Ana", "veinticinco"); <em>// ¡ERROR! PHP lanzará una excepción (Fatal Error)</em>
+    </code>
+  </pre>
+  <br>
+  <h3 class="text-xl">◾ Ventajas:</h3>
+  <p><b>IntelliSense</b>: Si pones los tipos (string $nombre), tu VS Code sabrá qué es esa variable y te dará <mark>autocompletado inteligente</mark>. Sin tipos, VS Code está "a ciegas".</p>
+  <p><b>Depuración</b>: Si cometes un error enviando un texto donde debería ir un número, PHP te detendrá en seco. Si no pones tipos, el error será silencioso y tu base de datos recibirá datos corruptos.</p>
+  <br>
+  <p><b>Regla de oro del tipado en PHP</b></p>
+  <ol>
+    <li class="list-decimal"><b>No confíes en el Type Juggling</b>: Aunque PHP te permita sumar '10' + 5, nunca lo hagas. Convierte los datos tú mismo antes.</li>
+    <li class="list-decimal"><b>Adopta Tipado Estricto</b>: Siempre declara el tipo de las variables en los argumentos de tus funciones y en los retornos. Esto convierte a PHP en un lenguaje de 'tipado fuerte' en la parte que importa (la lógica de negocio).</li>
+    <li class="list-decimal"><b><mark>Modo Estricto</mark></b>: Al principio de tus archivos PHP, añade <code class="logica">declare(strict_types=1);</code> para obligar a PHP a ser siempre estricto con los tipos. Esto te ahorrará horas de bugs."</li>
+  </ol>
+
+
+</section>

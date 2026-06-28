@@ -1,0 +1,40 @@
+Manual 4: PHP - El Lenguaje del Backend
+1. Fundamentos del Backend
+
+    La arquitectura Cliente-Servidor: Entender que PHP vive en el servidor, no en el navegador.
+    Sintaxis esencial: Etiquetas &lt;?php ?>, cómo imprimir (echo, print), y el uso de .php.
+    Tipado: Tipado débil vs. Tipado fuerte (declaración de tipos para parámetros y retornos).
+
+2. Lógica y Estructuras de Datos
+
+    Variables y tipos: Escalares, booleanos, null, y la importancia de los "falsy" en PHP.
+    Arrays asociativos: La joya de la corona; cómo tratar los arrays como diccionarios (clave => valor).
+    Estructuras de Control: if/else, switch, match (la versión moderna del switch).
+    Iteración: foreach (que desplaza al for clásico en PHP), map, filter, reduce.
+
+3. Funciones y Modelo de Objetos (POO)
+
+    Funciones: Argumentos por valor y por referencia, funciones anónimas y recursividad.
+    Programación Orientada a Objetos (POO): Clases, métodos, herencia, interfaces y el concepto de Traits (la forma de PHP de hacer "herencia múltiple").
+    Namespaces: Organización de archivos para evitar colisiones de nombres (vital en DAW).
+
+4. Web Layer (La capa web)
+
+    Superglobals: Entender el alcance del servidor con <!--KTX0-->_POST, <!--KTX1-->_REQUEST.
+    Gestión de sesiones y cookies: Cómo PHP "recuerda" al usuario entre páginas (session_start()).
+    Cabeceras (Headers): Cómo redirigir (header('Location:...')) y enviar tipos de contenido.
+
+5. Acceso a Datos y Seguridad
+
+    Trabajo con Bases de Datos (PDO): Olvida mysql_query (está muerto). PDO es el estándar profesional.
+    Seguridad:
+        Prevención de SQL Injection (sentencias preparadas obligatorias).
+        XSS y CSRF: Cómo limpiar formularios y usar tokens de seguridad.
+        Password Hashing: password_hash() y password_verify() (nunca guardes claves planas).
+
+6. PHP Profesional (Ecosistema Moderno)
+
+    Composer: El gestor de paquetes de PHP (el "npm" de PHP).
+    Autoloading (PSR-4): Cómo olvidarse de escribir include o require manualmente.
+    Estándares PSR: La biblia del estilo de programación en PHP.
+    Introducción a frameworks: La filosofía detrás de Laravel/Symfony.

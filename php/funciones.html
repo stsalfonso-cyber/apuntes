@@ -1,0 +1,191 @@
+<h1 class="text-3xl font-bold text-teal-800 pl-10">[3] Funciones y Modelo de Objetos (POO)</h1>
+
+<!-- Funciones: Paso a paso -->
+
+<section id="funciones" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+  <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">Funciones: Paso a paso</h2>
+  <h3 class="text-xl font-bold">Argumentos: Por Valor vs. Por Referencia</h3>
+  <ul>
+    <li class="list-disc">
+      <p><b>Paso por valor</b> (Por defecto): Si pasas una variable a una función, PHP crea una copia. Los cambios que hagas dentro de la función no afectan a la variable original.</p>
+        <pre class="logica">
+          <code>
+    function incrementar($n) {
+        $n++; 
+    }
+    $valor = 10;
+    incrementar($valor); 
+    echo $valor; <em>// Sigue siendo 10</em>
+          </code>
+        </pre>
+    </li>
+    <li class="list-disc">
+      <p><b>Paso por referencia </b>(<mark>Con el símbolo &</mark>): Si quieres que la función modifique la variable original, añades un & antes del argumento.</p>
+      <pre class="logica">
+        <code>
+  function incrementarReal(&$n) { 
+    $n++; 
+  } 
+  $valor = 10; 
+  incrementarReal($valor); 
+  echo $valor; <em>// ¡Ahora es 11!</em>
+        </code>
+      </pre>
+    </li>
+  </ul>
+
+  <br>
+
+  <h3 class="text-xl font-bold">Funciones Anónimas y "Closures"</h3>
+  <p>Igual que en JS, puedes guardar funciones en variables y pasarlas como argumentos. Sin embargo, en PHP, si quieres que una función anónima use una variable que está fuera de su alcance, <b>tienes que usar <code>use</code></b>.</p>
+  <pre class="logica">
+    <code>
+$factor = 2;
+<em>// El 'use' es obligatorio para traer la variable de fuera</em>
+$multiplicar = function($n) use ($factor) {
+    return $n * $factor;
+};
+
+echo $multiplicar(5); <em>// 10</em>
+    </code>
+  </pre>
+
+  <br>
+
+  <h3 class="text-xl font-bold">Recursividad</h3>
+  <p>La recursividad en PHP funciona igual que en JS (una función que se llama a sí misma)</p>
+  <pre class="logica">
+    <code>
+function factorial($n) {
+    if ($n &lt;?= 1) return 1;
+    return $n * factorial($n - 1);
+}
+    </code>
+  </pre>
+
+  <br>
+
+   <h3 class="text-xl font-bold">Nivel PRO</h3>
+   <ul>
+    <li class="list-disc">
+      <b><p>La importancia de los tipos. </b>Aunque no es obligatorio, acostúmbrate siempre a tipar los argumentos que recibe y devuelve una función: </p>
+      <p><code class="logica">function calcular(int $a, int $b): int { ... }</code>.</p>
+      <p>Esto evita que alguien pase un string al hacer un cálculo matemático.</li></p>
+    <li class="list-disc"><b>Funciones como ciudadanos de primera clase</b>: No tengas miedo de crear cientos de funciones pequeñas. En PHP es mucho mejor tener 10 funciones de 5 líneas cada una, que una función de 50 líneas.</li>
+    <li class="list-disc"><b>El alcance (Scope)</b>: Recuerda que en PHP, las funciones son "islas". Una función no puede ver las variables definidas fuera a menos que las pases como argumento o uses la palabra clave <code>global</code> (esta última, evítala a toda costa, es mala práctica)</li>
+  </ul>
+  <p></p>
+</section>
+
+<br>
+
+<!-- Programación Orientada a Objetos (POO) -->
+
+<section id="poo" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+  <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">Programación Orientada a Objetos (POO)</h2>
+  <p>La POO consiste en organizar tu código basándote en "entidades". En lugar de ver una web de Spagnolo como un montón de líneas de código, la vemos como un conjunto de objetos que interactúan: <code>Usuario</code>, <code>Producto</code>, <code>Carrito</code>, <code>Pedido</code>.</p>
+  <br>
+  <h3 class="text-xl font-bold">La esencia: ¿Qué es una Clase y qué es un Objeto?</h3>
+  <p><b>1. La Clase: El "Plano" (Blueprint)</b></p>
+  <p>Una clase no es el producto. Una clase es la instrucción, el diseño, el plano. <br>Si tú escribes una clase 
+    Camisa, en ese momento no tienes ninguna camisa física en el almacén. Solo tienes un papel donde dice: 
+    "Una camisa debe tener una talla, un color, un precio y una función para calcular el IVA"</p>
+  <p>◼ La clase no ocupa memoria (no "existe" realmente en el sistema), <mark>es solo la definición</mark>.</p>
+  <p>◼ Regla de oro en POO. Un archivo PHP sólo debe contener una clase. Esto facilita: legitibidad, depuración y la colaboración con el resto de compañeros de programación.</p>
+  <br>
+  <p><b>2. Sintaxis Real en PHP"</b></p>
+  <p>A diferencia de JS, donde usabas this. y puntos, en PHP usamos <code>$this-> (flecha)</code>. <b>Esta es la diferencia más importante que debes tener en cuenta</b>.</p>
+  <p>En function_contruct() lo que se hace es asignar el valor que viene de fuera a las variables internas.</p>
+  <pre class="logica">
+    <code>
+class Producto {
+    <em>// 1. Propiedades (Lo que el objeto "tiene")</em>
+    public string $nombre;
+    public float $precio;
+
+    <em>// 2. Constructor (Lo primero que se ejecuta al crear el objeto)</em>
+    <em>//    Aquí se le asigna los valores que vienen de fuera</em>
+    public function __construct(string $nombre, float $precio) {
+        $this->nombre = $nombre;
+        $this->precio = $precio;
+    }
+
+    <em>// 3. Método (Lo que el objeto "hace")</em>
+    public function aplicarDescuento(float $porc): void {
+        $this->precio -= ($this->precio * $porc / 100);
+    }
+}
+
+<em>// Creamos un objeto (Instanciación)</em>
+$camisa = new Producto("Camisa Oxford", 50.00);
+$camisa->aplicarDescuento(10); <em>// Usamos la flecha "->"</em>
+echo $camisa->precio; <em>// Imprime: 45</em>
+    </code>
+  </pre>
+  <p><b>3. El Objeto: La "Instancia"</b></p>
+  <p>Cuando tú decides que necesitas una camisa real en tu sistema, haces lo que en programación llamamos <mark>instanciar</mark>. Es decir, sacas una copia física basada en el plano.</p>
+  <ul>
+    <li class="list-disc mb-2"><code class="logica">$camisa1 = new Camisa("Azul", "M", 50);</code></li>
+    <li class="list-disc"><code class="logica">$camisa2 = new Camisa("Roja", "L", 55);</code></li>
+  </ul>
+  <br>
+  <p>Aquí, <code>$camisa1</code> y <code>$camisa2</code> <b>son objetos</b>. Son entidades independientes que viven en la memoria de tu servidor. Tienen sus propios datos, pero comparten "la misma lógica" (la que definió la clase).</p>
+  <p>Este es el objetivo de la POO, agrupar estos datos (propiedades) y acciones propias (métodos) y relacionarlos con una entidad (objeto) y acceder desde ese objeto a sus propiedades y métodos facilmente </p>
+  <br>
+  <p><b>4. La Visibilidad (encapsulamiento)</b></p>
+  <p>En JS, todo es accesible. En PHP (y en Java), tú decides quién puede ver o tocar tus datos. Esto es obligatorio en DAW:</p>
+  <ul>
+    <li class="list-disc"><b>public</b>: Todo el mundo puede acceder a la propiedad desde fuera con <code>$camisa->precio</code>.</li>
+    <li class="list-disc"><b>private</b>: Solo la misma clase puede ver <code>$this->precio</code>. Nadie de fuera puede tocarlo (ideal para proteger datos sensibles).</li>
+    <li class="list-disc"><b>protected</b>: Similar a privado, pero permite que las clases hijas (<mark>herencia</mark>) lo vean.</li>
+  </ul>
+  <br>
+  <p><b>5. Reglas técnicas para POO en PHP</b></p>
+  <ul>
+    <li class="list-decimal"><b>La Flecha -></b>: En PHP, el punto . es para concatenar strings. Por eso, <b>para acceder a propiedades o métodos de un objeto, usamos la flecha -></b>.</li>
+    <li class="list-decimal"><b>$this</b>: Representa a la instancia actual. Siempre que quieras tocar una propiedad o método de la clase, debes usar $this->.</li>
+    <li class="list-decimal"><b>Visibilidad</b>: Acostúmbrate a marcar todo como private por defecto y solo hacerlo public si es estrictamente necesario. Esto se llama Encapsulamiento y es la base de la seguridad en Java y PHP.</li>
+    <li class="list-decimal"><b>Constructor Property Promotion</b>: La declaracion de variables y asignacion de valores se hacen al mismo tiempo dentro de la <code>function_construct()</code> para ahorrar lineas.</li>
+  </ul>
+  
+</section>
+
+<br>
+
+<!-- Namespaces -->
+
+<section id="namespaces" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+  <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">Namespaces: La organización jerárquica del código</h2>
+  <p>Los Namespaces actúan como carpetas virtuales para tu código. Permiten que aunque dos clases se llamen igual, vivan en "espacios" distintos y puedan coexistir.</p>
+  <h3 class="text-xl font-bold">1. La sintaxis es simple</h3>
+  <p>Dentro de tu archivo PHP, lo primero (incluso antes que cualquier código) debe ser declarar a qué "espacio" pertenece ese archivo.</p>
+  <pre class="logica">
+    <code>
+    <em>// En el archivo Usuario.php</em>
+namespace Spagnolo\Models;
+
+class Usuario {
+    <em>// ...</em>
+}
+    </code>
+  </pre>
+  <br>
+  <h3 class="text-xl font-bold">2. ¿Cómo los usamos? (La cláusula use)</h3>
+  <p>No querrás escribir siempre el nombre completo (<code>new Spagnolo\Models\Usuario()</code>). Para eso existe <code>use</code>, que es exactamente lo mismo que el <code>import</code> de JavaScript.</p>
+  <pre class="logica">
+    <code>
+namespace Spagnolo\Controllers;
+
+<em>// Importamos la clase (le decimos a PHP: "Cuando diga Usuario, mira en este Namespace")</em>
+use Spagnolo\Models\Usuario;
+
+class LoginController {
+    public function index() {
+        $user = new Usuario(); <em>// PHP sabe que es el de Spagnolo\Models</em>
+    }
+}
+    </code>
+  </pre>
+  <h3 class="text-xl font-bold">3. El estándar DAW: PSR-4</h3>
+  <P><Kbd>"Si tu namespace es Spagnolo\Models\Usuario, tu archivo debe estar físicamente en la carpeta /Spagnolo/Models/Usuario.php."</Kbd></P>
+</section>

@@ -1,0 +1,310 @@
+<h1 class="text-3xl font-bold text-teal-800 pl-10">[5] Acceso a Datos y Seguridad</h1>
+
+<!-- Base de datos PDO -->
+
+<section id="PDO" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+  <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">PDO (PHP Data Objects)</h2>
+  <p>Las funciones mysql_query y sqlsrv_query han querdao totalmente obsoletas. El estándar absoluto es <b>PDO (PHP Data Objects)</b>. </p>
+  <p>Si usas PDO puedes cambiar de SQL Server a MySQL simplemente cambiando una línea de configuración</p>
+
+<!--       1. El secreto: El DSN (Data Source Name) -->
+
+  <h3 class="text-xl font-bold">1. El secreto: El DSN (Data Source Name)</h3>  
+  <p>El DSN es una simple cadena de texto que le dice a PHP: "¿A qué base de datos me conecto y dónde está?".</p>
+  <p><b>Para MySQL</b></p>
+  <pre class="logica"><code>$dsn = "mysql:host=localhost;dbname=nombre_db;charset=utf8mb4";</code></pre>
+  <p><b>Para SQL Server</b></p>
+  <pre class="logica"><code>$dsn = "sqlsrv:Server=localhost;Database=nombre_db";</code></pre>
+  <p><u>(Nota: Aunque el driver cambie, el resto de tu código PHP será exactamente el mismo.)</u></p>
+  <br>
+
+<!--        2. El proceso SELECT (traer datos) -->
+
+  <h3 class="text-xl font-bold">2. El proceso SELECT (traer datos)</h3>
+  <pre class="logica">
+    <code>
+try {
+    <em>// 1. Conexión  ( ESTO SUELE ESTAR EN UN ARCHIVO APARTE config.php o db.php )</em>
+    $pdo = new PDO($dsn, "usuario", "password");
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    <em>// 2. Preparar (La plantilla)</em>
+    <em>// Usamos :nombre en lugar del valor real (<mark>esto evita SQL Injections</mark>)</em>
+    $stmt = $pdo->prepare("SELECT * FROM productos WHERE categoria = :categoria");
+
+    <em>// 3. Ejecutar (Pasando los valores para el filtro)</em>
+    $stmt->execute(['categoria' => 'camisas']);
+
+    <em>// 4. Recuperar (fetchAll recupera toda la tabla en un array asociativo)</em>
+    $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+} catch (PDOException $e) {
+    echo "Error de conexión: " . $e->getMessage();
+}
+
+<em>// Esto cierra la conexion completamente, aunque no es necesario </em>
+<em>// porque se cierra automáticamente cuando el script termina</em>
+$pdo = null;
+    </code>
+  </pre>
+
+  <br>
+
+<!--         3. La esencia: ¿Por qué protege contra SQL Injection? -->
+
+  <h3 class="text-xl font-bold">3. La esencia: ¿Por qué protege contra SQL Injection?</h3>
+  <ul>
+    <li class="list-disc">
+      <b>La forma "amateur" (Peligrosa):</b>
+      <pre><code class="logica mb-2">$sql = "SELECT * FROM usuarios WHERE email = '" . $_POST['email'] . "'";</code></pre>
+      <p class="mb-2">Un hacker pone un email falso tipo: <code class="logica">inventado@falso.com' OR '1'='1</code> </p>
+      <p class="mb-2">El motor SQL interpretará esto <code class="logica">SELECT * FROM usuarios WHERE email = 'inventado@falso.com' OR '1'='1'</code>
+  y entra sin contraseña ya que la condicion <code>1 = 1</code> ES CIERTA.</p>
+    </li>
+    <li class="list-disc">
+      <b>La forma PDO (Segura):</b>
+      <p>Tú envías una "Plantilla" (la query) y los datos por separado. La base de datos recibe la estructura primero, 
+        y luego los datos se "pegan" de forma segura donde van los <code>:marcador</code>. El motor de SQL sabe perfectamente que 
+        <code>:categoria</code> no es código ejecutable, sino un simple valor de texto. Es imposible que un hacker inyecte código 
+        porque el servidor ya no interpreta "datos" como "comandos".</p>
+    </li>
+  </ul>
+  <br>
+
+
+  <h3 class="text-xl font-bold">4. Elegir <code>while + fetch</code> sobre <code>foreach + fetchAll</code> </h3>
+  <p>La desición de elegir entre uno u otro recae en la cantidad de datos que contenga la tabla.</p>
+  <br>
+  <p>Cuando hacemos <code class="logica">$productos = $stmt->fetchAll(PDO::FETCH_ASSOC);</code> recuperamos toda la tabla en una variable
+     que se puede recorrer con <code><b>foreach</b></code></p>
+  <pre class="logica">
+    <code>
+$productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+<em>// $productos ahora es así:
+// [
+//     0 => ['id' => 1, 'nombre' => 'Polo Azul', 'precio' => 45.00],
+//     1 => ['id' => 2, 'nombre' => 'Polo Rojo', 'precio' => 45.00],
+//     2 => ['id' => 3, 'nombre' => 'Camisa Oxford', 'precio' => 60.00]
+// ]</em>
+
+foreach ($productos as $producto) {
+    
+    <em>// En la primera vuelta del bucle:</em>
+    <em>// $producto se convierte en esto: ['id' => 1, 'nombre' => 'Polo Azul', 'precio' => 45.00]</em>
+
+    <em>// Por eso aquí NO necesitas el [0].</em> 
+    <em>// $producto YA ES el array de la fila correspondiente.</em>
+    echo $producto['nombre']; 
+}
+    </code>
+  </pre>
+  <p>El peso de la variable producto es el de toda la base de datos, si es muy grande puede <b>colapsar la memoria RAM</b></p>
+  <br>
+  <p>Pero ahora hacemos <code class="logica">$producto = $stmt->fetch(PDO::FETCH_ASSOC)</code> dentro de un <code><b>while</b></code>, 
+    esto resupera uno por uno cada registro de la tabla y lo convierte en un array asociativo sólo de este registro</p>
+  <pre class="logica">
+    <code>
+while ($producto = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    echo $producto['nombre'];
+<em>// ahora este es valor del array asociativo producto en la primera vuelta:
+// ['id' => 1, 'nombre' => 'Polo Azul', 'precio' => 45.00]</em>
+
+}
+    </code>
+  </pre>
+  <p>El peso de la varible producto no será tan elevado ya que solo recupera un registro en cada iteración del while</p>
+  <br>
+<!--        5. El proceso INSERT (añadir datos) -->
+
+  <h3 class="text-xl font-bold">5. El proceso INSERT (añadir datos)</h3>
+  <pre class="logica">
+    <code>
+<em>// 1. Conexión</em>
+$pdo = new PDO($dsn, "usuario", "password");
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+<em>// 2. Preparar</em>
+$sql = "INSERT INTO productos (nombre, precio, categoria) VALUES (:nombre, :precio, :categoria)";
+$stmt = $pdo->prepare($sql);
+
+<em>// 3. Ejecutar</em>
+$stmt->execute([
+    'nombre'    => 'Polo Spagnolo',
+    'precio'    => 45.00,
+    'categoria' => 'hombre'
+]);
+
+<em>// 4.Recuperar el ID que se acaba de generar automáticamente</em>
+$nuevoId = $pdo->lastInsertId();
+echo "Producto creado con ID: " . $nuevoId;
+    </code>
+  </pre>
+  <br>
+
+<!--        6. El proceso UPDATE (actualizar datos) -->
+
+  <h3 class="text-xl font-bold">6. El proceso UPDATE (actualizar datos)</h3>
+  <pre class="logica">
+    <code>
+<em>// 1. Conexión</em>
+$pdo = new PDO($dsn, "usuario", "password");
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+<em>// 2. Preparar</em>
+$sql = "UPDATE productos SET precio = :nuevo_precio WHERE id = :id";
+$stmt = $pdo->prepare($sql);
+
+<em>// 3. Ejecutar</em>
+$stmt->execute([
+    'nuevo_precio' => 39.99,
+    'id'           => 12
+]);
+
+<em>// 4.Recuperar el total de lineas actualizadas para validar</em>
+if ($stmt->rowCount() > 0) {
+    echo "Producto actualizado correctamente.";
+} else {
+    echo "No se encontró el producto o no había cambios.";
+}
+    </code>
+  </pre>
+  <br>
+
+<!--        7. El proceso DELETE (borrar datos) -->
+
+  <h3 class="text-xl font-bold">6. El proceso DELETE (borrar datos)</h3>
+  <pre class="logica">
+    <code>
+<em>// 1. Conexión</em>
+$pdo = new PDO($dsn, "usuario", "password");
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+<em>// 2. Preparar</em>
+$stmt = $pdo->prepare("DELETE FROM productos WHERE id = :id");
+
+<em>// 3. Ejecutar</em>
+$stmt->execute(['id' => 12]);
+
+<em>// 4.Valida la eliminacion</em>
+if ($stmt->rowCount() > 0) {
+    echo "Producto eliminado.";
+} else {
+    echo "El producto ya no existía.";
+}
+    </code>
+  </pre>
+</section>
+
+<br>
+
+<!--  Seguridad Web: La "Santísima Trinidad" -->
+
+<section id="seguridad" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+  <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">Seguridad Web: La "Santísima Trinidad"</h2>
+  <p>La seguridad en PHP se resume en "<b>nunca confíes en la entrada de datos</b>". Si el dato viene del usuario, es potencialmente peligroso.</p>
+  <br>
+  <!-- Inyección SQL (SQL Injection) -->
+  <h3 class="text-xl font-bold">Inyección SQL (SQL Injection)</h3>
+  <p>Salió en el tema PDO pero reafirmamos la regla de oro</p>
+  <ul>
+    <li class="list-disc"><b>El problema</b>: Concatenar variables directamente en la cadena SQL. Un atacante introduce comandos SQL en los campos de texto.</li>
+    <li class="list-disc"><b>La defensa: Sentencias preparadas (PREPARE + :marcadores).</b></li>
+    <li class="list-disc"><b>Manual</b>: Nunca uses <code>query()</code> con variables concatenadas. Usa siempre <code>prepare()</code> y pasa los valores a través del array de <code>execute()</code>. Es el único blindaje real certificado ante ataques de inyección.</li>
+  </ul>
+  <br>
+<!--   XSS (Cross-Site Scripting) -->
+  <h3 class="text-xl font-bold">XSS (Cross-Site Scripting)</h3>
+  <ul>
+    <li class="list-disc"><b>El problema</b>: Un atacante introduce código JavaScript en un formulario (ej: <code class="logica">&lt;script>alert('hack')&lt;/script></code>). Cuando tú haces un <code>echo</code> de ese dato en tu HTML, el navegador del usuario ejecuta ese script malicioso.</li>
+    <li class="list-disc"><b>La defensa</b>: Sanitización de salida. Nunca muestres datos crudos.</li>
+    <li class="list-disc"><b>Manual</b>: Usa siempre la función <mark><code>htmlspecialchars($data)</code></mark> antes de imprimir cualquier dato que venga del usuario.</li>
+  </ul>
+  <pre class="logica">
+    <code>
+<em>// Mal: si el usuario escribe &lt;script>, este se ejecuta</em>
+echo $comentario_usuario; 
+
+<em>// Bien: lo convierte en &'lt;script&'gt;, texto inofensivo</em>
+echo htmlspecialchars($comentario_usuario, ENT_QUOTES, 'UTF-8');
+    </code>
+  </pre>
+  <br>
+<!-- CSRF (Cross-Site Request Forgery)-->
+  <h3 class="text-xl font-bold">CSRF (Cross-Site Request Forgery)</h3>
+  <ul>
+    <li class="list-disc"><b>El problema</b>: Un atacante engaña a un usuario logueado en tu web para que haga clic en un enlace malicioso que envía una petición (ej: borrar su cuenta o cambiar la contraseña) sin que el usuario se dé cuenta.</li>
+    <li class="list-disc"><b>La defensa: <mark>Tokens CSRF</mark>.</b></li>
+    <li class="list-disc">
+      <b>Manual</b>: Es un "pase de seguridad" único y secreto generado por el servidor.
+      <ol>
+        <li class="list-decimal ml-6">El servidor genera un token aleatorio al cargar el formulario y lo guarda en <code>$_SESSION</code>.</li>
+        <li class="list-decimal ml-6">El formulario incluye ese token en un campo oculto (<code class="logica">&lt;input type="hidden" name="csrf_token" value="..."></code>).</li>
+        <li class="list-decimal ml-6">Al recibir el post, el servidor compara el token del formulario con el de <code>$_SESSION</code>. Si no coinciden, la petición es rechazada.</li>
+      </ol>
+    </li>
+  </ul>
+  <pre class="logica">
+    <code>
+&lt;?php
+session_start();
+<em>// Generamos un token aleatorio y seguro</em>
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); 
+}
+?>
+
+&lt;!-- En tu formulario HTML, añades un campo oculto --&gt;
+&lt;form action="procesar.php" method="POST">
+    $lt;input type="hidden" name="csrf_token" value="&lt;?php echo $_SESSION['csrf_token']; ?>">
+    $lt;input type="text" name="email">
+    $lt;button type="submit">Enviar</button>
+&lt;/form>
+    </code>
+  </pre>
+  <br>
+  <p>Y la validación...</p>
+  <pre class="logica">
+    <code>
+&lt;?php
+session_start();
+
+<em>// Validamos el token</em>
+if (!isset($_POST['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
+    <em>// Si no coincide, TERMINAMOS TODO. Es un intento de hackeo.</em>
+    die("Error de seguridad: Solicitud CSRF inválida.");
+}
+
+<em>// Si llega aquí, el token es correcto, ya podemos procesar el resto</em>
+echo "Datos procesados con éxito.";
+?>
+    </code>
+  </pre>
+  <br>
+<!-- Hashing de Contraseñas (Nunca guardes claves planas)-->
+  <h3 class="text-xl font-bold">Hashing de Contraseñas (Nunca guardes claves planas)</h3>
+  <p>Es el pecado capital del desarrollo backend: guardar contraseñas como texto ("123456").</p>
+  <ul>
+    <li class="list-disc"><b>El problema</b>: Si te hackean la base de datos, el hacker tiene todas las contraseñas de tus usuarios.</li>
+    <li class="list-disc"><b>La defensa</b>: Utiliza funciones de hash modernas (no uses md5 ni sha1, son antiguas).</li>
+  </ul>
+  <pre class="logica">
+    <code>
+<em>// Al guardar:</em>
+$hash = password_hash($password, PASSWORD_DEFAULT);
+
+<em>// Al validar:</em>
+if (password_verify($password, $hashEnBaseDeDatos)) {
+    echo "Contraseña correcta";
+}
+    </code>
+  </pre>
+  <br>
+  <!-- Tu Checklist de Seguridad-->
+  <h3 class="text-xl font-bold">Tu Checklist de Seguridad</h3>
+  <ol>
+    <li class="list-disc ml-6"><b>SQL</b>: ¿Usas prepare()?</li>
+    <li class="list-disc ml-6"><b>XHTML/Frontend</b>: ¿Has usado htmlspecialchars() en todo lo que imprimes de un usuario?</li>
+    <li class="list-disc ml-6"><b>Formularios</b>: ¿Has implementado tokens CSRF?</li>
+    <li class="list-disc ml-6"><b>Passwords</b>: ¿Guardas los hashes con password_hash()?</li>
+  </ol>
+</section>

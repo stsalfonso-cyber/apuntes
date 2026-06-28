@@ -1,0 +1,174 @@
+<h1 class="text-3xl font-bold text-teal-800 pl-10">[4] Web Layer (La capa web)</h1>
+
+<!-- Superglobals: El Puente Frontend-Backend -->
+
+<section id="superglobals" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+  <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">Superglobals: El Puente Frontend-Backend</h2>
+  <p>Las <b>Superglobals</b> son el corazón de la comunicación en PHP. Se llaman "superglobales" porque son variables
+    predefinidas que están siempre disponibles <b>en cualquier parte del código</b> (dentro de funciones, clases, archivos
+    importados, no importa dónde).</p>
+  <br>
+  <p>Representan los dos mundos de la web: lo que viene del cliente (entradas) y lo que el servidor conoce (entorno).</p>
+  <br>
+  <h3 class="text-xl font-bold">1. Las Superglobals de entrada (Input)</h3>
+  <p>Estas son las que leerás constantemente cuando el usuario interactúa. Su nombre siempre empieza por <code>$_</code> y <b>deben escribirse siempre en mayúsculas</b>.</p>
+  <ul>
+    <li class="list-disc">
+      <b><code>$_GET</code></b>: Captura los parámetros que viajan en la URL.
+      <ul>
+        <li class="list-disc ml-4">Ejemplo: spagnolo.es/perfil.php?id=10</li>
+        <li class="list-disc ml-4">En PHP: <code class="logica">$id_producto = $_GET['id'];</code></li>
+      </ul>
+    </li>
+    <li class="list-disc">
+      <b><code>$_POST</code></b>: Captura los datos enviados por un formulario cuando el método es <code>method="POST"</code>.
+      <ul>
+        <li class="list-disc ml-4">Es más seguro y permite enviar más datos que <code>$_GET</code></li>
+        <li class="list-disc ml-4">En PHP: <code class="logica">$nombre = $_POST['nombre_usuario'];</code></li>
+      </ul>
+    </li>
+  </ul>
+    <li class="list-disc">
+      <b><code>$_REQUEST</code></b>: Es una mezcla de <code>GET, POST (y COOKIE)</code>. Al principio parece cómoda, pero <b>no se recomienda</b> en desarrollo profesional porque es menos específica y puede causar confusión.
+    </li>
+  </ul>
+  <br>
+  <h3 class="text-xl font-bold">2. La lógica de "La Red de Seguridad" (El operador ??)</h3>
+  <p>Como aprendimos, nunca puedes confiar en que el usuario haya enviado el dato. Si intentas leer <code>$_GET['id']</code> y el usuario no lo ha puesto, tu app disparará un error <code>Undefined index</code>.</p>
+  <p>La forma correcta de leer supperglobals es:</p>
+  <pre class="logica">
+    <code>
+<em>// Si 'id' no existe, te devuelve null y no peta</em>
+$id = $_GET['id'] ?? null; 
+
+<em>// Si 'nombre' del formulario no existe, le pones un valor por defecto</em>
+$nombre = $_POST['nombre'] ?? 'Invitado';
+    </code>
+  </pre>
+  <br>
+  <h3 class="text-xl font-bold">3. Las Superglobals de entorno y sesión</h3>
+  <ul>
+    <li class="list-disc"><b><code>$_SESSION</code></b>: ¡Fundamental! Como PHP "muere" al terminar la petición (lo que hablamos en el apartado 1), esta variable es la única manera de recordar cosas entre páginas (ej: que el usuario ha hecho login)
+      <p>En PHP cuando termina de generar una página, el script se destruye y olvida todo. <code>$_SESSION</code> es la solución: es una variable global que vive en el servidor (EN LA MEMORIA RAM DEL SERVIDOR) y que <b>sobrevive de una página a otra mientras el usuario está navegando</b>.</p>
+      <p>Se pueden gardar cualquier tipo de dato, String, integer, booleano, array y objeto</p>
+      <pre class="logica">
+        <code>
+&lt;?php
+session_start(); // ¡Sin esto, PHP no sabe de quién es la sesión!
+
+<em>// 1. Guardar cualquier dato</em>
+$_SESSION['usuario_id'] = 101;
+$_SESSION['carrito'] = ['id' => 5, 'precio' => 20];
+$_SESSION['config'] = new UsuarioConfig(); <em>// Puedes guardar objetos</em>
+
+<em>// 2. Leer datos en otra página (ej: perfil.php)</em>
+if (isset($_SESSION['usuario_id'])) {
+    echo "Hola usuario " . $_SESSION['usuario_id'];
+} else {
+    echo "No has iniciado sesión";
+}
+
+<em>// 3. Destruir sesión (Logout)</em>
+session_unset(); // Borra todas las variables almacenadas
+session_destroy(); // Mata la sesión del servidor
+?>
+        </code>
+      </pre>
+    </li>
+    <li class="list-disc"><b><code>$_SERVER</code></b>: Contiene información técnica del servidor y del navegador del usuario
+      <ul>Por Ejemplo.
+        <li class="list-disc ml-6"><code>$_SERVER['REQUEST_METHOD']</code> te dice si el usuario entró vía GET o POST.</li>
+        <li class="list-disc ml-6"><code>$_SERVER['REQUEST_URI']</code>: La ruta completa de la página (ej: /productos/camisa-azul?color=azul).</li>
+        <li class="list-disc ml-6"><code>$_SERVER['QUERY_STRING']</code>: Todo lo que va después del signo ? en la URL.</li>
+        <li class="list-disc ml-6"><code>$_SERVER['REMOTE_ADDR']</code> te da la dirección IP del usuario.</li>
+      </ul>
+    </li>
+  </ul>
+</section>
+
+<br>
+
+<!-- Gestión de Persistencia (Sesiones vs Cookies) -->
+
+<section id="cookies" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+  <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">Gestión de Persistencia (Sesiones vs Cookies)</h2>
+  <p>Aunque en el día a día las usamos juntas, son conceptos técnicos totalmente distintos. La diferencia fundamental está en <b>dónde se guarda la información</b>.</p>
+  <br>
+  <h3 class="text-xl font-bold">Cookies: El "Sticker" en el <u>navegador del usuario</u></h3>
+  <p><b>▪ Sintaxis</b>: </p>
+  <pre class="logica">
+    <code>
+<em>// los parametros se pasan en este orden</em>
+<em>//   (nombre, valor, expiración, path) </em>
+setcookie("preferencia_idioma", "es", time() + (86400 * 30), "/"); <em>// + (86400 * 30) significa 30 días de duración</em>
+<em>// para acceder al valor</em>
+$idioma = $_COOKIE['preferencia_idioma'] ?? 'es';
+</code>
+  </pre>
+  <p><b>▪ Lugar</b>: Disco duro del usuario (o memoria del navegador).</p>
+  <p><b>▪ Seguridad: Baja</b>. Cualquier usuario puede ver sus cookies desde las herramientas de desarrollador. <b>Nunca guardes contraseñas o datos críticos aquí</b>.</p>
+  <p><b>▪ Recuperación</b>: Puedes leerlas usando la superglobal $_COOKIE.</p>
+  <pre class="logica"><code>echo $_COOKIE['preferencia_idioma'] ?? 'es';</code></pre>
+  <h3 class="text-xl font-bold">Sesiones: La "Caja fuerte" <u>en tu servidor</u></h3>
+  <p><p><b>▪ Sintaxis</b>: </p></p>
+  <pre class="logica">
+    <code>
+session_start(); 
+$_SESSION['usuario_id'] = 45;
+    </code>
+  </pre>
+  <p><b>▪ Lugar</b>: Servidor (Memoria RAM o disco del servidor).</p>
+  <p><b>▪ Seguridad</b>: Alta. El usuario nunca ve los datos de la sesión, solo ve el identificador (PHPSESSID).</p>
+  <br>
+  <p><b>¿Cuál elegir?</b> Si el dato es sensible (quién es el usuario, qué ha comprado), usa <code>$_SESSION</code>. Si el dato es cosmético o de configuración (qué color de fondo prefiere, idioma), usa <code>setcookie()</code>.</p>
+  <p>◾ Ademas, el uso de SESSION tambien utiliza cookies, la id de la sesion se queda guardada en una cookie para que el navegador sepa quien ha iniciado sesion y permitirle el acceso</p>
+</section>
+
+<!--Headers -->
+
+<section id="headers" class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+  <h2 class="text-2xl font-bold border-b-2 border-cyan-700 pb-2">Headers</h2>
+  <h3 class="text-xl font-bold">Lo que realmente usaras</h3>
+  <ol>
+    <li class="list-decimal"><b>Redirecciones</b>: 
+      <pre class="logica">
+        <code>
+header("Location: dashboard.php");
+exit(); <em>// ¡OBLIGATORIO siempre tras un Location!</em>
+        </code>
+      </pre>
+    </li>
+    <li class="list-decimal"><b>APIs y JSON (Backend moderno)</b>:
+      <pre class="logica">
+        <code>
+header("Content-Type: application/json; charset=UTF-8");
+echo json_encode($datos);
+        </code>
+      </pre>
+    </li>
+    <li class="list-decimal"><b>Control de Caché (Rendimiento)</b>:
+      <pre class="logica">
+        <code>
+header("Cache-Control: no-cache, no-store, must-revalidate");
+        </code>
+      </pre>
+    </li>
+  </ol>
+  <br>
+  <p><u>"Los HTTP Headers son metadatos que definen la 'naturaleza' de la respuesta."</u></p>
+  <ul>
+    <li class="list-decimal"><b>Orden</b>: Siempre van al principio (antes de cualquier echo).</li>
+    <li class="list-decimal"><b>Redirección</b>: header('Location: ...') + exit() es la combinación ganadora para flujos de login/logout.</li>
+    <li class="list-decimal"><b>API</b>: Cada vez que envíes JSON, debes avisar al navegador con Content-Type: application/json.</li>
+    <li class="list-decimal"><b>Prevención</b>: Si recibes el error "Headers already sent", busca el culpable: un espacio en blanco antes de &lt;?php o un echo mal puesto al principio del archivo.</li>
+  </ul>
+  <br>
+  <h3 class="text.2xl">¿Por qué son necesarias?</h3>
+  <p>Porque te permite tomar el control total. Sin cabeceras, el servidor solo "suelta texto". Con cabeceras, tú decides:</p>
+  <ul>
+    <li class="list-disc">Si el usuario puede ver la página o tiene que irse a otra parte (Location).</li>
+    <li class="list-disc">Si el navegador debe descargar un archivo, mostrarlo o guardarlo (Content-Disposition).</li>
+    <li class="list-disc">Si el navegador debe confiar en tus datos o no.</li>
+  </ul>
+</section>
+  
